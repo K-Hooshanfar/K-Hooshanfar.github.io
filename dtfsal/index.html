@@ -185,19 +185,20 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
-          Audio-visual video saliency prediction aims to mimic human visual attention by identifying salient regions in videos through
-           the integration of both visual and auditory information. Although visual-only approaches have significantly advanced, 
-           effectively incorporating auditory cues remains challenging due to complex spatio–temporal interactions and high computational demands. 
-           To address these challenges, we propose \textbf{D}ynamic \textbf{T}oken \textbf{F}usion \textbf{Sal}iency (DFTSal), 
-           a novel audio-visual saliency prediction framework designed to balance accuracy with computational efficiency. 
-           Our approach features a multi-scale visual encoder equipped with two novel modules: the Learnable Token Enhancement Block (LTEB), 
-           which adaptively weights tokens to emphasize crucial saliency cues, and the Dynamic Learnable Token Fusion Block (DLTFB), 
-           which employs a shifting operation to reorganize and merge features, effectively capturing long-range dependencies and detailed spatial information. 
-           In parallel, an audio branch processes raw audio signals to extract meaningful auditory features. Both visual and audio features are integrated using 
-           our Adaptive Multimodal Fusion Block (AMFB), which employs local, global, and adaptive fusion streams for precise cross-modal fusion. 
-           The resulting fused features are processed by a hierarchical multi-decoder structure, producing accurate saliency maps. 
-           Extensive evaluations on six audio-visual benchmarks demonstrate that DFTSal achieves SOTA performance while maintaining computational efficiency.
-          
+           <p>
+            Audio-visual video saliency prediction aims to mimic human visual attention by identifying salient regions in videos through
+            the integration of both visual and auditory information. Although visual-only approaches have significantly advanced, 
+            effectively incorporating auditory cues remains challenging due to complex spatio–temporal interactions and high computational demands. 
+            To address these challenges, we propose <strong>D</strong>ynamic <strong>T</strong>oken <strong>F</strong>usion <strong>Sal</strong>iency (DFTSal), 
+            a novel audio-visual saliency prediction framework designed to balance accuracy with computational efficiency. 
+            Our approach features a multi-scale visual encoder equipped with two novel modules: the Learnable Token Enhancement Block (LTEB), 
+            which adaptively weights tokens to emphasize crucial saliency cues, and the Dynamic Learnable Token Fusion Block (DLTFB), 
+            which employs a shifting operation to reorganize and merge features, effectively capturing long-range dependencies and detailed spatial information. 
+            In parallel, an audio branch processes raw audio signals to extract meaningful auditory features. Both visual and audio features are integrated using 
+            our Adaptive Multimodal Fusion Block (AMFB), which employs local, global, and adaptive fusion streams for precise cross-modal fusion. 
+            The resulting fused features are processed by a hierarchical multi-decoder structure, producing accurate saliency maps. 
+            Extensive evaluations on six audio-visual benchmarks demonstrate that DFTSal achieves SOTA performance while maintaining computational efficiency.
+          </p>         
         </div>
       </div>
     </div>
