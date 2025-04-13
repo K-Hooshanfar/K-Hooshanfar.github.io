@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="LIFT: Latent Implicit Functions for Task- and Data-Agnostic Encoding.">
+  <meta name="keywords" content="LIFT">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LIFT</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!-- <link rel="icon" href="./static/images/favicon.svg"> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <!-- <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div> -->
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">LIFT: Latent Implicit Functions for Task- and Data-Agnostic Encoding</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://amirhossein-kz.github.io/">Amirhossein Kazerouni</a><sup>*</sup>,</span>
+            <span class="author-block">
+              <a href="https://iatsl.org/people/smehraban.html">Soroush Mehraban</a><sup>*</sup>,</span>
+            <span class="author-block">
+              <a href="https://brudno.uhndata.io/">Michael Brudno</a><sup>*</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.cs.toronto.edu/~taati/">Babak Taati</a><sup>*</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>*</sup>University of Toronto, Vector Institute, University Health Network</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <!-- <span class="link-block">
+                <a href="https://arxiv.org/pdf/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span> -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2503.15420"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code (Coming soon)</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body has-text-centered">
+      <img id="teaser" src="./static/main_fig.png" alt="Teaser Image" style="max-width: 100%; height: auto;">
+      <h2 class="subtitle has-text-centered">
+        <span class="LIFT">LIFT</span> enables unified implicit neural representations across diverse tasks by leveraging localized implicit functions and a hierarchical latent generator..
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Implicit Neural Representations (INRs) are proving to be a powerful paradigm in unifying task modeling across diverse data domains, offering key advantages such as memory efficiency and resolution independence. Conventional deep learning models are typically modality-dependent, often requiring custom architectures and objectives for different types of signals. However, existing INR frameworks frequently rely on global latent vectors or exhibit computational inefficiencies that limit their broader applicability.
+          </p>
+          <p>
+            We introduce <b><span class="LIFT">LIFT</span></b>, a novel, high-performance framework that addresses these challenges by capturing multiscale information through meta-learning. LIFT leverages multiple parallel localized implicit functions alongside a hierarchical latent generator to produce unified latent representations that span local, intermediate, and global features. This architecture facilitates smooth transitions across local regions, enhancing expressivity while maintaining inference efficiency.
+          </p>
+          <p>
+            Additionally, we introduce <b><span class="ReLIFT">ReLIFT</span></b>, an enhanced variant of LIFT that incorporates residual connections and expressive frequency encodings. With this straightforward approach, ReLIFT effectively addresses the convergence-capacity gap found in comparable methods, providing an efficient yet powerful solution to improve capacity and speed up convergence. 
+          </p>
+          <p>
+            Empirical results show that LIFT achieves state-of-the-art (SOTA) performance in generative modeling and classification tasks, with notable reductions in computational costs. Moreover, in single-task settings, the streamlined ReLIFT architecture proves effective in signal representations and inverse problem tasks.
+          </p>
+          
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    
+    <!-- Concurrent Work. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Method Overview</h2>
+
+        <div class="content has-text-justified">
+          <video width="100%" autoplay muted loop playsinline>
+            <source src="static/new.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+  <div class="columns is-centered">
+    <div class="column is-full-width">
+      <h2 class="title is-3">LIFT: Experimental Results Across Large Datasets</h2>
+      <h2 class="title is-4">Performance on CelebA-HQ (64²) and ShapeNet (64³)</h2>
+
+      <div class="content has-text-justified">
+        <img src="static/results1.png" alt="Experimental Results" width="100%">
+        <p class="has-text-centered">
+          <em>Table: Performance comparison of image and voxel reconstruction and generation on CelebA-HQ (64²) and ShapeNet (64³). Each cell is color-coded to indicate the <span style="background-color:rgba(166,128,255,0.5); padding:2px;">best</span> and <span style="background-color:rgba(217,204,255,0.5); padding:2px;">second-best</span> performance. <i>Learn.</i> and <i>Inf.</i> refer to learnable and inference parameters, respectively.</em>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="columns is-centered">
+    <div class="column is-7">
+      <h2 class="title is-4">Performance on CIFAR-10 (32²)</h2>
+      <div class="content has-text-justified">
+        <img src="static/results2.png" alt="CIFAR-10 Classification Performance" width="100%">
+        <p class="has-text-centered">
+          <em>Table: Image classification performance on CIFAR-10. The table reports the Top-1 accuracy (in %) along with reconstruction performance across different numbers of augmentations. 
+          <span style="font-weight:bold;">★</span> denotes best classification results from Spatial Functa, while 
+          <span style="font-weight:bold;">★★</span> indicates the use of more sophisticated augmentations, including 
+          <a href="#mixup" style="color:#007bff; text-decoration:none;">MixUp</a> and 
+          <a href="#cutmix" style="color:#007bff; text-decoration:none;">CutMix</a>.</em>
+        </p>
+      </div>
+    </div>
+
+    <div class="column is-5">
+      <h2 class="title is-4">Performance on ImageNet-100 (256²)</h2>
+      <div class="content has-text-justified">
+        <img src="static/results3.png" alt="Additional CIFAR-10 Results" width="100%">
+        <p class="has-text-centered">
+          <em>Table: Image reconstruction performance on the ImageNet-100 dataset.</em>
+        </p>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    
+    <!-- Title for Experimental Results -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">ReLIFT: Experimental Results in Single-Data Settings</h2>
+        <p>
+          ReLIFT incorporates residual connections and expressive first-layer frequency scaling to mitigate the convergence-capacity gap often seen in INRs. These enhancements enable the model to capture finer details and represent a broader range of frequencies efficiently. The frequency scaling increases the network’s capacity to learn higher-frequency components, while the residual connections adjust layer weights to amplify higher-order harmonics while preserving fundamental components. This design allows ReLIFT to learn a balance between high and low-frequency information with greater efficiency.
+        </p>
+      </div>
+    </div>
+
+    
+    <div class="columns is-centered">
+      <div class="column is-half">
+        <div class="content has-text-centered">
+          <img src="static/activations_relift.png" alt="ReLIFT Activations" width="90%">
+          <p><strong>(a) ReLIFT</strong></p>
+        </div>
+      </div>
+
+      <div class="column is-half">
+        <div class="content has-text-centered">
+          <img src="static/activations_siren.png" alt="SIREN Activations" width="98%">
+          <p><strong>(b) SIREN</strong></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <p class="has-text-centered">
+          <em>Figure: Activation statistics comparison between ReLIFT and SIREN. </em>
+        </p>
+      </div>
+    </div>
+
+
+    
+    <!-- Image Representation -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-4">Image Representation</h3>
+        <div class="content has-text-centered">
+          <img src="static/img_rep_0001.png" alt="Image Representation 1" width="86%">
+          <img src="static/img_rep_0010.png" alt="Image Representation 2" width="86%">
+          <img src="static/img_rep_0878.png" alt="Image Representation 3" width="86%">
+          <p><em>Figure: PSNR comparisons of ReLIFT with SOTA models.</em></p>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <!-- Audio Representation -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-4">Audio Representation</h3>
+        <div class="content has-text-centered">
+          <style>
+            .audio-container {
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: space-evenly;
+              align-items: center;
+              max-width: 800px;
+              margin: auto;
+            }
+            .audio-item {
+              text-align: center;
+              margin: 10px;
+            }
+            .audio-item audio {
+              border-radius: 50px; /* Makes the audio player rounded */
+              width: 200px; /* Adjust width */
+            }
+          </style>
+          
+          <div class="audio-container">
+            <!-- First Row (4 items) -->
+            <div class="audio-item">
+              <h5>Ground truth</h5>
+              <audio controls src="static/audio/gt_bach.wav"></audio>
+            </div>
+            <div class="audio-item">
+              <h5>ReLIFT</h5>
+              <audio controls src="static/audio/pred_relift_waveform.wav"></audio>
+            </div>
+            <div class="audio-item">
+              <h5>SIREN</h5>
+              <audio controls src="static/audio/pred_siren_waveform.wav"></audio>
+            </div>
+            <div class="audio-item">
+              <h5>Gauss</h5>
+              <audio controls src="static/audio/pred_gauss_waveform.wav"></audio>
+            </div>
+          
+            <!-- Second Row (3 items) -->
+            <div class="audio-item">
+              <h5>ReLU + P.E.</h5>
+              <audio controls src="static/audio/pred_relu_waveform.wav"></audio>
+            </div>
+            <div class="audio-item">
+              <h5>WIRE</h5>
+              <audio controls src="static/audio/pred_wire_waveform.wav"></audio>
+            </div>
+            <div class="audio-item">
+              <h5>FINER</h5>
+              <audio controls src="static/audio/pred_finer_waveform.wav"></audio>
+            </div>
+          </div>
+          
+          <br>
+          <img src="static/exp_audio.png" alt="Audio Representation" width="100%">
+
+          <p><em>Figure: PSNR and reconstruction error comparisons of ReLIFT with SOTA models.</em></p>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <!-- Shape Representation -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-4">Shape Representation</h3>
+        <div class="content has-text-centered">
+          <img src="static/3d_sdf.png" alt="Shape Representation" width="100%">
+          <p><em>Figure: Qualitative comparisons of ReLIFT with SOTA models.</em></p>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <!-- Image Super-resolution -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-4">Image Super-resolution</h3>
+        <div class="content has-text-centered">
+          <img src="static/img_sr_4x_sample.png" alt="Super-resolution" width="100%">
+          <p><em>Figure: PSNR and SSIM comparisons of a 4× single image super-resolution between ReLIFT and SOTA models.</em></p>
+        </div>
+      </div>
+    </div>
+      
+    <br>
+    
+    <!-- Image Denoising -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-4">Image Denoising</h3>
+        <div class="content has-text-centered">
+          <img src="static/denoising_result.png" alt="Denoising Results" width="100%">
+          <p><em>Figure: PSNR and SSIM comparisons between ReLIFT and SOTA models.</em></p>
+        </div>
+      </div>
+    </div>
+    
+    
+    <br>  
+    
+    <!-- Image Inpainting -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-4">Image Inpainting</h3>
+        <div class="content has-text-centered">
+          <img src="static/inpainting_result.png" alt="Inpainting Results" width="100%">
+          <p><em>Figure: PSNR comparison between LIFT and SOTA models on 25% of the pixels in a 572 × 582 × 3 image.</em></p>
+        </div>
+      </div>
+    </div>
+    
+    <br> 
+
+   
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-4">ReLIFT Spectral Bias</h2>
+
+        <div class="content has-text-centered">
+          <img src="static/fr.png" alt="Spectral Bias Comparison" width="100%">
+          <p><em>Figure: Frequency learning comparison between SIREN and ReLIFT. The x-axis shows training steps, the y-axis indicates frequency, and the color represents relative approximation error.</em></p>
+        </div>
+      </div>
+    </div>
+
+      </div>
+    </section>
+    
+  </div>
+</section>
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@misc{,
+        author    = {Amirhossein Kazerouni and Soroush Mehraban and Michael Brudno and Babak Taati},
+        title     = {LIFT: Latent Implicit Functions for Task- and Data-Agnostic Encoding},
+        eprint   = {2503.15420},
+        year      = {2025},
+        url={https://arxiv.org/abs/2503.15420},
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            We thank the authors of <a href="https://nerfies.github.io/">Nerfies</a> for kindly open-sourcing the template of this website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
