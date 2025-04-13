@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="LIFT: Latent Implicit Functions for Task- and Data-Agnostic Encoding.">
-  <meta name="keywords" content="LIFT">
+        content="DTFSal: Audio-Visual Dynamic Token Fusion for Video Saliency Prediction">
+  <meta name="keywords" content="DTFSal">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LIFT</title>
+  <title>DTFSal</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
@@ -88,7 +88,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">LIFT: Latent Implicit Functions for Task- and Data-Agnostic Encoding</h1>
+          <h1 class="title is-1 publication-title">DTFSal: Audio-Visual Dynamic Token Fusion for Video Saliency Prediction</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://amirhossein-kz.github.io/">Amirhossein Kazerouni</a><sup>*</sup>,</span>
@@ -186,18 +186,18 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
-          <p>
-            Implicit Neural Representations (INRs) are proving to be a powerful paradigm in unifying task modeling across diverse data domains, offering key advantages such as memory efficiency and resolution independence. Conventional deep learning models are typically modality-dependent, often requiring custom architectures and objectives for different types of signals. However, existing INR frameworks frequently rely on global latent vectors or exhibit computational inefficiencies that limit their broader applicability.
-          </p>
-          <p>
-            We introduce <b><span class="LIFT">LIFT</span></b>, a novel, high-performance framework that addresses these challenges by capturing multiscale information through meta-learning. LIFT leverages multiple parallel localized implicit functions alongside a hierarchical latent generator to produce unified latent representations that span local, intermediate, and global features. This architecture facilitates smooth transitions across local regions, enhancing expressivity while maintaining inference efficiency.
-          </p>
-          <p>
-            Additionally, we introduce <b><span class="ReLIFT">ReLIFT</span></b>, an enhanced variant of LIFT that incorporates residual connections and expressive frequency encodings. With this straightforward approach, ReLIFT effectively addresses the convergence-capacity gap found in comparable methods, providing an efficient yet powerful solution to improve capacity and speed up convergence. 
-          </p>
-          <p>
-            Empirical results show that LIFT achieves state-of-the-art (SOTA) performance in generative modeling and classification tasks, with notable reductions in computational costs. Moreover, in single-task settings, the streamlined ReLIFT architecture proves effective in signal representations and inverse problem tasks.
-          </p>
+          Audio-visual video saliency prediction aims to mimic human visual attention by identifying salient regions in videos through
+           the integration of both visual and auditory information. Although visual-only approaches have significantly advanced, 
+           effectively incorporating auditory cues remains challenging due to complex spatio–temporal interactions and high computational demands. 
+           To address these challenges, we propose \textbf{D}ynamic \textbf{T}oken \textbf{F}usion \textbf{Sal}iency (DFTSal), 
+           a novel audio-visual saliency prediction framework designed to balance accuracy with computational efficiency. 
+           Our approach features a multi-scale visual encoder equipped with two novel modules: the Learnable Token Enhancement Block (LTEB), 
+           which adaptively weights tokens to emphasize crucial saliency cues, and the Dynamic Learnable Token Fusion Block (DLTFB), 
+           which employs a shifting operation to reorganize and merge features, effectively capturing long-range dependencies and detailed spatial information. 
+           In parallel, an audio branch processes raw audio signals to extract meaningful auditory features. Both visual and audio features are integrated using 
+           our Adaptive Multimodal Fusion Block (AMFB), which employs local, global, and adaptive fusion streams for precise cross-modal fusion. 
+           The resulting fused features are processed by a hierarchical multi-decoder structure, producing accurate saliency maps. 
+           Extensive evaluations on six audio-visual benchmarks demonstrate that DFTSal achieves SOTA performance while maintaining computational efficiency.
           
         </div>
       </div>
@@ -209,26 +209,6 @@
 </section>
 
 
-<section class="section">
-  <div class="container is-max-desktop">
-
-    
-    <!-- Concurrent Work. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Method Overview</h2>
-
-        <div class="content has-text-justified">
-          <video width="100%" autoplay muted loop playsinline>
-            <source src="static/new.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
 
 <section class="section">
   <div class="container is-max-desktop">
@@ -330,74 +310,6 @@
 
     <br>
 
-    <!-- Audio Representation -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h3 class="title is-4">Audio Representation</h3>
-        <div class="content has-text-centered">
-          <style>
-            .audio-container {
-              display: flex;
-              flex-wrap: wrap;
-              justify-content: space-evenly;
-              align-items: center;
-              max-width: 800px;
-              margin: auto;
-            }
-            .audio-item {
-              text-align: center;
-              margin: 10px;
-            }
-            .audio-item audio {
-              border-radius: 50px; /* Makes the audio player rounded */
-              width: 200px; /* Adjust width */
-            }
-          </style>
-          
-          <div class="audio-container">
-            <!-- First Row (4 items) -->
-            <div class="audio-item">
-              <h5>Ground truth</h5>
-              <audio controls src="static/audio/gt_bach.wav"></audio>
-            </div>
-            <div class="audio-item">
-              <h5>ReLIFT</h5>
-              <audio controls src="static/audio/pred_relift_waveform.wav"></audio>
-            </div>
-            <div class="audio-item">
-              <h5>SIREN</h5>
-              <audio controls src="static/audio/pred_siren_waveform.wav"></audio>
-            </div>
-            <div class="audio-item">
-              <h5>Gauss</h5>
-              <audio controls src="static/audio/pred_gauss_waveform.wav"></audio>
-            </div>
-          
-            <!-- Second Row (3 items) -->
-            <div class="audio-item">
-              <h5>ReLU + P.E.</h5>
-              <audio controls src="static/audio/pred_relu_waveform.wav"></audio>
-            </div>
-            <div class="audio-item">
-              <h5>WIRE</h5>
-              <audio controls src="static/audio/pred_wire_waveform.wav"></audio>
-            </div>
-            <div class="audio-item">
-              <h5>FINER</h5>
-              <audio controls src="static/audio/pred_finer_waveform.wav"></audio>
-            </div>
-          </div>
-          
-          <br>
-          <img src="static/exp_audio.png" alt="Audio Representation" width="100%">
-
-          <p><em>Figure: PSNR and reconstruction error comparisons of ReLIFT with SOTA models.</em></p>
-        </div>
-      </div>
-    </div>
-
-    <br>
-
     <!-- Shape Representation -->
     <div class="columns is-centered">
       <div class="column is-full-width">
@@ -475,16 +387,16 @@
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
     <pre><code>@misc{,
-        author    = {Amirhossein Kazerouni and Soroush Mehraban and Michael Brudno and Babak Taati},
-        title     = {LIFT: Latent Implicit Functions for Task- and Data-Agnostic Encoding},
-        eprint   = {2503.15420},
+        author    = {Kiana Hoshanfar and Alireza Hosseini and Ahmad Kalhor and Babak Nadjar Araabi},
+        title     = {DTFSal: Audio-Visual Dynamic Token Fusion for Video Saliency Prediction},
+        eprint   = { },
         year      = {2025},
-        url={https://arxiv.org/abs/2503.15420},
+        url={ },
 }</code></pre>
   </div>
 </section>
 
-<footer class="footer">
+<!-- <footer class="footer">
   <div class="container">
     <div class="content has-text-centered">
       <a class="icon-link"
@@ -510,7 +422,21 @@
       </div>
     </div>
   </div>
+</footer> -->
+
+
+<footer class="footer">
+  <div class="container" style="text-align: center;">  <h2 style="font-size: 2em; font-weight: bold;">Contact</h2> 
+    <p>For Questions, Clarifications and Colaborations, please get in touch with:</p>
+
+    <br><br>
+    <div class="email text-center">
+      <i class="bi bi-envelope"></i>
+      <p style="font-size: larger; font-weight: bold;"><a href="mailto:k.hooshanfar02@gmail.com">k.hooshanfar02@gmail.com</a></p>
+    </div>
+    </div>
 </footer>
+
 
 </body>
 </html>
