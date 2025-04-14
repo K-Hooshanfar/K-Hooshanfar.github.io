@@ -138,7 +138,7 @@
                 </a>
               </span> -->
               <!-- Code Link. -->
-              <span class="link-block">
+              <!-- <span class="link-block">
                 <a href=""
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
@@ -146,7 +146,7 @@
                   </span>
                   <span>Code (Coming soon)</span>
                   </a>
-              </span>
+              </span> -->
               <!-- Dataset Link. -->
               <!-- <span class="link-block">
                 <a href="https://github.com/google/nerfies/releases/tag/0.1"
@@ -248,88 +248,42 @@
     <!-- Title for Experimental Results -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">ReLIFT: Experimental Results in Single-Data Settings</h2>
-        <p>
-          ReLIFT incorporates residual connections and expressive first-layer frequency scaling to mitigate the convergence-capacity gap often seen in INRs. These enhancements enable the model to capture finer details and represent a broader range of frequencies efficiently. The frequency scaling increases the network’s capacity to learn higher-frequency components, while the residual connections adjust layer weights to amplify higher-order harmonics while preserving fundamental components. This design allows ReLIFT to learn a balance between high and low-frequency information with greater efficiency.
-        </p>
+        <h2 class="title is-3">DTFSal: Qualitative Results of Saliency maps</h2>
       </div>
     </div>
 
     
     <div class="columns is-centered">
-      <div class="column is-half">
-        <div class="content has-text-centered">
-          <img src="static/activations_relift.png" alt="ReLIFT Activations" width="90%">
-          <p><strong>(a) ReLIFT</strong></p>
-        </div>
-      </div>
-
-      <div class="column is-half">
-        <div class="content has-text-centered">
-          <img src="static/activations_siren.png" alt="SIREN Activations" width="98%">
-          <p><strong>(b) SIREN</strong></p>
-        </div>
-      </div>
-    </div>
-
-    <div class="columns is-centered">
       <div class="column is-full-width">
-        <p class="has-text-centered">
-          <em>Figure: Activation statistics comparison between ReLIFT and SIREN. </em>
-        </p>
-      </div>
-    </div>
-
-
-    
-    <!-- Image Representation -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h3 class="title is-4">Image Representation</h3>
+        <h3 class="title is-4">Qualitative Results of Audio-Visual Saliency maps</h3>
         <div class="content has-text-centered">
-          <img src="static/img_rep_0001.png" alt="Image Representation 1" width="86%">
-          <img src="static/img_rep_0010.png" alt="Image Representation 2" width="86%">
-          <img src="static/img_rep_0878.png" alt="Image Representation 3" width="86%">
-          <p><em>Figure: PSNR comparisons of ReLIFT with SOTA models.</em></p>
+          <img src="static/av_fig.png" alt="av_fig" width="100%">
+          <p><em>Figure: Comparative visualizations of our DTFSal model compared with previous SOTA audio-visual saliency prediction methods.</em></p>
         </div>
       </div>
     </div>
 
     <br>
 
-    <!-- Shape Representation -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h3 class="title is-4">Shape Representation</h3>
         <div class="content has-text-centered">
-          <img src="static/3d_sdf.png" alt="Shape Representation" width="100%">
-          <p><em>Figure: Qualitative comparisons of ReLIFT with SOTA models.</em></p>
+          <img src="static/av_fig2.png" alt="av_fig2" width="100%">
+          <p><em>Figure: Additional comparative visualizations of our DTFSal model compared with previous SOTA audio-visual saliency prediction methods.</em></p>
         </div>
       </div>
     </div>
 
     <br>
 
-    <!-- Image Super-resolution -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h3 class="title is-4">Image Super-resolution</h3>
-        <div class="content has-text-centered">
-          <img src="static/img_sr_4x_sample.png" alt="Super-resolution" width="100%">
-          <p><em>Figure: PSNR and SSIM comparisons of a 4× single image super-resolution between ReLIFT and SOTA models.</em></p>
-        </div>
-      </div>
-    </div>
-      
-    <br>
     
     <!-- Image Denoising -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h3 class="title is-4">Image Denoising</h3>
+        <h3 class="title is-4">Qualitative Results of Visual Only Saliency maps</h3>
         <div class="content has-text-centered">
-          <img src="static/denoising_result.png" alt="Denoising Results" width="100%">
-          <p><em>Figure: PSNR and SSIM comparisons between ReLIFT and SOTA models.</em></p>
+          <img src="static/visual_fig.png" alt="visual only Results" width="100%">
+          <p><em>Figure: Comparative visualizations of our DTFSal model compared with previous SOTA visual-only saliency prediction methods.</em></p>
         </div>
       </div>
     </div>
@@ -337,30 +291,6 @@
     
     <br>  
     
-    <!-- Image Inpainting -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h3 class="title is-4">Image Inpainting</h3>
-        <div class="content has-text-centered">
-          <img src="static/inpainting_result.png" alt="Inpainting Results" width="100%">
-          <p><em>Figure: PSNR comparison between LIFT and SOTA models on 25% of the pixels in a 572 × 582 × 3 image.</em></p>
-        </div>
-      </div>
-    </div>
-    
-    <br> 
-
-   
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-4">ReLIFT Spectral Bias</h2>
-
-        <div class="content has-text-centered">
-          <img src="static/fr.png" alt="Spectral Bias Comparison" width="100%">
-          <p><em>Figure: Frequency learning comparison between SIREN and ReLIFT. The x-axis shows training steps, the y-axis indicates frequency, and the color represents relative approximation error.</em></p>
-        </div>
-      </div>
-    </div>
 
       </div>
     </section>
