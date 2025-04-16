@@ -1,0 +1,321 @@
+/* Basic Reset to Normalize Styles */
+body, h1, h2, h3, p, ul, li, form, input, button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box; /* Ensure padding and border are included in element's total width and height */
+}
+
+body {
+  font-family: 'Open Sans', sans-serif; /* Use the font you linked in HTML */
+  line-height: 1.6;
+  background-color: #f4f4f4; /* Light gray background */
+  color: #333; /* Dark gray text */
+  padding: 20px;
+}
+
+h1, h2, h3 {
+  font-family: 'Raleway', sans-serif; /* Use another linked font */
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: 2.5em;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+h3 {
+  font-size: 1.6em;
+}
+
+p {
+  margin-bottom: 15px;
+}
+
+/* Chat Widget Styles */
+#chat-widget {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  margin: 20px auto; /* Center the widget */
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 600px; /* Limit the width */
+}
+
+#chat-widget h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.8em;
+}
+
+#chat-log {
+  height: 300px;
+  overflow-y: auto;
+  border: 1px solid #eee;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+  border-radius: 3px;
+}
+
+#chat-log div {
+  padding: 5px;
+  margin-bottom: 5px;
+  border-bottom: 1px dotted #eee;
+}
+
+#chat-log div:last-child {
+  border-bottom: none;
+}
+
+#chat-log div:nth-child(odd) {
+  background-color: #fff;
+}
+
+#chat-form {
+  display: flex;
+}
+
+#chat-input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px 0 0 3px;
+  font-size: 1em;
+}
+
+#chat-input:focus {
+  outline: none;
+  border-color: #007bff; /* Example focus color */
+}
+
+#chat-form button {
+  background-color: #007bff; /* Example button color */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 0 3px 3px 0;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+#chat-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Example Basic Styles for Other Sections (you'll need to adapt this) */
+section {
+  padding: 40px 20px;
+  margin-bottom: 30px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+/* You can add more styles for your navigation, education, experience, etc. */
+
+/* Basic Footer Style */
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #333;
+  color: #f4f4f4;
+  font-size: 0.9em;
+}
+
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Navigation Styles */
+.navbar {
+  background-color: #fff;
+  padding: 15px 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 10;
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar .logo {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.8em;
+  color: #007bff;
+}
+
+.navbar .nav-links {
+  list-style: none;
+  display: flex;
+}
+
+.navbar .nav-links li {
+  margin-left: 20px;
+}
+
+.navbar .nav-links a {
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s;
+}
+
+.navbar .nav-links a:hover {
+  color: #007bff;
+}
+
+/* Hero Section */
+#hero {
+  background: linear-gradient(135deg, #007bff, #00c6ff);
+  color: #fff;
+  text-align: center;
+  padding: 120px 20px 80px;
+  margin-top: 70px; /* To offset the fixed nav */
+}
+
+#hero h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+
+#hero p {
+  font-size: 1.2em;
+}
+
+/* Chat Widget Styles */
+#chat-widget {
+  background-color: #fff;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#chat-widget h2 {
+  margin-bottom: 15px;
+  font-size: 1.8em;
+  color: #007bff;
+}
+
+#chat-log {
+  height: 300px;
+  overflow-y: auto;
+  border: 1px solid #eee;
+  padding: 10px;
+  margin-bottom: 15px;
+  background-color: #fafafa;
+  border-radius: 4px;
+}
+
+#chat-log div {
+  padding: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+#chat-form {
+  display: flex;
+}
+
+#chat-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+  font-size: 1em;
+}
+
+#chat-input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+#chat-form button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#chat-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Footer Styles */
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #333;
+  color: #f4f4f4;
+  font-size: 0.9em;
+  margin-top: 40px;
+}
+
+
+#chat-suggestions {
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* space between buttons */
+}
+
+.suggestion-btn {
+  border: 1px solid #ddd;
+  background-color: #fff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 0.9em;
+}
+
+.suggestion-btn:hover {
+  background-color: #f0f0f0;
+}
+
+
+#reset-chat {
+  color: #333;
+  background-color: #f8f9fa; /* Light gray background */
+  /* Add more styles if you like */
+}
+
+#reset-chat:hover {
+  background-color: #e2e6ea; /* Slightly darker hover */
+}

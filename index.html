@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kiana Hooshanfar</title>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600|Raleway:300,400,600|Poppins:300,400,600" rel="stylesheet">
+  
+  <!-- Vendor CSS -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <link href="main.css" rel="stylesheet" />
+
+  <!-- Inline Styles for Conversation Bubbles -->
+  <style>
+    /* Container for the chat messages */
+    #chat-log {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    /* Common styling for all messages */
+    .message {
+      padding: 10px 15px;
+      border-radius: 15px;
+      max-width: 70%;
+      word-wrap: break-word;
+    }
+    /* User messages appear on the right */
+    .user-message {
+      background-color: #007bff !important;
+      color: #ffffff !important;
+      align-self: flex-end;
+      text-align: right;
+    }
+    /* Bot messages appear on the left */
+    .bot-message {
+      background-color: #f1f0f0;
+      color: #333;
+      align-self: flex-start;
+      text-align: left;
+    }
+  </style>
+  
+
+  <!-- <script>
+    // Gemini API details
+    // const GEMINI_API_KEY = "AIzaSyDcHo_x2I0oGF2pK1YMlLVSpBNb94BtGoI";
+    // const GEMINI_API_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + GEMINI_API_KEY;
+    const GEMINI_API_KEY = "__GEMINI_API_KEY__";
+    const GEMINI_API_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + GEMINI_API_KEY;
+    console.log("Endpoint:", GEMINI_API_KEY);
+
+    
+  </script> -->
+  
+  <script src="config.js"></script>
+  <script>
+    // Check if the API key is loaded
+    if (!GEMINI_API_KEY) {
+      console.error("Error: GEMINI_API_KEY is undefined. Make sure the config.js file is properly loaded.");
+    }
+  
+    const GEMINI_API_ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
+    console.log("API Endpoint:", GEMINI_API_ENDPOINT);
+  </script>
+
+
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <h1 class="logo">Kiana Hooshanfar</h1>
+      <ul class="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#resume">Resume</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" data-aos="fade-in">
+    <div class="hero-content">
+      <h1>Welcome to My Portfolio</h1>
+      <p>Discover my journey in AI, Research, and Development.</p>
+    </div>
+  </section>
+
+  <!-- Chat Widget Section -->
+  <section id="chat-widget" class="container my-5" data-aos="fade-up" style="max-width: 1000px;">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <!-- Title and Reset Button -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2 class="card-title mb-0">Chat about my Resume</h2>
+          <button id="reset-chat" class="btn btn-light border">Reset</button>
+        </div>
+
+        <!-- Suggestion Buttons -->
+        <div class="mb-3">
+          <button class="btn btn-outline-secondary me-2 suggestion-btn" data-question="Projects">Projects</button>
+          <button class="btn btn-outline-secondary me-2 suggestion-btn" data-question="Skills">Skills</button>
+          <button class="btn btn-outline-secondary me-2 suggestion-btn" data-question="Experience">Experience</button>
+          <button class="btn btn-outline-secondary me-2 suggestion-btn" data-question="Education">Education</button>
+          <button class="btn btn-outline-secondary me-2 suggestion-btn" data-question="Contact">Contact</button>
+        </div>
+
+        <!-- Chat Log -->
+        <div id="chat-log" class="form-control mb-3" style="height: 300px; overflow-y: auto; background-color: #fafafa;"></div>
+
+        <!-- Chat Form -->
+        <form id="chat-form" class="input-group">
+          <input 
+            type="text" 
+            id="chat-input" 
+            class="form-control" 
+            placeholder="Ask a question about my resume..." 
+            required 
+          />
+          <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer data-aos="fade-in" class="bg-dark text-light text-center py-3">
+    <div class="container">
+      <p class="mb-0">© 2025 Kiana Hooshanfar. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Sample résumé data in Markdown format
+    const resumeMarkdown = `
+**Resume of Kiana Hooshanfar**
+
+**Education:**
+- Master's in Electrical Engineering (Control Engineering), University of Tehran
+- Bachelor's in Electrical Engineering (Control Engineering), Iran University of Science and Technology
+
+**Experience:**
+- AI Developer at AVIR AI Center, Tehran
+- Research Assistant at Machine Learning and Computational Modeling Lab, University of Tehran
+- AI Developer at University of Tehran
+- Research Assistant at Control Laboratory, Iran University of Science and Technology
+- Research Intern at Robotics Research Laboratory, Iran University of Science and Technology
+    `;
+
+    // Helper function to append a message to the chat log
+    function appendMessage(text, sender) {
+      const chatLogEl = document.getElementById("chat-log");
+      const messageDiv = document.createElement("div");
+      messageDiv.classList.add("message");
+      if (sender === "user") {
+        messageDiv.classList.add("user-message");
+      } else {
+        messageDiv.classList.add("bot-message");
+      }
+      messageDiv.textContent = text;
+      chatLogEl.appendChild(messageDiv);
+      // Scroll to the bottom of the chat log
+      chatLogEl.scrollTop = chatLogEl.scrollHeight;
+    }
+
+    // Chat form submission handler
+    document.getElementById("chat-form").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const inputEl = document.getElementById("chat-input");
+      const userMessage = inputEl.value.trim();
+      if (!userMessage) return;
+      appendMessage(userMessage, "user");
+      inputEl.value = "";
+
+      // Append temporary bot message
+      appendMessage("...", "bot");
+
+      // Construct prompt with resume data and instructions
+      const prompt = `
+You are an AI assistant. Your knowledge is limited to the following resume information:
+${resumeMarkdown}
+
+If a question is asked that is not answered in the resume, reply with: "I'm sorry, I can only answer questions about my resume."
+
+User: ${userMessage}
+Assistant:
+      `;
+
+      try {
+        const response = await fetch(GEMINI_API_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+        });
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error("API Error:", response.status, errorText);
+          // Replace the last bot message with the error
+          const chatLogEl = document.getElementById("chat-log");
+          chatLogEl.lastChild.textContent = "Bot: API error " + response.status;
+          return;
+        }
+        const data = await response.json();
+        let reply = "No reply received.";
+        if (data && data.candidates && data.candidates.length > 0 &&
+            data.candidates[0].content && data.candidates[0].content.parts &&
+            data.candidates[0].content.parts.length > 0) {
+          reply = data.candidates[0].content.parts[0].text;
+        }
+        // Replace the last bot message (the temporary one) with the actual reply
+        const chatLogEl = document.getElementById("chat-log");
+        chatLogEl.lastChild.textContent = reply;
+      } catch (err) {
+        console.error("Fetch error:", err);
+        const chatLogEl = document.getElementById("chat-log");
+        chatLogEl.lastChild.textContent = "Bot: Error occurred: " + err.message;
+      }
+    });
+
+    // Add event listeners for suggestion buttons and reset button after DOM is loaded
+    document.addEventListener("DOMContentLoaded", () => {
+      // Suggestion buttons auto-fill and auto-send the chat question
+      const suggestionButtons = document.querySelectorAll(".suggestion-btn");
+      suggestionButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const question = btn.getAttribute("data-question");
+          document.getElementById("chat-input").value = question;
+          // Auto-send the question:
+          document.getElementById("chat-form").dispatchEvent(new Event("submit"));
+        });
+      });
+
+      // RESET BUTTON: Clear the chat log and input field
+      document.getElementById("reset-chat").addEventListener("click", () => {
+        document.getElementById("chat-log").innerHTML = "";
+        document.getElementById("chat-input").value = "";
+      });
+    });
+  </script>
+  
+  <!-- Vendor JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/js/main.js"></script>
+  
+  <script>
+    // Initialize AOS animations
+    AOS.init();
+  </script>
+</body>
+</html>
