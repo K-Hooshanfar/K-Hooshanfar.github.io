@@ -9,8 +9,8 @@ on:
 # Grant the permissions needed to check out code + deploy Pages
 permissions:
   contents: read        # for actions/checkout
-  # pages: write          # to push to the github-pages environment
-  # id-token: write       # required by configure-pages / deploy-pages
+  pages: write          # to push to the github-pages environment
+  id-token: write       # required by configure-pages / deploy-pages
 
 jobs:
   build-and-deploy:
