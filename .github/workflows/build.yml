@@ -1,13 +1,15 @@
-name: Build & Deploy
+name: Build & Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main, master ]
+    branches:
+      - main
+      - master
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: read         # for actions/checkout
+  pages: write           # to publish to the Pages environment
+  id-token: write        # for configure-pages
 
 jobs:
   deploy:
@@ -15,33 +17,41 @@ jobs:
     environment: github-pages
 
     steps:
-      - name: Checkout
+      # 1) Check out your code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
+      # 2) (Optional) Install Node.js if you need a build step
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 16
 
+      # 3) Auto-generate config.js at the repo root
       - name: Generate config.js
         run: |
           cat <<EOF > config.js
-          // AUTO‑GENERATED; do not edit.
-          var GEMINI_API_KEY    = '${{ secrets.GEMINI_API_KEY }}';
+          // AUTO‑GENERATED; do not edit by hand.
+          var GEMINI_API_KEY = '${{ secrets.GEMINI_API_KEY }}';
           var GEMINI_API_ENDPOINT =
             'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key='
             + GEMINI_API_KEY;
           EOF
 
-      # (your existing build steps go here, if any)
+      # 4) (Optional) Your build step, if any
+      # - name: Build project
+      #   run: npm ci && npm run build
 
-      - name: Configure Pages
+      # 5) Configure the Pages environment
+      - name: Configure GitHub Pages
         uses: actions/configure-pages@v3
 
-      - name: Upload artifact
+      # 6) Upload everything in the repo root for deployment
+      - name: Upload artifact for deployment
         uses: actions/upload-pages-artifact@v1
         with:
-          path: ./       # <<– publish the repo root
+          path: ./   # <-- this ensures index.html, config.js, assets/, etc. all go up
 
-      - name: Deploy to Pages
+      # 7) Publish to GitHub Pages
+      - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v1
