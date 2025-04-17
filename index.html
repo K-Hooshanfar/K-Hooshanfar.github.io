@@ -51,15 +51,12 @@
   </style>
   
 
-  <!-- Load config.js (auto-generated in CI) -->
-  <script src="./config.js"></script>
-  <!-- Sanity check that both globals exist -->
   <script>
-    if (typeof GEMINI_API_KEY === 'undefined' || typeof GEMINI_API_ENDPOINT === 'undefined') {
-      console.error("🚨 config.js didn’t load or didn’t define GEMINI_API_KEY + GEMINI_API_ENDPOINT");
-    } else {
-      console.log("✅ Gemini endpoint:", GEMINI_API_ENDPOINT);
-    }
+    // Gemini API details
+    const GEMINI_API_KEY = "AIzaSyDcHo_x2I0oGF2pK1YMlLVSpBNb94BtGoI";
+    const GEMINI_API_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + GEMINI_API_KEY;
+
+    
   </script>
 
 
