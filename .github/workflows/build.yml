@@ -1,41 +1,46 @@
-name: Deploy to GitHub Pages
+name: Build & Deploy
 
-# Trigger on pushes to your deployment branch
 on:
   push:
-    branches:
-      - main
+    branches: [ main, master ]
 
-# Grant the permissions needed to check out code + deploy Pages
 permissions:
-  contents: read        # for actions/checkout
-  pages: write          # to push to the github-pages environment
-  id-token: write       # required by configure-pages / deploy-pages
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
+    environment: github-pages
 
     steps:
-      # 1) Get your code
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v3
 
-      # 2) (Optional) Install Node.js if you need to run a build
       - name: Set up Node.js
         uses: actions/setup-node@v3
-        with:
-          node-version: 16
+        with: node-version: 16
 
-      # 3) Auto-generate config.js with your API key + endpoint
       - name: Generate config.js
         run: |
           cat <<EOF > config.js
-          // AUTO‑GENERATED; do not edit by hand.
-          var GEMINI_API_KEY = '${{ secrets.GEMINI_API_KEY }}';
+          // AUTO‑GENERATED; do not edit.
+          var GEMINI_API_KEY    = '${{ secrets.GEMINI_API_KEY }}';
           var GEMINI_API_ENDPOINT =
             'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key='
             + GEMINI_API_KEY;
           EOF
+
+      # (your existing build steps go here, if any)
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./       # <<– publish the repo root
+
+      - name: Deploy to Pages
+        uses: actions/deploy-pages@v1
