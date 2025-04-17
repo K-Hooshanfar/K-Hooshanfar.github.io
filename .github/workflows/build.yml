@@ -7,9 +7,9 @@ on:
       - master
 
 permissions:
-  contents: read         # for actions/checkout
-  pages: write           # to publish to the Pages environment
-  id-token: write        # for configure-pages
+  contents: read       # for checkout
+  pages: write         # to publish
+  id-token: write      # for configure-pages
 
 jobs:
   deploy:
@@ -17,17 +17,14 @@ jobs:
     environment: github-pages
 
     steps:
-      # 1) Check out your code
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2) (Optional) Install Node.js if you need a build step
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 16
 
-      # 3) Auto-generate config.js at the repo root
       - name: Generate config.js
         run: |
           cat <<EOF > config.js
@@ -38,20 +35,17 @@ jobs:
             + GEMINI_API_KEY;
           EOF
 
-      # 4) (Optional) Your build step, if any
-      # - name: Build project
+      # (Optional build here, if you have one)
+      # - name: Build site
       #   run: npm ci && npm run build
 
-      # 5) Configure the Pages environment
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v3
 
-      # 6) Upload everything in the repo root for deployment
       - name: Upload artifact for deployment
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v1    # <<— this is the one you need
         with:
-          path: ./   # <-- this ensures index.html, config.js, assets/, etc. all go up
+          path: ./                                 # publishes index.html, config.js, assets/, etc.
 
-      # 7) Publish to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v1
