@@ -8,19 +8,24 @@ on:
 permissions:
   contents: write  # Allows the workflow to push to the gh-pages branch
 
+# .github/workflows/deploy.yml
 jobs:
   deploy:
-    runs-on: ubuntu-latest
-
+    # …
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16  # Use the version of Node.js your project requires
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
 
-    - name: Add API Key to Config File
-      run: |
-        echo "const GEMINI_API_KEY = '${{ secrets.GEMINI_API_KEY }}';" > config.js
+      - name: Write config.js with API key + endpoint
+        run: |
+          cat <<EOF > config.js
+          // THIS FILE IS AUTO‑GENERATED IN CI; DO NOT EDIT.
+          window.GEMINI_API_KEY = '${{ secrets.GEMINI_API_KEY }}';
+          window.GEMINI_API_ENDPOINT = \`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=\${window.GEMINI_API_KEY}\`;
+          EOF
+
+      # … your build / gh-pages‑publish steps here …

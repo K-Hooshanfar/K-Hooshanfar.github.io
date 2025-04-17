@@ -51,25 +51,15 @@
   </style>
   
 
-  <!-- <script>
-    // Gemini API details
-    // const GEMINI_API_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + GEMINI_API_KEY;
-    const GEMINI_API_KEY = "__GEMINI_API_KEY__";
-    const GEMINI_API_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + GEMINI_API_KEY;
-    console.log("Endpoint:", GEMINI_API_KEY);
+  <!-- <script src="config.js"></script> -->
 
-    
-  </script> -->
-
-  <script src="config.js"></script>
+  <!-- right away sanity‑check them: -->
   <script>
-    // Check if the API key is loaded
-    if (!GEMINI_API_KEY) {
-      console.error("Error: GEMINI_API_KEY is undefined. Make sure the config.js file is properly loaded.");
+    if (!window.GEMINI_API_KEY || !window.GEMINI_API_ENDPOINT) {
+      console.error("➤ config.js didn't load or didn't define the API key + endpoint!");
+    } else {
+      console.log("➤ Gemini endpoint:", window.GEMINI_API_ENDPOINT);
     }
-  
-    const GEMINI_API_ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
-    console.log("API Endpoint:", GEMINI_API_ENDPOINT);
   </script>
 
 
