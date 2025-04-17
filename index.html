@@ -51,14 +51,14 @@
   </style>
   
 
-  <script src="config.js"></script>
-
-  <!-- right away sanity‑check them: -->
+  <!-- Load config.js (auto-generated in CI) -->
+  <script src="./config.js"></script>
+  <!-- Sanity check that both globals exist -->
   <script>
-    if (!window.GEMINI_API_KEY || !window.GEMINI_API_ENDPOINT) {
-      console.error("➤ config.js didn't load or didn't define the API key + endpoint!");
+    if (typeof GEMINI_API_KEY === 'undefined' || typeof GEMINI_API_ENDPOINT === 'undefined') {
+      console.error("🚨 config.js didn’t load or didn’t define GEMINI_API_KEY + GEMINI_API_ENDPOINT");
     } else {
-      console.log("➤ Gemini endpoint:", window.GEMINI_API_ENDPOINT);
+      console.log("✅ Gemini endpoint:", GEMINI_API_ENDPOINT);
     }
   </script>
 
