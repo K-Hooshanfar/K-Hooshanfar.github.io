@@ -44,11 +44,13 @@
 
   <script>
     let paperSource = '';
-    // if you renamed it to .tex:
-    fetch('./paper.tex')
-      .then(res => res.text())
+    fetch('./paper.txt')           // ← point at the actual filename
+      .then(r => {
+        if (!r.ok) throw new Error(r.status);
+        return r.text();
+      })
       .then(text => { paperSource = text; })
-      .catch(err => console.error('Couldn’t load paper source:', err));
+      .catch(err => console.error('Couldn’t load paper.txt:', err));
   </script>
 
 <nav class="navbar" role="navigation" aria-label="main navigation">
