@@ -503,14 +503,13 @@ ${paperSource}
 
 **Instructions for Generating Your Answer:**
 
-1.  **Source Limitation:** Use *only* the provided LaTeX source. Do not add external knowledge or information not present in the text.
-2.  **Relevance:** Directly address the user's question. Find all relevant information within the source to construct your answer.
-3.  **Structure:**
+1.  **Relevance:** Directly address the user's question. Find all relevant information within the source to construct your answer.
+2.  **Structure:**
     * Organize your answer logically. Use paragraphs for explanations.
     * Use bullet points for lists or distinct points if it enhances clarity.
     * Ensure the answer flows well and is easy to understand.
-4.  **Synthesis:** Do not just copy-paste sections. Synthesize the information from the relevant parts of the source into a coherent response. Rephrase in your own words, while staying true to the source content.
-5.  **LaTeX and Math Formatting:**
+3.  **Synthesis:** Do not just copy-paste sections. Synthesize the information from the relevant parts of the source into a coherent response. Rephrase in your own words, while staying true to the source content.
+4.  **LaTeX and Math Formatting:**
     * **No Delimiters:** Absolutely *no* LaTeX delimiters (like \\( \\), \\[ \\], $ $, $$ $$) should appear in your output.
     * **Plain Text Math:** Render *all* mathematical notation (variables, formulas, symbols, Greek letters, etc.) as plain text.
         * Example: Write E(t) instead of \\(\\mathbf{E}(t)\\).
@@ -521,7 +520,7 @@ ${paperSource}
         * Present each relevant equation on a new line.
         * Use clear, readable plain text format for the equation itself.
         * You may add a brief label or explanation before or after the equation *if* it helps clarify its relevance to the answer, based *only* on the source text surrounding the equation. Example: "The equation for calculating force is:" followed by the plain text equation on the next line.
-6.  **Out-of-Scope Questions:** If the user's question cannot be answered using *only* the provided LaTeX source, reply *exactly* with:
+5.  **Out-of-Scope Questions:** If the user's question cannot be answered using *only* the provided LaTeX source, reply *exactly* with:
     "I'm sorry, I can only answer questions about this paper."
 
 User: ${question}
