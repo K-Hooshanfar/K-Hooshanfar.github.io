@@ -1,7 +1,7 @@
 \title{DTFSal: Audio-Visual Dynamic Token Fusion for Video Saliency Prediction}
 
 \author{
-Kiana Hoshanfar$^{1}$, 
+Kiana Hooshanfar$^{1}$, 
 Alireza Hosseini$^{1}$, 
 Ahmad Kalhor$^{1}$,
 Babak Nadjar Araabi$^{1}$ \\
