@@ -493,6 +493,10 @@
     // Build prompt
     const prompt = `
 You are an AI assistant.  Use _only_ the following LaTeX source to answer questions:
+When you generate your answer:
+ • Don’t use any LaTeX delimiters like \\( or \\).
+ • Render all math in plain text.  
+   e.g. instead of \\(\\mathbf{E}(t)\\) write E(t).
 
 \`\`\`latex
 ${paperSource}
