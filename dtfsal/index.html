@@ -42,6 +42,15 @@
 </head>
 <body>
 
+  <script>
+    let paperSource = '';
+    // if you renamed it to .tex:
+    fetch('./paper.tex')
+      .then(res => res.text())
+      .then(text => { paperSource = text; })
+      .catch(err => console.error('Couldn’t load paper source:', err));
+  </script>
+
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
@@ -495,15 +504,18 @@
 
     // Build prompt
     const prompt = `
-You are an AI assistant. Use ONLY the following paper Markdown to answer:
+You are an AI assistant.  Use _only_ the following LaTeX source to answer questions:
 
-${paperMarkdown}
+\`\`\`latex
+${paperSource}
+\`\`\`
 
-If you cannot find the answer, say "I’m sorry, I can only answer questions about this paper."
+If the user asks something not in the source, reply:
+"I'm sorry, I can only answer questions about this paper."
 
 User: ${question}
 Assistant:
-    `;
+`;
 
     try {
       const res = await fetch(GEMINI_API_ENDPOINT, {
