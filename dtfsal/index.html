@@ -128,20 +128,6 @@
     }
   </style>
 
-  <!-- Load the paper Markdown at startup -->
-  <script>
-    let paperMarkdown = '';
-    // Fetch the markdown file on load
-    fetch('./paper.md')
-      .then(res => res.text())
-      .then(md => {
-        paperMarkdown = md;
-      })
-      .catch(err => {
-        console.error('Failed to load paper.md:', err);
-      });
-  </script>
-
   <!-- Gemini API details -->
   <script>
     const KEY = "AIzaSyDcHo_x2I0oGF2pK1YMlLVSpBNb94BtGoI";
