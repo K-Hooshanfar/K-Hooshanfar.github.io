@@ -82,6 +82,65 @@
   </div> -->
 </nav>
 
+  <!-- Inline Styles for Conversation Bubbles -->
+  <style>
+    /* Container for the chat messages */
+    #chat-log {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 10px;
+      background: #fafafa;
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    /* Common styling for all messages */
+    .message {
+      padding: 10px 15px;
+      border-radius: 15px;
+      max-width: 70%;
+      word-wrap: break-word;
+    }
+    /* User messages appear on the right */
+    .user-message {
+      background-color: #007bff;
+      color: #fff;
+      align-self: flex-end;
+      text-align: right;
+    }
+    /* Bot messages appear on the left */
+    .bot-message {
+      background-color: #f1f0f0;
+      color: #333;
+      align-self: flex-start;
+      text-align: left;
+    }
+  </style>
+
+  <!-- Load the paper Markdown at startup -->
+  <script>
+    let paperMarkdown = '';
+    // Fetch the markdown file on load
+    fetch('./paper.md')
+      .then(res => res.text())
+      .then(md => {
+        paperMarkdown = md;
+      })
+      .catch(err => {
+        console.error('Failed to load paper.md:', err);
+      });
+  </script>
+
+  <!-- Gemini API details -->
+  <script>
+    const KEY = "AIzaSyDcHo_x2I0oGF2pK1YMlLVSpBNb94BtGoI";
+    const GEMINI_API_ENDPOINT = 
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" 
+      + KEY;
+  </script>
+
 
 <section class="hero">
   <div class="hero-body">
@@ -175,7 +234,50 @@
   </div>
 </section>
 
+<!-- ===== Paper Chatbot ===== -->
+<section id="chat-widget" class="section">
+  <div class="container is-max-desktop">
+    <div class="card">
+      <div class="card-content">
 
+        <!-- Header + Reset -->
+        <div class="level mb-4">
+          <div class="level-left">
+            <h2 class="title is-4">Chat about this Paper</h2>
+          </div>
+          <div class="level-right">
+            <button id="reset-chat" class="button is-light">Reset</button>
+          </div>
+        </div>
+
+        <!-- Suggested Questions -->
+        <div class="buttons mb-3">
+          <button class="button is-small suggestion-btn" data-question="What is the main contribution?">Contribution</button>
+          <button class="button is-small suggestion-btn" data-question="Who are the authors?">Authors</button>
+          <button class="button is-small suggestion-btn" data-question="Explain DFTSal.">DFTSal</button>
+          <button class="button is-small suggestion-btn" data-question="How does the LTEB block work?">LTEB</button>
+          <button class="button is-small suggestion-btn" data-question="Show the BibTeX entry.">BibTeX</button>
+        </div>
+
+        <!-- Chat Log -->
+        <div id="chat-log"></div>
+
+        <!-- Chat Input -->
+        <form id="chat-form" class="field has-addons">
+          <div class="control is-expanded">
+            <input id="chat-input" class="input" type="text"
+                   placeholder="Ask a question about the paper…" required>
+          </div>
+          <div class="control">
+            <button type="submit" class="button is-primary">Send</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ===== End Chatbot ===== -->
 
 
 <section class="section">
@@ -354,6 +456,77 @@
     </div>
 </footer>
 
+<script>
+  // Append a chat message to the DOM
+  function appendMessage(text, sender) {
+    const log = document.getElementById('chat-log');
+    const msg = document.createElement('div');
+    msg.classList.add('message', sender === 'user' ? 'user-message' : 'bot-message');
+    msg.textContent = text;
+    log.appendChild(msg);
+    log.scrollTop = log.scrollHeight;
+  }
+
+  // Reset chat
+  document.getElementById('reset-chat').addEventListener('click', () => {
+    document.getElementById('chat-log').innerHTML = '';
+  });
+
+  // Handle suggestion buttons
+  document.querySelectorAll('.suggestion-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const q = btn.dataset.question;
+      document.getElementById('chat-input').value = q;
+      document.getElementById('chat-form').dispatchEvent(new Event('submit'));
+    });
+  });
+
+  // Handle form submit
+  document.getElementById('chat-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const input = document.getElementById('chat-input');
+    const question = input.value.trim();
+    if (!question) return;
+    appendMessage(question, 'user');
+    input.value = '';
+
+    // Show a typing indicator
+    appendMessage('...', 'bot');
+
+    // Build prompt
+    const prompt = `
+You are an AI assistant. Use ONLY the following paper Markdown to answer:
+
+${paperMarkdown}
+
+If you cannot find the answer, say "I’m sorry, I can only answer questions about this paper."
+
+User: ${question}
+Assistant:
+    `;
+
+    try {
+      const res = await fetch(GEMINI_API_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+      });
+      if (!res.ok) throw new Error(`API ${res.status}`);
+      const data = await res.json();
+      let reply = 'No response.';
+      if (data.candidates?.[0]?.content?.parts?.[0]?.text) {
+        reply = data.candidates[0].content.parts[0].text.trim();
+      }
+      // Replace the typing indicator
+      const log = document.getElementById('chat-log');
+      log.lastChild.textContent = reply;
+    } catch (err) {
+      const log = document.getElementById('chat-log');
+      log.lastChild.textContent = 'Error: ' + err.message;
+      console.error(err);
+    }
+  });
+</script>
 
 </body>
 </html>
