@@ -40,11 +40,23 @@
   <script src="./static/js/bulma-slider.min.js"></script>
   <!-- <script src="./static/js/index.js"></script> -->
 
-  <!-- MathJax 3 -->
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async
-          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-  </script>
+<!-- 1) Configure MathJax before loading it -->
+<script>
+  window.MathJax = {
+    tex: {
+      // enable both \(…\)/\[…\] and $…$/$$…$$
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      displayMath: [ ['$$','$$'], ['\\[','\\]'] ]
+    }
+  };
+</script>
+
+<!-- 2) Load MathJax -->
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 
 </head>
 <body>
@@ -466,9 +478,16 @@
     const log = document.getElementById('chat-log');
     const msg = document.createElement('div');
     msg.classList.add('message', sender === 'user' ? 'user-message' : 'bot-message');
-    msg.textContent = text;
+    msg.innerHTML = text;
     log.appendChild(msg);
     log.scrollTop = log.scrollHeight;
+
+    // Re-render any TeX in this new message
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([ msg ]).catch(err =>
+        console.error('MathJax typeset failed:', err)
+      );
+    }
   }
 
       // Post‑processing: bold and equations
@@ -572,39 +591,32 @@ Assistant:
 `;
 
 try {
-  /* 1 ───── call Gemini */
-  const res = await fetch(GEMINI_API_ENDPOINT, {
-    method : 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body   : JSON.stringify({
-      contents: [
-        { parts: [{ text: prompt }] }
-      ]
-    })
+      const res = await fetch(GEMINI_API_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+      });
+      if (!res.ok) throw new Error(`API ${res.status}`);
+
+      const data = await res.json();
+      const reply = data.candidates?.[0]?.content?.parts?.[0]?.text.trim() || 'No response.';
+
+      // Replace typing indicator with the real answer
+      const log = document.getElementById('chat-log');
+      log.lastChild.innerHTML = formatReply(reply);
+
+      // Re-typeset that final message
+      if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise([ log.lastChild ])
+          .catch(err => console.error('MathJax typeset failed:', err));
+      }
+
+    } catch (err) {
+      const log = document.getElementById('chat-log');
+      log.lastChild.textContent = 'Error: ' + err.message;
+      console.error(err);
+    }
   });
-
-  if (!res.ok) throw new Error(`API ${res.status}`);
-
-  /* 2 ───── extract the reply */
-  const data  = await res.json();
-  const reply = data.candidates?.[0]?.content?.parts?.[0]?.text.trim()
-               || 'No response.';
-
-  /* 3 ───── swap the “typing …” bubble with the reply */
-  const log   = document.getElementById('chat-log');
-  log.lastChild.innerHTML = formatReply(reply);   // or simply  reply
-
-  /* 4 ───── ask MathJax to typeset ONLY this new bubble */
-  if (window.MathJax) {
-    await MathJax.typesetPromise([log.lastChild]);
-  }
-
-} catch (err) {
-  /* graceful error handling */
-  const log = document.getElementById('chat-log');
-  log.lastChild.textContent = 'Error: ' + err.message;
-  console.error(err);
-}
   </script>
 
 </body>
