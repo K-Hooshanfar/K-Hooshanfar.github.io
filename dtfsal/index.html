@@ -464,30 +464,42 @@
     log.scrollTop = log.scrollHeight;
   }
 
-  <script>
-  // 1️⃣ initialize
-  const md = window.markdownit({
-    html: false,
-    linkify: false,
-    typographer: false
-  });
+      // Post‑processing: bold and equations
+    // Enhanced post‑processing: bold, lists, paragraphs, equations
+    function formatReply(text) {
+      // 1) bold → <strong>
+      let out = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
 
-  function formatReply(text) {
-    // 2️⃣ fence any single‑line equation (foo = bar) so it becomes a code block
-    text = text.replace(
-      /^([A-Za-z0-9_\{\}\^\(\)\[\]\s\.,\-+*\/]+=[^=\n]+)$/gm,
-      '```$1```'
-    );
+      // 2) break out inline “: * ” bullets into their own lines
+      out = out.replace(/:\s*\* /g, ':\n* ');
 
-    // 3️⃣ let markdown-it handle **bold**, lists, paragraphs, <pre><code>, etc.
-    let html = md.render(text);
+      // 3) one‑line equations → <pre><code>
+      out = out.replace(
+        /^([A-Za-z0-9_{}\^\(\)\[\]\s\.,\-+*\/]+=[^=\n]+)$/gm,
+        '<pre><code>$1</code></pre>'
+      );
 
-    // 4️⃣ if you really want <strong> instead of <b> tags
-    html = html.replace(/<b>(.*?)<\/b>/g, '<strong>$1</strong>');
-
-    return html;
-  }
-</script>    // Post‑processing: bold and equations
+      // 4) split lines, build lists and paragraphs
+      const lines = out.split('\n');
+      let html = '', inList = false;
+      for (let line of lines) {
+        if (/^\*\s+/.test(line)) {
+          if (!inList) { html += '<ul>'; inList = true; }
+          html += `<li>${line.replace(/^\*\s+/, '')}</li>`;
+        } else {
+          if (inList) { html += '</ul>'; inList = false; }
+          if (/^\s*<pre>/.test(line)) {
+            html += line;                // already a code block
+          } else if (line.trim() === '') {
+            // skip blank
+          } else {
+            html += `<p>${line.trim()}</p>`;
+          }
+        }
+      }
+      if (inList) html += '</ul>';
+      return html;
+    }
 
   // Reset chat
   document.getElementById('reset-chat').addEventListener('click', () => {
@@ -552,25 +564,25 @@ User: ${question}
 Assistant:
 `;
 
-  try {
-          const res = await fetch(GEMINI_API_ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-          });
-          if (!res.ok) throw new Error(API ${res.status});
-          const data = await res.json();
-          let reply = data.candidates?.[0]?.content?.parts?.[0]?.text.trim() || 'No response.';
-          // Replace the typing indicator with formatted HTML
-          const log = document.getElementById('chat-log');
-          log.lastChild.innerHTML = formatReply(reply);
-        } catch (err) {
-          const log = document.getElementById('chat-log');
-          log.lastChild.textContent = 'Error: ' + err.message;
-          console.error(err);
-        }
-      });
-</script>
+try {
+        const res = await fetch(GEMINI_API_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+        });
+        if (!res.ok) throw new Error(`API ${res.status}`);
+        const data = await res.json();
+        let reply = data.candidates?.[0]?.content?.parts?.[0]?.text.trim() || 'No response.';
+        // Replace the typing indicator with formatted HTML
+        const log = document.getElementById('chat-log');
+        log.lastChild.innerHTML = formatReply(reply);
+      } catch (err) {
+        const log = document.getElementById('chat-log');
+        log.lastChild.textContent = 'Error: ' + err.message;
+        console.error(err);
+      }
+    });
+  </script>
 
 </body>
 </html>
