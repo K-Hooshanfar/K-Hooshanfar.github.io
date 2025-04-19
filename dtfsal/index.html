@@ -464,6 +464,18 @@
     log.scrollTop = log.scrollHeight;
   }
 
+      // Post‑processing: bold and equations
+  function formatReply(text) {
+      // **bold** → <strong>bold</strong>
+      let out = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+      // lines like "lhs = rhs" → block code
+      out = out.replace(
+        /^([A-Za-z0-9_{}\^\(\)\[\]\s\.,\-+*\/]+=[^=\n]+)$/gm,
+        '<pre><code>$1</code></pre>'
+      );
+      return out;
+    }
+
   // Reset chat
   document.getElementById('reset-chat').addEventListener('click', () => {
     document.getElementById('chat-log').innerHTML = '';
@@ -541,7 +553,8 @@ Assistant:
       }
       // Replace the typing indicator
       const log = document.getElementById('chat-log');
-      log.lastChild.textContent = reply;
+      const formatted = formatReply(reply);
+      log.lastChild.textContent = formatted;
     } catch (err) {
       const log = document.getElementById('chat-log');
       log.lastChild.textContent = 'Error: ' + err.message;
