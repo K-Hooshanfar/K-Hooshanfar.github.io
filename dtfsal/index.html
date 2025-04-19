@@ -47,6 +47,9 @@
       // enable both \(…\)/\[…\] and $…$/$$…$$
       inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
       displayMath: [ ['$$','$$'], ['\\[','\\]'] ]
+    },
+    options: {
+      skipHtmlTags: ['script','noscript','style','textarea','pre']
     }
   };
 </script>
@@ -493,6 +496,24 @@
       // Post‑processing: bold and equations
     // Enhanced post‑processing: bold, lists, paragraphs, equations
     function formatReply(text) {
+      
+      // 1) turn \url{…} into clickable links
+      text = text.replace(/\\url\{([^}]+)\}/g,
+        '<a href="$1" target="_blank">$1</a>'
+      );
+
+      // 2) turn {\tt\small {a,b}@domain} into mailto links
+      text = text.replace(
+        /\{\\tt\\small\s*\\\{([^}]+)\}@([^\}]+)\}/g,
+        (_, userList, domain) => {
+          return userList
+            .split(',')
+            .map(u => u.trim() + '@' + domain)
+            .map(email => `<a href="mailto:${email}">${email}</a>`)
+            .join(', ');
+        }
+      );
+
       // 1) bold → <strong>
       let out = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
 
