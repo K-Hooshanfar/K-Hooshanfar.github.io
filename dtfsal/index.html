@@ -605,16 +605,14 @@ You are an AI assistant whose only knowledge comes from the provided LaTeX sourc
 - **Formatting:**
   - Use Markdown for headings and bullets.
   - Render any equations or symbols using LaTeX syntax.
-
+  
 **LaTeX Source:**
-```latex
+\`\`\`latex
 ${paperSource}
-```
+\`\`\`
 
-**User Question:**
-${question}
-
-**Your Answer:**
+User: ${question}
+Assistant:
 `;
 
 try {
