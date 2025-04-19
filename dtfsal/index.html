@@ -474,10 +474,10 @@
       out = out.replace(/:\s*\* /g, ':\n* ');
 
       // 3) one‑line equations → <pre><code>
-      out = out.replace(
-        /^([A-Za-z0-9_{}\^\(\)\[\]\s\.,\-+*\/]+=[^=\n]+)$/gm,
-        '<pre><code>$1</code></pre>'
-      );
+        out = out.replace(
+            /^(.+=.+)$/gm,
+            '<pre><code>$1</code></pre>'
+          );
 
       // 4) split lines, build lists and paragraphs
       const lines = out.split('\n');
