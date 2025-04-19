@@ -39,6 +39,13 @@
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
   <!-- <script src="./static/js/index.js"></script> -->
+
+  <!-- MathJax 3 -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
 </head>
 <body>
 
@@ -473,27 +480,6 @@
       // 2) break out inline “: * ” bullets into their own lines
       out = out.replace(/:\s*\* /g, ':\n* ');
 
-      // 3) one‑line equations → <pre><code>
-        out = out.replace(
-  /^(.+=.+)$/gm,
-  (_, equation) => {
-    // convert Caret superscripts:
-    //   x^y  → x<sup>y</sup>
-    //   x^{yz} → x<sup>yz</sup>
-    let withSup = equation.replace(
-      /\^(\{([^}]+)\}|(\w))/g,
-      (_, _all, braced, single) =>
-        '<sup>' + (braced || single) + '</sup>'
-    );
-
-    // convert double primes, e.g. P'' → P<sup>''</sup>
-    withSup = withSup.replace(/([A-Za-z0-9\}])''/g, '$1<sup>\'\'</sup>');
-
-    // now wrap in your code block
-    return '<pre><code>' + withSup + '</code></pre>';
-  }
-);
-
       // 4) split lines, build lists and paragraphs
       const lines = out.split('\n');
       let html = '';
@@ -578,18 +564,7 @@ ${paperSource}
     * Use bullet points for lists or distinct points if it enhances clarity.
     * Ensure the answer flows well and is easy to understand.
 3.  **Synthesis:** Do not just copy-paste sections. Synthesize the information from the relevant parts of the source into a coherent response. Rephrase in your own words, while staying true to the source content.
-4.  **LaTeX and Math Formatting:**
-    * **No Delimiters:** Absolutely *no* LaTeX delimiters (like \\( \\), \\[ \\], $ $, $$ $$) should appear in your output.
-    * **Plain Text Math:** Render *all* mathematical notation (variables, formulas, symbols, Greek letters, etc.) as plain text.
-        * Example: Write E(t) instead of \\(\\mathbf{E}(t)\\).
-        * Example: Write alpha_i instead of \\(\\alpha_i\\).
-        * Example: Write x^2 + y^2 = z^2 instead of \\(x^2 + y^2 = z^2\\).
-    * **Equations:**
-        * If the answer requires showing specific equations from the source:
-        * Present each relevant equation on a new line.
-        * Use clear, readable plain text format for the equation itself.
-        * You may add a brief label or explanation before or after the equation *if* it helps clarify its relevance to the answer, based *only* on the source text surrounding the equation. Example: "The equation for calculating force is:" followed by the plain text equation on the next line.
-5.  **Out-of-Scope Questions:** If the user's question cannot be answered using *only* the provided LaTeX source, reply *exactly* with:
+4.  **Out-of-Scope Questions:** If the user's question cannot be answered using *only* the provided LaTeX source, reply *exactly* with:
     "I'm sorry, I can only answer questions about this paper."
 
 User: ${question}
@@ -597,23 +572,39 @@ Assistant:
 `;
 
 try {
-        const res = await fetch(GEMINI_API_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-        });
-        if (!res.ok) throw new Error(`API ${res.status}`);
-        const data = await res.json();
-        let reply = data.candidates?.[0]?.content?.parts?.[0]?.text.trim() || 'No response.';
-        // Replace the typing indicator with formatted HTML
-        const log = document.getElementById('chat-log');
-        log.lastChild.innerHTML = formatReply(reply);
-      } catch (err) {
-        const log = document.getElementById('chat-log');
-        log.lastChild.textContent = 'Error: ' + err.message;
-        console.error(err);
-      }
-    });
+  /* 1 ───── call Gemini */
+  const res = await fetch(GEMINI_API_ENDPOINT, {
+    method : 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body   : JSON.stringify({
+      contents: [
+        { parts: [{ text: prompt }] }
+      ]
+    })
+  });
+
+  if (!res.ok) throw new Error(`API ${res.status}`);
+
+  /* 2 ───── extract the reply */
+  const data  = await res.json();
+  const reply = data.candidates?.[0]?.content?.parts?.[0]?.text.trim()
+               || 'No response.';
+
+  /* 3 ───── swap the “typing …” bubble with the reply */
+  const log   = document.getElementById('chat-log');
+  log.lastChild.innerHTML = formatReply(reply);   // or simply  reply
+
+  /* 4 ───── ask MathJax to typeset ONLY this new bubble */
+  if (window.MathJax) {
+    await MathJax.typesetPromise([log.lastChild]);
+  }
+
+} catch (err) {
+  /* graceful error handling */
+  const log = document.getElementById('chat-log');
+  log.lastChild.textContent = 'Error: ' + err.message;
+  console.error(err);
+}
   </script>
 
 </body>
