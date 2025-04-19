@@ -10,6 +10,9 @@ $^1$University of Tehran \\
 \normalsize \url{https://k-hooshanfar.github.io/dtfsal/}
 }
 
+%%==================================%%
+%%abstract %%
+%%==================================%%
 
 \begin{abstract}
 Audio-visual saliency prediction aims to mimic human visual attention by identifying salient regions in videos through the integration of both visual and auditory information. Although visual-only approaches have significantly advanced, effectively incorporating auditory cues remains challenging due to complex spatio-temporal interactions and high computational demands. To address these challenges, we propose \textbf{D}ynamic \textbf{T}oken \textbf{F}usion \textbf{Sal}iency (DFTSal), a novel audio-visual saliency prediction framework designed to balance accuracy with computational efficiency. Our approach features a multi-scale visual encoder equipped with two novel modules: the Learnable Token Enhancement Block (LTEB), which adaptively weights tokens to emphasize crucial saliency cues, and the Dynamic Learnable Token Fusion Block (DLTFB), which employs a shifting operation to reorganize and merge features, effectively capturing long-range dependencies and detailed spatial information. In parallel, an audio branch processes raw audio signals to extract meaningful auditory features. Both visual and audio features are integrated using our Adaptive Multimodal Fusion Block (AMFB), which employs local, global, and adaptive fusion streams for precise cross-modal fusion. The resulting fused features are processed by a hierarchical multi-decoder structure, producing accurate saliency maps. Extensive evaluations on six audio-visual benchmarks demonstrate that DFTSal achieves SOTA performance while maintaining computational efficiency.
@@ -44,6 +47,7 @@ In summary, our main \textbf{contributions} are:
     \label{fig:dtfsal_Network}
 \end{figure*}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Related Work
 
 \section{Related Work} \label{sec:related}
 
@@ -55,6 +59,11 @@ More recent methods \cite{xiong2023casp, zhou2023transformer, wu2023gfnet, morad
 \textbf{Audio-Visual Saliency Prediction:}
 Incorporating audio cues into video saliency models has become a growing focus due to the significant influence of sound on visual attention \cite{zhu2024discrete, yu2024relevance, xie2024audio}. The DAVE model \cite{tavakoli2019dave} illustrates this approach, introducing the Audio-Visual Eye-tracking dataset (AVE) and a simple encoder-decoder that integrates audio and visual features to enhance saliency prediction \cite{tavakoli2019dave}. Subsequently, STAViS, a spatio-temporal audio-visual saliency network, demonstrated that synchronized audio, such as speech and noise events, enhances saliency prediction in dynamic scenes \cite{tsiami2020stavis}. More specialized models \cite{liu2020learning, qiao2021joint} have been developed to focus on multi-speaker conversation videos, predicting saliency and localizing sound sources. Advancements like CASP-Net \cite{xiong2023casp} and DiffSal \cite{xiong2024diffsal} further improve performance through enhanced fusion strategies and increased model complexities, scaling up to 76M parameters. A newer methodology, DAVS \cite{zhu2024discrete}, leverages Implicit Neural Networks~\cite{sitzmann2020implicit} for audio-visual saliency prediction, effectively mapping spatio-temporal coordinates to saliency values.
 In contrast to previous approaches that often compromise either global context or efficiency, our proposed DFTSal framework dynamically fuses visual and auditory cues to capture long-range dependencies without incurring heavy computational costs. By effectively integrating audio and visual cues in dynamic scenes, our method bridges the gap between accuracy and efficiency.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Proposed Method 
+
 
 \section{Proposed Method} \label{sec:method}
 
@@ -262,6 +271,7 @@ In this framework, KL quantifies the divergence between the predicted and ground
 
 where \( s \) and \( s^{g} \) are the predicted saliency and ground truth (GT) maps, respectively, \( i \) is the pixel index, \( \epsilon \) is a regularization term, and \( \sigma(s, s^{g}) \) is the covariance of \( s \) and \( s^{g} \).
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Experiments
 
 \section{Experiments} \label{sec:exp}
 
@@ -310,6 +320,10 @@ Experiments are carried out on eight datasets, comprising two purely visual and 
 		}
 	\end{center}
 \end{table*}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Setup
 
 \subsection{Setup}
 
@@ -407,6 +421,7 @@ DTFSal & 384$\times$224 & 297.91  & 187.26 \\
 	\label{table-block-type-ablation}
 \end{table}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Ablation Studies
 
 \subsection{Ablation Studies}
 
@@ -463,6 +478,8 @@ For further analysis of our approach, please refer to \textcolor{red}{Supplement
 \section{Conclusion} \label{sec:Conclusion}
 In this paper, we presented DFTSAL, a novel framework for dynamic video saliency prediction that balances performance and efficiency through innovative modules such as LTEB, DLTFB, and a Tri-stream AMFB for effective audio-visual integration. Our approach robustly captures multi-scale spatio–temporal features and effectively fuses audio cues, achieving SOTA performance on both visual-only and audio-visual benchmarks with competitive computational efficiency. Experimental results and extensive ablation studies demonstrate the effectiveness of our method, paving the way for scalable applications in real-world scenarios.
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% supplementary
 
 \maketitlesupplementary
 
