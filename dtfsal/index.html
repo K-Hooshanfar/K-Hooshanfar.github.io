@@ -38,6 +38,19 @@
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
+  <!-- Markdown → HTML -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <!-- Optional: safe‑HTML sanitizer -->
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js"></script>
+
+  <!-- Code‑block highlighting -->
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
+
+  <!-- LaTeX typesetting -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
   <!-- <script src="./static/js/index.js"></script> -->
 </head>
 <body>
@@ -460,9 +473,29 @@
     const msg = document.createElement('div');
     msg.classList.add('message', sender === 'user' ? 'user-message' : 'bot-message');
     msg.textContent = text;
-    log.appendChild(msg);
-    log.scrollTop = log.scrollHeight;
+
+    if (sender === 'bot') {
+    // 1. Markdown → HTML
+    let html = marked.parse(text, { breaks: true });
+
+    // 2. (optional) sanitize
+    html = DOMPurify.sanitize(html);
+
+    // 3. insert as HTML
+    msg.innerHTML = html;
+
+    // 4. highlight <code> blocks
+    msg.querySelectorAll('pre code').forEach(block => hljs.highlightElement(block));
+
+    // 5. typeset LaTeX
+    MathJax.typesetPromise([msg]);
+  } else {
+    msg.textContent = text;        // keep user text literal
   }
+
+  log.appendChild(msg);
+  log.scrollTop = log.scrollHeight;
+}
 
   // Reset chat
   document.getElementById('reset-chat').addEventListener('click', () => {
@@ -510,11 +543,9 @@ ${paperSource}
     * Ensure the answer flows well and is easy to understand.
 3.  **Synthesis:** Do not just copy-paste sections. Synthesize the information from the relevant parts of the source into a coherent response. Rephrase in your own words, while staying true to the source content.
 4.  **LaTeX and Math Formatting:**
-    * **No Delimiters:** Absolutely *no* LaTeX delimiters (like \\( \\), \\[ \\], $ $, $$ $$) should appear in your output.
-    * **Plain Text Math:** Render *all* mathematical notation (variables, formulas, symbols, Greek letters, etc.) as plain text.
-        * Example: Write E(t) instead of \\(\\mathbf{E}(t)\\).
-        * Example: Write alpha_i instead of \\(\\alpha_i\\).
-        * Example: Write x^2 + y^2 = z^2 instead of \\(x^2 + y^2 = z^2\\).
+      • You may write standard GitHub‑flavoured Markdown.  
+      • Math may be written in LaTeX delimiters \`$…$\`, \`$$…$$\`, \`\\(...\\)\`, or \`\\[...\\]\`.  
+      • Put longer equations in fenced code blocks if you like.  
     * **Equations:**
         * If the answer requires showing specific equations from the source:
         * Present each relevant equation on a new line, formatted as a **Markdown code block** (using triple backticks \`\`\`).
