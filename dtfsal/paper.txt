@@ -206,7 +206,12 @@ An adaptive attention mechanism is then applied, referred to as the \emph{Tri-St
 \label{eq:amfb_scores}
 \end{equation}
 
-where \(\mathbf{W} = [W_{\text{Local}},\, W_{\text{Global}},\, W_{\text{Adaptive}}]\). The final fused representation is computed as
+where 
+
+\(\mathbf{W} = [W_{\text{Local}},\, W_{\text{Global}},\, W_{\text{Adaptive}}]\). 
+
+
+The final fused representation is computed as
 
 \begin{equation}
 F_{\text{AMFB}} = W_{\text{Local}} \cdot F_{\text{Local}} + W_{\text{Global}} \cdot F_{\text{Global}} + W_{\text{Adaptive}} \cdot F_{\text{Adaptive}}.

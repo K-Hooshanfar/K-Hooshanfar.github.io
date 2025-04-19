@@ -474,23 +474,29 @@
       out = out.replace(/:\s*\* /g, ':\n* ');
 
       // 3) one‑line equations → <pre><code>
-        out = out.replace(
+      out = out.replace(
   /^(.+=.+)$/gm,
-  (_, equation) => {
-    // convert Caret superscripts:
-    //   x^y  → x<sup>y</sup>
-    //   x^{yz} → x<sup>yz</sup>
-    let withSup = equation.replace(
-      /\^(\{([^}]+)\}|(\w))/g,
-      (_, _all, braced, single) =>
-        '<sup>' + (braced || single) + '</sup>'
+  (_, eq) => {
+    // 1) convert subscript: _{foo} or _x → <sub>foo</sub> or <sub>x</sub>
+    let htmlEq = eq.replace(
+      /_(\{([^}]+)\}|(\w))/g,
+      (_, _all, braced, single) => `<sub>${braced || single}</sub>`
     );
 
-    // convert double primes, e.g. P'' → P<sup>''</sup>
-    withSup = withSup.replace(/([A-Za-z0-9\}])''/g, '$1<sup>\'\'</sup>');
+    // 2) convert superscript: ^{foo} or ^x → <sup>foo</sup> or <sup>x</sup>
+    htmlEq = htmlEq.replace(
+      /\^(\{([^}]+)\}|(\w))/g,
+      (_, _all, braced, single) => `<sup>${braced || single}</sup>`
+    );
 
-    // now wrap in your code block
-    return '<pre><code>' + withSup + '</code></pre>';
+    // 3) convert double‑prime: P'' → P<sup>''</sup>
+    htmlEq = htmlEq.replace(
+      /([A-Za-z0-9\}])''/g,
+      '$1<sup>\'\'</sup>'
+    );
+
+    // 4) wrap it all in a code block
+    return `<pre><code>${htmlEq}</code></pre>`;
   }
 );
 
