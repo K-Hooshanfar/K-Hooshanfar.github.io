@@ -464,81 +464,6 @@
     log.scrollTop = log.scrollHeight;
   }
 
-      // Post‑processing: bold and equations
-    // Enhanced post‑processing: bold, lists, paragraphs, equations
-    function formatReply(text) {
-      // 1) bold → <strong>
-      let out = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-
-      // 2) break out inline “: * ” bullets into their own lines
-      out = out.replace(/:\s*\* /g, ':\n* ');
-
-      // 3) one‑line equations → <pre><code>
-      out = out.replace(
-  /^(.+=.+)$/gm,
-  (_, eq) => {
-    // 1) convert subscript: _{foo} or _x → <sub>foo</sub> or <sub>x</sub>
-    let htmlEq = eq.replace(
-      /_(\{([^}]+)\}|(\w))/g,
-      (_, _all, braced, single) => `<sub>${braced || single}</sub>`
-    );
-
-    // 2) convert superscript: ^{foo} or ^x → <sup>foo</sup> or <sup>x</sup>
-    htmlEq = htmlEq.replace(
-      /\^(\{([^}]+)\}|(\w))/g,
-      (_, _all, braced, single) => `<sup>${braced || single}</sup>`
-    );
-
-    // 3) convert double‑prime: P'' → P<sup>''</sup>
-    htmlEq = htmlEq.replace(
-      /([A-Za-z0-9\}])''/g,
-      '</sub><sup>$1</sup>'
-    );
-
-    // 4) wrap it all in a code block
-    return `<pre><code>${htmlEq}</code></pre>`;
-  }
-);
-
-      // 4) split lines, build lists and paragraphs
-      const lines = out.split('\n');
-      let html = '';
-      let inList = false;
-
-      for (let line of lines) {
-        if (/^\*\s+/.test(line)) {
-          // start or continue a list
-          if (!inList) {
-            html += '<ul>';
-            inList = true;
-          }
-          html += `<li>${line.replace(/^\*\s+/, '')}</li>`;
-        } else {
-          // close any open list
-          if (inList) {
-            html += '</ul>';
-            inList = false;
-          }
-
-          if (/^\s*<pre>/.test(line)) {
-            // already a code block
-            html += line;
-          } else if (line.trim() !== '') {
-            // normal paragraph
-            html += `<p>${line.trim()}</p>`;
-          }
-          // else: skip blank lines
-        }
-      }
-
-      // if we ended inside a list, close it
-      if (inList) {
-        html += '</ul>';
-      }
-
-      return html;
-    }
-
   // Reset chat
   document.getElementById('reset-chat').addEventListener('click', () => {
     document.getElementById('chat-log').innerHTML = '';
@@ -592,9 +517,14 @@ ${paperSource}
         * Example: Write x^2 + y^2 = z^2 instead of \\(x^2 + y^2 = z^2\\).
     * **Equations:**
         * If the answer requires showing specific equations from the source:
-        * Present each relevant equation on a new line.
-        * Use clear, readable plain text format for the equation itself.
-        * You may add a brief label or explanation before or after the equation *if* it helps clarify its relevance to the answer, based *only* on the source text surrounding the equation. Example: "The equation for calculating force is:" followed by the plain text equation on the next line.
+        * Present each relevant equation on a new line, formatted as a **Markdown code block** (using triple backticks \`\`\`).
+        * Use clear, readable **plain text format** for the equation *inside* the code block.
+        * You may add a brief label or explanation *before* the code block *if* it helps clarify its relevance to the answer, based *only* on the source text surrounding the equation.
+        * Example:
+            The equation for calculating force is:
+            \`\`\`
+            F = m * a
+            \`\`\`
 5.  **Out-of-Scope Questions:** If the user's question cannot be answered using *only* the provided LaTeX source, reply *exactly* with:
     "I'm sorry, I can only answer questions about this paper."
 
@@ -603,24 +533,27 @@ Assistant:
 `;
 
 try {
-        const res = await fetch(GEMINI_API_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-        });
-        if (!res.ok) throw new Error(`API ${res.status}`);
-        const data = await res.json();
-        let reply = data.candidates?.[0]?.content?.parts?.[0]?.text.trim() || 'No response.';
-        // Replace the typing indicator with formatted HTML
-        const log = document.getElementById('chat-log');
-        log.lastChild.innerHTML = formatReply(reply);
-      } catch (err) {
-        const log = document.getElementById('chat-log');
-        log.lastChild.textContent = 'Error: ' + err.message;
-        console.error(err);
+      const res = await fetch(GEMINI_API_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+      });
+      if (!res.ok) throw new Error(`API ${res.status}`);
+      const data = await res.json();
+      let reply = 'No response.';
+      if (data.candidates?.[0]?.content?.parts?.[0]?.text) {
+        reply = data.candidates[0].content.parts[0].text.trim();
       }
-    });
-  </script>
+      // Replace the typing indicator
+      const log = document.getElementById('chat-log');
+      log.lastChild.textContent = reply;
+    } catch (err) {
+      const log = document.getElementById('chat-log');
+      log.lastChild.textContent = 'Error: ' + err.message;
+      console.error(err);
+    }
+  });
+</script>
 
 </body>
 </html>
