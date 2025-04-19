@@ -118,12 +118,14 @@ To further refine the spatio–temporal features, we introduce LTEB, which selec
 	G = \text{Sigmoid}\left(\text{Conv}_{1 \times 3 \times 3}(F^R)\right),
 	\label{eq:lteb_gate}
 \end{equation}
+
 After that, a global embedding (\(\mathbf{E}(t)\)) is computed by spatially averaging \(G\).
 We obtain the adaptive token weights \(\{w_i\}_{i=1}^{N}\) by applying a softmax on a linear transformation of \(\mathbf{E}(t)\):
 
 \begin{equation}
 	\{w_i\}_{i=1}^{N} = \text{Softmax}\Bigl(\text{Linear}\bigl(\mathbf{E}(t)\bigr)\Bigr).
 \end{equation}
+
 To adaptively adjust the contribution of each token based on its significance, we apply element-wise multiplication between these weights and the generated learnable tokens \(\{\mathbf{P}_i\}_{i=1}^{N}\), producing refined representations, followed by interpolation and a 3D convolution to yield:
 
 
@@ -154,6 +156,7 @@ Building upon LTEB, DLTFB further refines the spatial distribution of features b
 	Y = \operatorname{Conv3d}\Bigl(\operatorname{GELU}\bigl(\text{Conv}_{1 \times 1 \times 1}(\mathbf{F}_{\text{shift}})\bigr)\Bigr).
 	\label{eq:dltf_conv}
 \end{equation}
+
 A subsequent shift along the height dimension, \(Y_{\text{shift}}\), is followed by layer normalization (LN) and a convolution, producing the refined features:
 
 
@@ -161,6 +164,7 @@ A subsequent shift along the height dimension, \(Y_{\text{shift}}\), is followed
 	\mathbf{F}^{Sh} = F + \text{Conv}_{1 \times 1 \times 1}\Bigl( \operatorname{LN}\bigl(Y_{\text{shift}}\bigr) \Bigr).
 	\label{eq:dltf_norm}
 \end{equation}
+
 Finally, the output of DLTFB fuses the weighted original features with the spatially refined information:
 
 \begin{equation}
@@ -194,12 +198,14 @@ The outputs of the three streams—represented as \(F_{\text{Local}}\), \(F_{\te
 F_{\text{fused}} = \bigl[F_{\text{Local}}: F_{\text{Global}}: F_{\text{Adaptive}}\bigr].
 \label{eq:amfb_fuse}
 \end{equation}
+
 An adaptive attention mechanism is then applied, referred to as the \emph{Tri-Stream Score module}: global average pooling (GAP) is applied to \(F_{\text{fused}}\), which is then passed through a linear layer followed by a sigmoid activation to compute the Tri-Stream Scores (as illustrated in~\autoref{fig:AMFB} (b)):
 
 \begin{equation}
 \mathbf{W} = \text{Sigmoid}\Bigl(\text{Linear}\bigl(\text{GAP}(F_{\text{fused}})\bigr)\Bigr),
 \label{eq:amfb_scores}
 \end{equation}
+
 where \(\mathbf{W} = [W_{\text{Local}},\, W_{\text{Global}},\, W_{\text{Adaptive}}]\). The final fused representation is computed as
 
 \begin{equation}
@@ -215,7 +221,9 @@ To decode the enhanced multiscale spatio-temporal features, our hierarchical dec
 \begin{equation}
 s_i \in \mathbb{R}^{1 \times 1 \times H \times W} \quad \text{for } i=1,2,3,4. 
 \end{equation}
+
 These intermediate outputs capture diverse views of the attention distribution, each reflecting different aspects of the underlying features. To obtain a definitive and coherent saliency prediction, the decoder outputs are concatenated and then fused by a final 3D convolution followed by a sigmoid activation. This fusion step is formalized as:
+
 \begin{equation}
 	S = \text{Sigmoid}\Bigl(\operatorname{Conv}\Bigl([s_1; s_2; s_3; s_4]\Bigr)\Bigr),
 	\label{eq:decoder_final}
