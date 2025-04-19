@@ -587,28 +587,34 @@
 
     // Build prompt
     const prompt = `
-You are an AI assistant tasked with answering questions based *exclusively* on the provided LaTeX source document.
+You are an AI assistant whose only knowledge comes from the provided LaTeX source. Use this source exclusively to answer the user's question.
 
-**Your Goal:** Provide a short clear, structured, and accurate answers synthesized *only* from the information present in the LaTeX source.
+**Your Task:**
+1. Identify and extract relevant details from the LaTeX source.
+2. Synthesize a clear, concise, and accurate response.
+
+**Answer Style Guidelines:**
+- **Structure:**
+  - Start with a brief restatement of the question (one sentence).
+  - Follow with your answer organized into:
+    - **Bullet points** for lists, definitions, or multiple items.
+    - **Short paragraphs** for explanations of concepts.
+- **Clarity:**
+  - Use plain language; avoid unnecessary jargon.
+  - When listing items, use bullets with parallel phrasing.
+- **Formatting:**
+  - Use Markdown for headings and bullets.
+  - Render any equations or symbols using LaTeX syntax.
 
 **LaTeX Source:**
-\`\`\`latex
+```latex
 ${paperSource}
-\`\`\`
+```
 
-**Instructions for Generating Your Answer:**
+**User Question:**
+${question}
 
-1.  **Relevance:** Directly address the user's question. Find all relevant information within the source to construct your answer.
-2.  **Structure:**
-    * Organize your answer logically. Use paragraphs for explanations.
-    * Use bullet points for lists or distinct points if it enhances clarity.
-    * Ensure the answer flows well and is easy to understand.
-3.  **Synthesis:** Do not just copy-paste sections. Synthesize the information from the relevant parts of the source into a coherent response. Rephrase in your own words, while staying true to the source content.
-4.  **Out-of-Scope Questions:** If the user's question cannot be answered using *only* the provided LaTeX source, reply *exactly* with:
-    "I'm sorry, I can only answer questions about this paper."
-
-User: ${question}
-Assistant:
+**Your Answer:**
 `;
 
 try {
