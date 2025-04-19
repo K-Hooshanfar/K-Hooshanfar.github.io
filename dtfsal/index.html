@@ -492,7 +492,7 @@
     // 3) convert double‑prime: P'' → P<sup>''</sup>
     htmlEq = htmlEq.replace(
       /([A-Za-z0-9\}])''/g,
-      '$1<sup>\'\'</sup>'
+      '</sub><sup>$1</sup>'
     );
 
     // 4) wrap it all in a code block
