@@ -38,19 +38,6 @@
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
-  <!-- Markdown → HTML -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
-  <!-- Optional: safe‑HTML sanitizer -->
-  <script src="https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js"></script>
-
-  <!-- Code‑block highlighting -->
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/highlight.min.js"></script>
-
-  <!-- LaTeX typesetting -->
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-
   <!-- <script src="./static/js/index.js"></script> -->
 </head>
 <body>
@@ -473,29 +460,78 @@
     const msg = document.createElement('div');
     msg.classList.add('message', sender === 'user' ? 'user-message' : 'bot-message');
     msg.textContent = text;
-
-    if (sender === 'bot') {
-    // 1. Markdown → HTML
-    let html = marked.parse(text, { breaks: true });
-
-    // 2. (optional) sanitize
-    html = DOMPurify.sanitize(html);
-
-    // 3. insert as HTML
-    msg.innerHTML = html;
-
-    // 4. highlight <code> blocks
-    msg.querySelectorAll('pre code').forEach(block => hljs.highlightElement(block));
-
-    // 5. typeset LaTeX
-    MathJax.typesetPromise([msg]);
-  } else {
-    msg.textContent = text;        // keep user text literal
+    log.appendChild(msg);
+    log.scrollTop = log.scrollHeight;
   }
 
-  log.appendChild(msg);
-  log.scrollTop = log.scrollHeight;
-}
+      // Post‑processing: bold and equations
+    // Enhanced post‑processing: bold, lists, paragraphs, equations
+    function formatReply(text) {
+      // 1) bold → <strong>
+      let out = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+
+      // 2) break out inline “: * ” bullets into their own lines
+      out = out.replace(/:\s*\* /g, ':\n* ');
+
+      // 3) one‑line equations → <pre><code>
+        out = out.replace(
+  /^(.+=.+)$/gm,
+  (_, equation) => {
+    // convert Caret superscripts:
+    //   x^y  → x<sup>y</sup>
+    //   x^{yz} → x<sup>yz</sup>
+    let withSup = equation.replace(
+      /\^(\{([^}]+)\}|(\w))/g,
+      (_, _all, braced, single) =>
+        '<sup>' + (braced || single) + '</sup>'
+    );
+
+    // convert double primes, e.g. P'' → P<sup>''</sup>
+    withSup = withSup.replace(/([A-Za-z0-9\}])''/g, '$1<sup>\'\'</sup>');
+
+    // now wrap in your code block
+    return '<pre><code>' + withSup + '</code></pre>';
+  }
+);
+
+      // 4) split lines, build lists and paragraphs
+      const lines = out.split('\n');
+      let html = '';
+      let inList = false;
+
+      for (let line of lines) {
+        if (/^\*\s+/.test(line)) {
+          // start or continue a list
+          if (!inList) {
+            html += '<ul>';
+            inList = true;
+          }
+          html += `<li>${line.replace(/^\*\s+/, '')}</li>`;
+        } else {
+          // close any open list
+          if (inList) {
+            html += '</ul>';
+            inList = false;
+          }
+
+          if (/^\s*<pre>/.test(line)) {
+            // already a code block
+            html += line;
+          } else if (line.trim() !== '') {
+            // normal paragraph
+            html += `<p>${line.trim()}</p>`;
+          }
+          // else: skip blank lines
+        }
+      }
+
+      // if we ended inside a list, close it
+      if (inList) {
+        html += '</ul>';
+      }
+
+      return html;
+    }
 
   // Reset chat
   document.getElementById('reset-chat').addEventListener('click', () => {
@@ -544,16 +580,15 @@ ${paperSource}
 3.  **Synthesis:** Do not just copy-paste sections. Synthesize the information from the relevant parts of the source into a coherent response. Rephrase in your own words, while staying true to the source content.
 4.  **LaTeX and Math Formatting:**
     * **No Delimiters:** Absolutely *no* LaTeX delimiters (like \\( \\), \\[ \\], $ $, $$ $$) should appear in your output.
+    * **Plain Text Math:** Render *all* mathematical notation (variables, formulas, symbols, Greek letters, etc.) as plain text.
+        * Example: Write E(t) instead of \\(\\mathbf{E}(t)\\).
+        * Example: Write alpha_i instead of \\(\\alpha_i\\).
+        * Example: Write x^2 + y^2 = z^2 instead of \\(x^2 + y^2 = z^2\\).
     * **Equations:**
         * If the answer requires showing specific equations from the source:
-        * Present each relevant equation on a new line, formatted as a **Markdown code block** (using triple backticks \`\`\`).
-        * Use clear, readable **plain text format** for the equation *inside* the code block.
-        * You may add a brief label or explanation *before* the code block *if* it helps clarify its relevance to the answer, based *only* on the source text surrounding the equation.
-        * Example:
-            The equation for calculating force is:
-            \`\`\`
-            F = m * a
-            \`\`\`
+        * Present each relevant equation on a new line.
+        * Use clear, readable plain text format for the equation itself.
+        * You may add a brief label or explanation before or after the equation *if* it helps clarify its relevance to the answer, based *only* on the source text surrounding the equation. Example: "The equation for calculating force is:" followed by the plain text equation on the next line.
 5.  **Out-of-Scope Questions:** If the user's question cannot be answered using *only* the provided LaTeX source, reply *exactly* with:
     "I'm sorry, I can only answer questions about this paper."
 
@@ -562,27 +597,24 @@ Assistant:
 `;
 
 try {
-      const res = await fetch(GEMINI_API_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-      });
-      if (!res.ok) throw new Error(`API ${res.status}`);
-      const data = await res.json();
-      let reply = 'No response.';
-      if (data.candidates?.[0]?.content?.parts?.[0]?.text) {
-        reply = data.candidates[0].content.parts[0].text.trim();
+        const res = await fetch(GEMINI_API_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+        });
+        if (!res.ok) throw new Error(`API ${res.status}`);
+        const data = await res.json();
+        let reply = data.candidates?.[0]?.content?.parts?.[0]?.text.trim() || 'No response.';
+        // Replace the typing indicator with formatted HTML
+        const log = document.getElementById('chat-log');
+        log.lastChild.innerHTML = formatReply(reply);
+      } catch (err) {
+        const log = document.getElementById('chat-log');
+        log.lastChild.textContent = 'Error: ' + err.message;
+        console.error(err);
       }
-      // Replace the typing indicator
-      const log = document.getElementById('chat-log');
-      log.lastChild.textContent = reply;
-    } catch (err) {
-      const log = document.getElementById('chat-log');
-      log.lastChild.textContent = 'Error: ' + err.message;
-      console.error(err);
-    }
-  });
-</script>
+    });
+  </script>
 
 </body>
 </html>
