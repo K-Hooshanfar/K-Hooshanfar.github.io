@@ -481,23 +481,40 @@
 
       // 4) split lines, build lists and paragraphs
       const lines = out.split('\n');
-      let html = '', inList = false;
+      let html = '';
+      let inList = false;
+
       for (let line of lines) {
         if (/^\*\s+/.test(line)) {
-          if (!inList) { html += '<ul>'; inList = true; }
+          // start or continue a list
+          if (!inList) {
+            html += '<ul>';
+            inList = true;
+          }
           html += `<li>${line.replace(/^\*\s+/, '')}</li>`;
         } else {
-          if (inList) { html += '</ul>'; inList = false; }
+          // close any open list
+          if (inList) {
+            html += '</ul>';
+            inList = false;
+          }
+
           if (/^\s*<pre>/.test(line)) {
-            html += line;                // already a code block
-          } else if (line.trim() === '') {
-            // skip blank
-          } else {
+            // already a code block
+            html += line;
+          } else if (line.trim() !== '') {
+            // normal paragraph
             html += `<p>${line.trim()}</p>`;
           }
+          // else: skip blank lines
         }
       }
-      if (inList) html += '</ul>';
+
+      // if we ended inside a list, close it
+      if (inList) {
+        html += '</ul>';
+      }
+
       return html;
     }
 
