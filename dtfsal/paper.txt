@@ -6,7 +6,7 @@ Alireza Hosseini$^{1}$,
 Ahmad Kalhor$^{1}$,
 Babak Nadjar Araabi$^{1}$ \\
 $^1$University of Tehran \\
-{\tt\small \{k.hooshanfar, arhosseini77, Kalhor, Araabi\}@ut.ac.ir} \\
+{\tt\small {k.hooshanfar, arhosseini77, Kalhor, Araabi}@ut.ac.ir} \\
 \normalsize \url{https://k-hooshanfar.github.io/dtfsal/}
 }
 
