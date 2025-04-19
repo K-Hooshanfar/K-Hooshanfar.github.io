@@ -465,15 +465,40 @@
   }
 
       // Post‑processing: bold and equations
-  function formatReply(text) {
-      // **bold** → <strong>bold</strong>
+    // Enhanced post‑processing: bold, lists, paragraphs, equations
+    function formatReply(text) {
+      // 1) bold → <strong>
       let out = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-      // lines like "lhs = rhs" → block code
+
+      // 2) break out inline “: * ” bullets into their own lines
+      out = out.replace(/:\s*\* /g, ':\n* ');
+
+      // 3) one‑line equations → <pre><code>
       out = out.replace(
         /^([A-Za-z0-9_{}\^\(\)\[\]\s\.,\-+*\/]+=[^=\n]+)$/gm,
         '<pre><code>$1</code></pre>'
       );
-      return out;
+
+      // 4) split lines, build lists and paragraphs
+      const lines = out.split('\n');
+      let html = '', inList = false;
+      for (let line of lines) {
+        if (/^\*\s+/.test(line)) {
+          if (!inList) { html += '<ul>'; inList = true; }
+          html += `<li>${line.replace(/^\*\s+/, '')}</li>`;
+        } else {
+          if (inList) { html += '</ul>'; inList = false; }
+          if (/^\s*<pre>/.test(line)) {
+            html += line;                // already a code block
+          } else if (line.trim() === '') {
+            // skip blank
+          } else {
+            html += `<p>${line.trim()}</p>`;
+          }
+        }
+      }
+      if (inList) html += '</ul>';
+      return html;
     }
 
   // Reset chat
@@ -539,29 +564,25 @@ User: ${question}
 Assistant:
 `;
 
-    try {
-      const res = await fetch(GEMINI_API_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-      });
-      if (!res.ok) throw new Error(`API ${res.status}`);
-      const data = await res.json();
-      let reply = 'No response.';
-      if (data.candidates?.[0]?.content?.parts?.[0]?.text) {
-        reply = data.candidates[0].content.parts[0].text.trim();
+try {
+        const res = await fetch(GEMINI_API_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+        });
+        if (!res.ok) throw new Error(`API ${res.status}`);
+        const data = await res.json();
+        let reply = data.candidates?.[0]?.content?.parts?.[0]?.text.trim() || 'No response.';
+        // Replace the typing indicator with formatted HTML
+        const log = document.getElementById('chat-log');
+        log.lastChild.innerHTML = formatReply(reply);
+      } catch (err) {
+        const log = document.getElementById('chat-log');
+        log.lastChild.textContent = 'Error: ' + err.message;
+        console.error(err);
       }
-      // Replace the typing indicator
-      const log = document.getElementById('chat-log');
-      const formatted = formatReply(reply);
-      log.lastChild.textContent = formatted;
-    } catch (err) {
-      const log = document.getElementById('chat-log');
-      log.lastChild.textContent = 'Error: ' + err.message;
-      console.error(err);
-    }
-  });
-</script>
+    });
+  </script>
 
 </body>
 </html>
