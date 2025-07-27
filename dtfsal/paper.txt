@@ -2,10 +2,12 @@
 
 \author{
 Kiana Hooshanfar$^{1}$, 
-Alireza Hosseini$^{1}$, 
+Alireza Hosseini$^{1}$,
+Mona Ahmadian$^{2}$,
 Ahmad Kalhor$^{1}$,
 Babak Nadjar Araabi$^{1}$ \\
 $^1$University of Tehran \\
+$^2$University of Surrey \\
 {k.hooshanfar@ut.ac.ir, arhosseini77@ut.ac.ir, kalhor@ut.ac.ir, araabi@ut.ac.ir}
 \normalsize \url{https://k-hooshanfar.github.io/dtfsal/}
 }
@@ -785,3 +787,12 @@ To provide a more intuitive understanding of the contributions of our multi-deco
 
 \section{Limitation \& Future works}
 A key limitation of our work is the lack of large-scale audio-visual datasets, which constrains broader generalization. Future efforts could focus on collecting more comprehensive datasets across diverse domains—such as commercials, documentaries, and other complex scenes—and on unifying image-level and video-level human visual modeling under a single framework.
+
+\section{BibTeX}
+
+@article{hooshanfar2025dtfsal,
+  title={DTFSal: Audio-Visual Dynamic Token Fusion for Video Saliency Prediction},
+  author={Hooshanfar, Kiana and Hosseini, Alireza and Kalhor, Ahmad and Araabi, Babak Nadjar},
+  journal={arXiv preprint arXiv:2504.10070},
+  year={2025}
+}
