@@ -247,6 +247,16 @@
 .copy-pill:hover{ background:#eef1f6; }
 .copy-pill i{ font-size:16px; color:#0f4d8f; }
 
+    .logo-pill{
+      display:inline-grid; place-items:center;
+      width:28px; height:28px; border-radius:999px;
+      border:2px solid #fff; color:#fff;    /* default on hero (white) */
+      font-size:18px; line-height:1;
+    }
+    header.site-header.scrolled .logo-pill{
+      border-color: var(--text); color: var(--text);  /* dark after scroll */
+    }
+
   </style>
 </head>
 <body>
@@ -256,10 +266,11 @@
   <!-- Header / Nav -->
   <header class="site-header" id="site-header">
     <div class="container header-inner">
-      <div class="brand">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="#ffffff" stroke-width="2"/><path d="M7 13l3 3 7-7" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <h1>Kiana Hooshanfar</h1>
-      </div>
+        <div class="brand">
+          <!-- was: the circle-check SVG -->
+          <span class="logo-pill" aria-hidden="true"><i class="bx bxs-cat"></i></span>
+          <h1>Kiana Hooshanfar</h1>
+        </div>
       <nav class="site-nav" aria-label="Primary">
         <a href="#home">Home</a>
         <a href="#about">About</a>
