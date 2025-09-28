@@ -176,6 +176,77 @@
     .send-btn, .reset-btn{ border:0; border-radius:12px; padding:12px 14px; font-weight:600; white-space:nowrap; cursor:pointer; }
     .send-btn{ background:#ffd166; color:#1a1a1a; }
     .reset-btn{ background:#eef1f6; color:#0b1b2b; }
+
+  /* Contact actions */
+.contact-actions{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 360px));
+  grid-template-areas:
+    "email   linkedin"
+    "scholar github";
+  justify-content: center;           /* center the whole grid */
+  gap: 16px 18px;
+  margin: 14px auto 22px;            /* keeps it centered */
+}
+/* Map each button to a grid area */
+.action-email   { grid-area: email; }
+.action-linkedin{ grid-area: linkedin; }
+.action-github  { grid-area: github; }
+.action-scholar { grid-area: scholar; }
+
+/* Stack on small screens */
+@media (max-width: 640px){
+  .contact-actions{
+    grid-template-columns: minmax(240px, 1fr);
+    grid-template-areas:
+      "email"
+      "linkedin"
+      "github"
+      "scholar";
+  }
+}
+.action-btn{
+  display:flex; align-items:center; gap:12px;
+  padding: 12px 14px;
+  border: 1px solid rgba(0,0,0,.10);
+  background: #ffffff;
+  border-radius: 14px;
+  text-decoration: none;
+  color: var(--text);
+  box-shadow: 0 4px 14px rgba(0,0,0,.06);
+  transition: transform .1s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
+}
+.action-btn:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0,0,0,.10);
+  border-color: rgba(0,0,0,.18);
+  background: #fcfdff;
+}
+.action-btn .ico{
+  width:38px; height:38px; border-radius: 999px;
+  display:grid; place-items:center;
+  background: #ecf2ff; /* soft blue pill */
+}
+.action-btn .ico i{ font-size: 22px; color:#0f4d8f; }
+.action-btn .label{
+  display:flex; flex-direction:column; line-height:1.2;
+}
+.action-btn .label .title{ font-weight: 700; }
+.action-btn .label .sub{ font-size: 12px; color: var(--muted); }
+
+/* Tiny copy pill */
+.copy-pill{
+  margin-top: 12px;
+  display:inline-flex; align-items:center; gap:6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.10);
+  background:#f6f7fb; color: var(--text);
+  font-size:12px; cursor:pointer;
+}
+.copy-pill:hover{ background:#eef1f6; }
+.copy-pill i{ font-size:16px; color:#0f4d8f; }
+
   </style>
 </head>
 <body>
@@ -241,21 +312,51 @@
         <p>I focus on XYZ. Previously at <em>Company</em>. I enjoy building fast, minimal products and publishing papers at <em>Conference</em>.</p>
       </section>
 
+      <!-- Publications -->
       <section id="publications" class="section-card">
         <h3>Publications</h3>
         <div class="grid">
           <article class="item">
-            <h4>Paper Title, Venue (Year)</h4>
-            <div class="meta">Authors: You, Coauthor • <a href="#">PDF</a> · <a href="#">Code</a></div>
-            <p class="muted">One-line summary of the contribution. Add links as needed.</p>
+            <h4>DTFSal: Audio-Visual Dynamic Token Fusion for Video Saliency Prediction (BMVC, 2025)</h4>
+            <div class="meta">
+              <strong>K. Hooshanfar</strong>, A. Hosseini, A. Kalhor, B. N. Araabi ·
+              <a href="https://arxiv.org/abs/2504.10070" target="_blank" rel="noopener">Paper</a> ·
+              <a href="https://k-hooshanfar.github.io/dtfsal/" target="_blank" rel="noopener">Project Page</a>
+            </div>
+            <p class="muted">Audio-visual saliency modeling with dynamic token fusion.</p>
           </article>
+
           <article class="item">
-            <h4>Another Paper, Venue (Year)</h4>
-            <div class="meta">Authors: You, Coauthor • <a href="#">PDF</a> · <a href="#">Project page</a></div>
-            <p class="muted">Short description of results and methods.</p>
+            <h4>Brand visibility in packaging: a deep learning approach for logo detection, saliency-map prediction, and logo placement analysis (Discover Applied Sciences, 2025)</h4>
+            <div class="meta">
+              A. Hosseini, <strong>K. Hooshanfar</strong>, et&nbsp;al. ·
+              <a href="https://link.springer.com/article/10.1007/s42452-025-07043-9" target="_blank" rel="noopener">Paper</a> ·
+              <a href="https://github.com/Arhosseini77/Brand_Attention" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <p class="muted">Logo detection, saliency-map prediction, and logo placement analysis for neuromarketing.</p>
+          </article>
+
+          <article class="item">
+            <h4>Hybrid Retrieval-Augmented Generation Approach for LLMs Query Response Enhancement (ICWR 2024)</h4>
+            <div class="meta">
+              P. Omrani, A. Hosseini, <strong>K. Hooshanfar</strong>, et&nbsp;al. ·
+              <a href="https://ieeexplore.ieee.org/abstract/document/10533345" target="_blank" rel="noopener">Paper</a>
+            </div>
+            <p class="muted">Improving responses via hybrid RAG for large language models.</p>
+          </article>
+
+          <article class="item">
+            <h4>Eye-Tracking Based Control of a Robotic Arm and Wheelchair for People with Severe Speech and Motor Impairment (SSMI) (ICRoM 2023)</h4>
+            <div class="meta">
+              M. Asad Samani, <strong>K. Hooshanfar</strong>, et&nbsp;al. ·
+              <a href="https://ieeexplore.ieee.org/abstract/document/10412408/" target="_blank" rel="noopener">Paper</a> ·
+              <a href="https://github.com/K-Hooshanfar/EyeTrackRobot" target="_blank" rel="noopener">GitHub</a>
+            </div>
+            <p class="muted">Intelligent control for SSMI users using eye-tracking.</p>
           </article>
         </div>
       </section>
+
 
       <section id="projects" class="section-card">
         <h3>Projects</h3>
@@ -269,25 +370,63 @@
       <section id="news" class="section-card">
         <h3>News</h3>
         <ul>
-          <li><strong>Sep 2025</strong> — Shipped cool thing / paper accepted.</li>
-          <li><strong>Aug 2025</strong> — Started new role / internship.</li>
-          <li><strong>Jun 2025</strong> — Gave a talk at Event.</li>
+          <li><strong>Jul 2025</strong> — <strong>DTFSal</strong> accepted to <strong>BMVC 2025</strong>.</li>
+          <li><strong>May 2025</strong> — <strong>Eye-Tracking Brand Visibility in Packaging</strong> accepted to <strong>Discover Applied Sciences</strong>.</li>
+          <li><strong>Feb 2025</strong> — Defended Master’s thesis at the University of Tehran.</li>
+          <li><strong>May 2024</strong> — <strong>Hybrid RAG Approach for LLMs</strong> accepted to <strong>ICWR 2024</strong>.</li>
+          <li><strong>Dec 2023</strong> — <strong>Eye-Tracking Based Control of a Robotic Arm and Wheelchair</strong> accepted to <strong>ICRoM 2023</strong>.</li>
+
         </ul>
       </section>
 
-      <section id="contact" class="section-card">
-        <h3>Contact</h3>
-        <ul class="muted">
-          <li>Email: <a href="mailto:you@example.com">you@example.com</a></li>
-          <li>GitHub: <a href="https://github.com/yourhandle">@yourhandle</a> · X: <a href="https://x.com/yourhandle">@yourhandle</a></li>
-        </ul>
-        <form class="contact" onsubmit="event.preventDefault(); alert('This is a static site — connect a form service to make this work.');">
-          <div class="field"><label for="name">Name</label><input id="name" name="name" placeholder="Jane Doe" /></div>
-          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="jane@example.com" /></div>
-          <div class="field"><label for="message">Message</label><textarea id="message" name="message" placeholder="Hello!"></textarea></div>
-          <button class="btn" type="submit">Send</button>
-        </form>
-      </section>
+        <section id="contact" class="section-card">
+          <h3>Contact</h3>
+
+        <div class="contact-actions">
+          <a class="action-btn action-email" href="mailto:k.hooshanfar02@gmail.com" aria-label="Send me an email">
+            <span class="ico"><i class="bx bx-envelope"></i></span>
+            <span class="label">
+              <span class="title">Email</span>
+              <span class="sub">k.hooshanfar02@gmail.com</span>
+            </span>
+          </a>
+
+          <a class="action-btn action-linkedin" href="https://www.linkedin.com/in/kiana-hooshanfar/" target="_blank" rel="noopener"
+             aria-label="Open LinkedIn profile">
+            <span class="ico"><i class="bx bxl-linkedin"></i></span>
+            <span class="label">
+              <span class="title">LinkedIn</span>
+              <span class="sub">kiana-hooshanfar</span>
+            </span>
+          </a>
+
+          <a class="action-btn action-scholar" href="https://scholar.google.com/citations?user=-qqc3AUAAAAJ&hl=en"
+             target="_blank" rel="noopener" aria-label="Open Google Scholar profile">
+            <span class="ico"><i class="bx bxs-graduation"></i></span>
+            <span class="label">
+              <span class="title">Google Scholar</span>
+              <span class="sub">Profile</span>
+            </span>
+          </a>
+
+          <a class="action-btn action-github" href="https://github.com/K-Hooshanfar" target="_blank" rel="noopener"
+             aria-label="Open GitHub profile">
+            <span class="ico"><i class="bx bxl-github"></i></span>
+            <span class="label">
+              <span class="title">GitHub</span>
+              <span class="sub">K-Hooshanfar</span>
+            </span>
+          </a>
+        </div>
+
+          <!-- Keep your form if you like -->
+          <form class="contact" onsubmit="event.preventDefault(); alert('This is a static site — connect a form service to make this work.');">
+            <div class="field"><label for="name">Name</label><input id="name" name="name" placeholder="Jane Doe" /></div>
+            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="jane@example.com" /></div>
+            <div class="field"><label for="message">Message</label><textarea id="message" name="message" placeholder="Hello!"></textarea></div>
+            <button class="btn" type="submit">Send</button>
+          </form>
+        </section>
     </div>
   </main>
 
