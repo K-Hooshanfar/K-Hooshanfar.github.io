@@ -155,8 +155,8 @@
   <!-- Gemini API details -->
   <script>
     const KEY = "AIzaSyDcHo_x2I0oGF2pK1YMlLVSpBNb94BtGoI";
-    const GEMINI_API_ENDPOINT = 
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" 
+    const GEMINI_API_ENDPOINT =
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key="
       + KEY;
   </script>
 
@@ -315,18 +315,18 @@
         <div class="content has-text-justified">
            <p>
             Audio-visual saliency prediction aims to mimic human visual attention by identifying salient regions in videos through
-            the integration of both visual and auditory information. Although visual-only approaches have significantly advanced, 
-            effectively incorporating auditory cues remains challenging due to complex spatio–temporal interactions and high computational demands. 
-            To address these challenges, we propose <strong>D</strong>ynamic <strong>T</strong>oken <strong>F</strong>usion <strong>Sal</strong>iency (DFTSal), 
-            a novel audio-visual saliency prediction framework designed to balance accuracy with computational efficiency. 
-            Our approach features a multi-scale visual encoder equipped with two novel modules: the Learnable Token Enhancement Block (LTEB), 
-            which adaptively weights tokens to emphasize crucial saliency cues, and the Dynamic Learnable Token Fusion Block (DLTFB), 
-            which employs a shifting operation to reorganize and merge features, effectively capturing long-range dependencies and detailed spatial information. 
-            In parallel, an audio branch processes raw audio signals to extract meaningful auditory features. Both visual and audio features are integrated using 
-            our Adaptive Multimodal Fusion Block (AMFB), which employs local, global, and adaptive fusion streams for precise cross-modal fusion. 
-            The resulting fused features are processed by a hierarchical multi-decoder structure, producing accurate saliency maps. 
+            the integration of both visual and auditory information. Although visual-only approaches have significantly advanced,
+            effectively incorporating auditory cues remains challenging due to complex spatio–temporal interactions and high computational demands.
+            To address these challenges, we propose <strong>D</strong>ynamic <strong>T</strong>oken <strong>F</strong>usion <strong>Sal</strong>iency (DFTSal),
+            a novel audio-visual saliency prediction framework designed to balance accuracy with computational efficiency.
+            Our approach features a multi-scale visual encoder equipped with two novel modules: the Learnable Token Enhancement Block (LTEB),
+            which adaptively weights tokens to emphasize crucial saliency cues, and the Dynamic Learnable Token Fusion Block (DLTFB),
+            which employs a shifting operation to reorganize and merge features, effectively capturing long-range dependencies and detailed spatial information.
+            In parallel, an audio branch processes raw audio signals to extract meaningful auditory features. Both visual and audio features are integrated using
+            our Adaptive Multimodal Fusion Block (AMFB), which employs local, global, and adaptive fusion streams for precise cross-modal fusion.
+            The resulting fused features are processed by a hierarchical multi-decoder structure, producing accurate saliency maps.
             Extensive evaluations on six audio-visual benchmarks demonstrate that DFTSal achieves SOTA performance while maintaining computational efficiency.
-          </p>         
+          </p>
         </div>
       </div>
     </div>
@@ -372,7 +372,7 @@
 
 <section class="section">
   <div class="container is-max-desktop">
-    
+
     <!-- Title for Experimental Results -->
     <div class="columns is-centered">
       <div class="column is-full-width">
@@ -380,7 +380,7 @@
       </div>
     </div>
 
-    
+
     <div class="columns is-centered">
       <div class="column is-full-width">
         <h3 class="title is-4">Qualitative Results of Audio-Visual Saliency maps</h3>
@@ -404,7 +404,7 @@
 
     <br>
 
-    
+
     <!-- Image Denoising -->
     <div class="columns is-centered">
       <div class="column is-full-width">
@@ -415,14 +415,14 @@
         </div>
       </div>
     </div>
-    
-    
-    <br>  
-    
+
+
+    <br>
+
 
       </div>
     </section>
-    
+
   </div>
 </section>
 
@@ -471,7 +471,7 @@
 
 
 <footer class="footer">
-  <div class="container" style="text-align: center;">  <h2 style="font-size: 2em; font-weight: bold;">Contact</h2> 
+  <div class="container" style="text-align: center;">  <h2 style="font-size: 2em; font-weight: bold;">Contact</h2>
     <p>For Questions, Clarifications and Colaborations, please get in touch with:</p>
 
     <br><br>
@@ -503,7 +503,7 @@
       // Post‑processing: bold and equations
     // Enhanced post‑processing: bold, lists, paragraphs, equations
     function formatReply(text) {
-      
+
       // 1) turn \url{…} into clickable links
       text = text.replace(/\\url\{([^}]+)\}/g,
         '<a href="$1" target="_blank">$1</a>'
@@ -612,7 +612,7 @@ You are an AI assistant whose only knowledge comes from the provided LaTeX sourc
 - **Formatting:**
   - Use Markdown for headings and bullets.
   - Render any equations or symbols using LaTeX syntax.
-  
+
 **LaTeX Source:**
 \`\`\`latex
 ${paperSource}
