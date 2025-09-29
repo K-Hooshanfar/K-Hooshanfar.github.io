@@ -256,6 +256,9 @@
     header.site-header.scrolled .logo-pill{
       border-color: var(--text); color: var(--text);  /* dark after scroll */
     }
+.bot-message p { margin: 8px 0; }
+.bot-message ul, .bot-message ol { margin: 8px 0 8px 18px; padding: 0; }
+.bot-message a { color:#0f4d8f; text-decoration: underline; font-weight:600; }
 
   </style>
 </head>
@@ -740,13 +743,34 @@
       close.addEventListener('click', (e) => { e.preventDefault(); setOpen(false); });
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
 
-      // Chat helpers
-      function appendMessage(text, who){
+      // Convert markdown -> sanitized HTML
+      function renderMarkdown(md){
+        try {
+          const html = marked.parse(md, { breaks: true });
+          return DOMPurify.sanitize(html, { ADD_ATTR: ['target','rel'] });
+        } catch (e) {
+          // Fallback: very small markdown support if CDNs fail
+          let h = (md || '')
+            .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+            .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')          // **bold**
+            .replace(/\*(.+?)\*/g, '<em>$1</em>')                      // *italic*
+            .replace(/\[(.+?)\]\((https?:\/\/[^\s)]+)\)/g,
+                     '<a href="$2" target="_blank" rel="noopener">$1</a>');
+          // bullets: lines starting with "- "
+          h = h.replace(/(^|\n)-\s+(.+)(?=\n|$)/g, '$1<li>$2</li>');
+          if (/<li>/.test(h)) h = h.replace(/(<li>[\s\S]*<\/li>)/g, '<ul>$1</ul>');
+          return h.replace(/\n/g,'<br>');
+        }
+      }
+
+      // Add a message; set as markdown if needed
+      function appendMessage(text, who, asMarkdown = false){
         const d = document.createElement('div');
         d.className = 'message ' + (who === 'user' ? 'user-message' : 'bot-message');
-        d.textContent = text;
-        log.appendChild(d);
-        log.scrollTop = log.scrollHeight;
+        if (asMarkdown) d.innerHTML = renderMarkdown(text);
+        else d.textContent = text;
+        document.getElementById('chat-log').appendChild(d);
+        document.getElementById('chat-log').scrollTop = document.getElementById('chat-log').scrollHeight;
       }
       appendMessage('Hi! Ask me anything about my résumé.', 'bot');
 
@@ -808,7 +832,7 @@ Assistant:
         }
         // Replace the last bot message (the temporary one) with the actual reply
         const chatLogEl = document.getElementById("chat-log");
-        chatLogEl.lastChild.textContent = reply;
+        chatLogEl.lastChild.innerHTML = renderMarkdown(reply);
       } catch (err) {
         console.error("Fetch error:", err);
         const chatLogEl = document.getElementById("chat-log");
@@ -817,5 +841,7 @@ Assistant:
     });
   })();
   </script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
 </body>
 </html>
