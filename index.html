@@ -10,7 +10,7 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="alternate icon" href="favicon.ico"> <!-- optional fallback -->
   <meta name="theme-color" content="#0f4d8f">
-  
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -263,6 +263,15 @@
 .bot-message ul, .bot-message ol { margin: 8px 0 8px 18px; padding: 0; }
 .bot-message a { color:#0f4d8f; text-decoration: underline; font-weight:600; }
 
+    /* === Justify text in Project cards === */
+    #projects .item p,
+    #projects .item .muted{
+      text-align: justify;
+      text-justify: inter-word;   /* nicer spacing */
+      hyphens: auto;              /* better breaks */
+      -webkit-hyphens: auto;
+    }
+
   </style>
 </head>
 <body>
@@ -377,19 +386,42 @@
       <section id="projects" class="section-card">
         <h3>Projects</h3>
         <div class="grid cols-2">
+
         <article class="item">
-          <h4>SmartEYE Ads — Predicting Brand Attention with Eye-Tracking AI</h4>
-          <p class="muted">Real-time saliency/attention for ads and packaging from gaze data; supports A/B tests and creative iteration. <a href="#">Demo</a></p>
+          <h4>OCR (English) - Prompt-Engineering, Labeling & Extraction</h4>
+          <p class="muted">
+            Built a fast labeling workflow for English documents—<strong>handwritten and typed</strong>—using prompt engineering to cut annotation time and improve accuracy.
+            Includes template-aware prompts for forms, smart span suggestions. Exports clean JSON for downstream tasks. <a href="#">Report</a>
+          </p>
         </article>
 
         <article class="item">
-          <h4>GazeLab — In-the-Wild Eye-Tracking Data Collection</h4>
-          <p class="muted">Calibrated web/mobile capture, quality checks, anonymization, and export for large-scale eye-tracking studies. <a href="#">Docs</a></p>
+          <h4>OCR (Farsi) - Data Collection, Annotation & Model Fine-Tuning</h4>
+          <p class="muted">
+            Curated a diverse Persian (Farsi) dataset covering <strong>handwritten and typed</strong> pages (receipts, forms, notes), defined labeling guidelines, and
+            fine-tuned OCR models for real-world fonts, cursive handwriting, and noisy scans. The pipeline spans dataset prep, annotation, normalization, and evaluation.
+            <a href="#">Demo</a>
+          </p>
         </article>
 
         <article class="item">
-          <h4>AutoCreator — AI-Powered YouTube Content Generator</h4>
-          <p class="muted">From a topic to script, voiceover, B-roll and thumbnail; integrates TTS and stock footage search. <a href="#">GitHub</a></p>
+          <h4>SmartEYE Ads - Predicting Brand Attention with Eye-Tracking</h4>
+          <p class="muted">  Built AI pipelines for gaze estimation, saliency prediction, and brand-attention scoring on video ads, enabling frame-level insights,
+            A/B tests, and faster creative iteration.<a href="#">Demo</a></p>
+        </article>
+
+        <article class="item">
+          <h4>GazeLab - In-the-Wild Eye-Tracking Data Collection</h4>
+          <p class="muted">Designed and executed billboard & video-ad eye-tracking studies with high-precision trackers; standardized calibration, unified task scripts,
+            and ready-to-use dataset exports (gaze points, fixations, AOIs, heatmaps) for large-scale analysis.  <a href="#">Docs</a></p>
+        </article>
+
+        <article class="item">
+          <h4>AutoCreator - AI-Powered YouTube Content Generator</h4>
+          <p class="muted">  Automatically transforms PDF slides into narrated videos: extracts slide text, generates natural TTS in multiple languages/voices,
+            and syncs narration to slide order and timing.
+            Supports adding an intro clip after slide 1 and compositing a talking avatar with chroma-key (green-screen)
+            removal for presenter overlays.<a href="#">GitHub</a></p>
         </article>
 
         <article class="item">
@@ -404,7 +436,9 @@
 
         <article class="item">
           <h4>Multimodal Shopping Assistant</h4>
-          <p class="muted">Chat + visual search to compare products, read labels/receipts, and recommend alternatives on budget. <a href="#">Demo</a></p>
+          <p class="muted">  Multilingual shopping assistant (FastAPI): understands Persian/English queries, supports chat + visual search,
+            reads labels/receipts, extracts & normalizes product entities, classifies images, compares prices, and recommends budget-aware alternatives.
+        <a href="#">Demo</a></p>
         </article>
 
         <article class="item">
@@ -645,7 +679,7 @@
   [Project Page](https://k-hooshanfar.github.io/dtfsal/)
 
 - **[Eye-Tracking Brand Visibility in Packaging (Arxiv 2024)](https://arxiv.org/abs/2403.02336)**  
-  _Submitted to Applied Soft Computing Journal_  
+  _Accepted to Discover Applied Sciences
   _Authors:_ Alireza Hosseini, **Kiana Hooshanfar**, et al.  
   [GitHub](https://github.com/Arhosseini77/Brand_Attention)
 
