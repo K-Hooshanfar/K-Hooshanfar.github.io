@@ -1,0 +1,32 @@
+<!-- favicon.svg — KH monogram in a cat-ear badge -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-labelledby="title">
+  <title>Kiana Hooshanfar — KH Monogram</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0"  stop-color="#0f4d8f"/>
+      <stop offset="1"  stop-color="#154f86"/>
+    </linearGradient>
+    <style>
+      .badge { fill:url(#bg); }
+      .mark  { stroke:#fff; stroke-width:6; stroke-linecap:round; stroke-linejoin:round; }
+      @media (max-width: 32px) { .mark { stroke-width:7; } }
+    </style>
+  </defs>
+
+  <!-- Cat-ear badge -->
+  <polygon class="badge" points="16,22 24,10 26,26"/>
+  <polygon class="badge" points="48,22 40,10 38,26"/>
+  <circle class="badge" cx="32" cy="36" r="22"/>
+
+  <!-- KH monogram -->
+  <g class="mark">
+    <!-- K -->
+    <line x1="22" y1="20" x2="22" y2="52"/>
+    <line x1="22" y1="34" x2="34" y2="22"/>
+    <line x1="22" y1="34" x2="34" y2="46"/>
+    <!-- H -->
+    <line x1="40" y1="20" x2="40" y2="52"/>
+    <line x1="48" y1="20" x2="48" y2="52"/>
+    <line x1="40" y1="34" x2="48" y2="34"/>
+  </g>
+</svg>
