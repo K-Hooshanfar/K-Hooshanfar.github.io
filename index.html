@@ -116,6 +116,43 @@
 
     footer { color: rgba(255,255,255,.9); text-align: center; padding: 26px 0 50px; }
 
+    /* Version Toggle Button */
+    .version-toggle {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      z-index: 1000;
+      background: var(--accent);
+      color: #1a1a1a;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    
+    .version-toggle:hover {
+      background: #ffdb80;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    }
+
+    @media (max-width: 768px) {
+      .version-toggle {
+        left: 16px;
+        bottom: 16px;
+        padding: 10px 16px;
+        font-size: 13px;
+      }
+    }
+
     /* ===== Nyan / star CSS (behind content) ===== */
     .nyan{ z-index: 10; position:absolute; width:34px;height:33px; pointer-events: none; }
     .rainbow{ position:absolute; width:9px;height:18px;margin-top:6px; z-index:5; pointer-events: none; }
@@ -515,6 +552,12 @@
   <footer>
     <div class="container">© <span id="year"></span> Kiana Hooshanfar</div>
   </footer>
+
+  <!-- Version Toggle Button -->
+  <a href="academic_portfolio.html" class="version-toggle">
+    <i class='bx bx-file-blank'></i>
+    <span>Academic Version</span>
+  </a>
 
   <!-- jQuery (for landing animation script) -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
