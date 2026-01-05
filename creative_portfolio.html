@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kiana Hooshanfar</title>
+  <meta name="description" content="Personal site with a full-screen landing hero and additional sections for About, Publications, Projects, News, and Contact." />
+
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="alternate icon" href="favicon.ico"> <!-- optional fallback -->
+  <meta name="theme-color" content="#0f4d8f">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --page-max: 1000px;
+      --page-pad: 24px;
+      --card-bg: #ffffff;
+      --text: #0b1b2b;
+      --muted: rgba(11,27,43,.75);
+      --accent: #ffd166;
+      --blue: #154f86;
+      --blue-deeper: #0f4d8f;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; overflow-x: clip;  }
+    body {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      line-height: 1.65;
+      background: var(--blue-deeper);
+      margin: 0;
+    }
+
+    /* Keep content above the Nyan layers */
+    main, section, .content, .section-card, header, nav { position: relative; z-index: 100; }
+
+    /* Page shell */
+    .container { max-width: var(--page-max); margin-inline: auto; padding-inline: var(--page-pad); }
+
+    /* Header: transparent at the very top, solid after scroll */
+    header.site-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      transition: background .25s ease, box-shadow .25s ease, border-color .25s ease;
+      background: transparent;
+      border-bottom: 1px solid transparent;
+    }
+    header.site-header.scrolled {
+      background: linear-gradient(rgba(255,255,255,.92), rgba(255,255,255,.9));
+      box-shadow: 0 4px 16px rgba(0,0,0,.08);
+      border-bottom-color: rgba(0,0,0,.06);
+    }
+
+    .header-inner { display:flex; align-items:center; justify-content:space-between; gap: 18px; padding: 12px 0; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand h1 { font-size: 18px; margin: 0; letter-spacing: .3px; color: #fff; }
+    header.site-header.scrolled .brand h1 { color: var(--text); }
+
+    nav.site-nav { display: flex; gap: 14px; flex-wrap: wrap; }
+    nav.site-nav a { text-decoration: none; color: #fff; font-weight: 600; padding: 8px 10px; border-radius: 10px; }
+    header.site-header.scrolled nav.site-nav a { color: var(--text); }
+    nav.site-nav a:hover { background: rgba(255,255,255,.12); }
+    header.site-header.scrolled nav.site-nav a:hover { background: rgba(0,0,0,.06); }
+
+    /* ===== Landing hero ===== */
+    .landing {
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 96px 24px 48px;
+      color: #fff;
+    }
+    .landing-inner { max-width: 900px; margin-inline: auto; }
+    .landing h2 { font-size: clamp(40px, 8vw, 72px); line-height: 1.05; margin: 12px 0 12px; font-weight: 800; }
+    .landing p.tagline { margin: 0 0 18px; font-size: clamp(16px, 2.3vw, 22px); opacity: .95; }
+    .social { margin-top: 18px; display:flex; gap:16px; justify-content:center; }
+    .social a { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius: 999px; background: rgba(255,255,255,.12); color: #fff;text-decoration: none;}
+    .social a i { font-size: 20px; }    /* match your 20px SVG size */
+    .social a:hover { background: rgba(255,255,255,.22); }
+    .social svg { width:20px; height:20px; fill: #fff; }
+
+    /* Scroll cue — stacked (mouse above, text under it) */
+    .scroll-cue { position: absolute; bottom: 20px; left: 0; right: 0; display:flex; justify-content:center; }
+    .scroll-cue a{
+      color:#fff; text-decoration:none; font-weight:600; opacity:.9;
+      display:inline-flex; flex-direction:column; align-items:center; gap:8px;
+    }
+    .scroll-cue .mouse { width: 22px; height: 32px; border:2px solid #fff; border-radius: 16px; position: relative; }
+    .scroll-cue .wheel { width: 3px; height: 6px; background:#fff; border-radius:2px; position:absolute; top:6px; left: 50%; transform: translateX(-50%); animation: wheel 1.2s infinite; }
+    @keyframes wheel { 0%{opacity:1; transform:translate(-50%,0)} 100%{opacity:0; transform:translate(-50%,8px)} }
+
+    /* Sections */
+    main .sections { display: grid; gap: 28px; padding: 28px 0 80px; background: linear-gradient(180deg, transparent 0, transparent 30px, var(--blue) 30px, var(--blue) 100%); }
+    .section-card { background: var(--card-bg); border-radius: 18px; box-shadow: 0 12px 40px rgba(0,0,0,.18); padding: 26px; scroll-margin-top: 96px; }
+    .section-card h3 { margin-top: 0; font-size: 22px; }
+    .muted { color: var(--muted); }
+
+    .grid { display: grid; gap: 18px; }
+    .grid.cols-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .item { border: 1px solid rgba(0,0,0,.06); border-radius: 14px; padding: 16px; background: #fff; }
+    .item h4 { margin: 0 0 6px; font-size: 18px; }
+    .item .meta { font-size: 13px; color: var(--muted); }
+
+    form.contact { display: grid; gap: 12px; }
+    .field { display: grid; gap: 6px; }
+    .field input, .field textarea { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(0,0,0,.12); font: inherit; }
+    .field textarea { min-height: 120px; resize: vertical; }
+    .btn { display: inline-block; background: var(--accent); color: #1a1a1a; font-weight: 700; border: 0; padding: 12px 16px; border-radius: 12px; cursor: pointer; }
+
+    footer { color: rgba(255,255,255,.9); text-align: center; padding: 26px 0 50px; }
+
+    /* Version Toggle Button */
+    .version-toggle {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      z-index: 1000;
+      background: var(--accent);
+      color: #1a1a1a;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    
+    .version-toggle:hover {
+      background: #ffdb80;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    }
+
+    @media (max-width: 768px) {
+      .version-toggle {
+        left: 16px;
+        bottom: 16px;
+        padding: 10px 16px;
+        font-size: 13px;
+      }
+    }
+
+    /* ===== Nyan / star CSS (behind content) ===== */
+    .nyan{ z-index: 10; position:absolute; width:34px;height:33px; pointer-events: none; }
+    .rainbow{ position:absolute; width:9px;height:18px;margin-top:6px; z-index:5; pointer-events: none; }
+    .star{ width:7px;height:7px; position:absolute; z-index:1; -webkit-background-size: 100% 100%; background-size: 100% 100%; pointer-events: none; }
+
+    /* (You can replace these base64 backgrounds with your own assets if you prefer) */
+    .nyan{background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMwAAAAgCAYAAABepJcLAAACiUlEQVR4nO2Yi23DMAxEvVMW6Ghdwzt1p7Qp4sKhKIkUqVyUXtEHBIlsPZ9J+bN9fG4bIcQGXICQlYALELIScAFCVgIuQMhKwAUIWQnboG27RkmRpQc9wB4mievXHiYaCj3o8QoePomffzcJodCDHq/iYRepTXTZ9c+KTEog9KAH0MMm0pvI2MHhQOhBjwSP7f680vM4xo03TIdC5CzeEcn0KFwqHl4XeqxfH7ex+77/0spDjktvGFVE6dyaSPaJqbqIE+Nxocf69XHefysPOeahYQ7RA7PIqTOjIqFAxCW46aKcmLQCocf0+pA1GvU45jmj/V40jNw42rlekVAgk1wyV/aVPeTYjJV9JAtZp1kePdSG0ZpGFak8UEVF3IE0HuwyXMyF+uYecltZ5Mj68HqMOBR5yFVECnU791JeSoe71xOI4pEVSq1I0R6IPGRdIOtDa+BjzIjH7a/mJn8rGqbWNH8ijhVsRMQciOGVYaZLtXEBHsg8ZA6o+sisU20xOB9bt2G0YCz3hhki5kCe4KJtg/AIraiTzo37SjfJIeJxvaM1bNHAd6oNY74FUd48RESGA6m8EQqFUjnBSA/zQjbBY+jlwxPqI8NDZiw/mxvmQaRzucsQyfDIdJEFivCQY5B5vFt91BaiM2r2ZpHOJS8qkuUx0wXhcfyO9mjegQDrw+uhubQosjffDhmIiLhDAbjQQ7/6orI49jeah4VizpaIZTUYxdMsMz1GXJAe6DzO8yOzmOXRa1bzSdG+t2xr3c5aIJ79vaML2gE9P9qjusMz2ve9g6lt6ynQ1pwZLl6fV3BBO6Dnz9hP5BhcxUvIfwcuQMhKwAUIWQm4ACErARcgZCXgAoSsxDdoVHw2ca8RoAAAAABJRU5ErkJggg==);}
+    .rainbow{background-image: url(data:image/png;base64,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);}
+    .star{background-image: url(data:image/gif;base64,R0lGODlhBwAHAIABAP///////yH/C05FVFNDQVBFMi4wAwEAAAAh/wtYTVAgRGF0YVhNUDw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBXaW5kb3dzIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjU0NTY1ODg4RDlBODExRTI5MzZGQjVEN0ZDMUFENjhCIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjU0NTY1ODg5RDlBODExRTI5MzZGQjVEN0ZDMUFENjhCIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NTQ1NjU4ODZEOUE4MTFFMjkzNkZCNUQ3RkMxQUQ2OEIiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NTQ1NjU4ODdEOUE4MTFFMjkzNkZCNUQ3RkMxQUQ2OEIiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4B//79/Pv6+fj39vX08/Lx8O/u7ezr6uno5+bl5OPi4eDf3t3c29rZ2NfW1dTT0tHQz87NzMvKycjHxsXEw8LBwL++vby7urm4t7a1tLOysbCvrq2sq6qpqKempaSjoqGgn56dnJuamZiXlpWUk5KRkI+OjYyLiomIh4aFhIOCgYB/fn18e3p5eHd2dXRzcnFwb25tbGtqaWhnZmVkY2JhYF9eXVxbWllYV1ZVVFNSUVBPTk1MS0pJSEdGRURDQkFAPz49PDs6OTg3NjU0MzIxMC8uLSwrKikoJyYlJCMiISAfHh0cGxoZGBcWFRQTEhEQDw4NDAsKCQgHBgUEAwIBAAAh+QQJFAABACwAAAAABwAHAAACB4yPqQfrXwAAIfkEBRQAAQAsAAAAAAcABwAAAgmMj2mQzPiUNAUAIfkECRQAAQAsAQABAAUABQAAAgdMYGm4mlwAACH5BAkUAAEALAAAAAAHAAcAAAILjGEZqA0IWUuSpgIAIfkECRQAAQAsAAAAAAcABwAAAgqMYZeYzdscnKEAACH5BAUUAAEALAAAAAAHAAcAAAIJjGGpm6jO4kkFADs=);}
+
+
+    a:focus { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+    /* ===== Floating Chat Widget ===== */
+
+    /* Floating action button (FAB) */
+    .chat-fab{
+      position: fixed; right: 22px; bottom: 22px; z-index: 2000;
+      width: 56px; height: 56px; border-radius: 999px; border: 0; cursor: pointer;
+      font-size: 22px; line-height: 1; background: #ffd166; color: #1a1a1a;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25); transition: transform .15s ease, box-shadow .2s ease, opacity .15s ease;
+    }
+    .chat-fab:hover{ transform: translateY(-1px); box-shadow: 0 12px 34px rgba(0,0,0,.28); }
+
+    /* Panel */
+    .chat-widget{
+      position: fixed; right: 22px; bottom: 90px; z-index: 2000;
+      width: min(360px, calc(100vw - 32px));
+      max-height: min(70vh, 560px);
+      display: grid; grid-template-rows: auto 1fr auto auto; gap: 10px; padding: 12px;
+      border-radius: 18px; background: #ffffff; color: #0b1b2b;
+      box-shadow: 0 18px 60px rgba(0,0,0,.25);
+      transform: translateY(8px); opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s;
+      box-sizing: border-box;
+    }
+    .chat-widget.open{ opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+    .chat-header{ position:relative; display:flex; align-items:flex-start; justify-content:flex-start; gap:10px; padding-right:42px; }
+    .chat-title{ display:flex; flex-direction:column; line-height:1.2; }
+    .chat-title strong{ font-size:16px; }
+    .chat-title .chat-sub{ display:block; font-size:12px; opacity:.75; margin-top:2px; }
+
+    .chat-close{
+      position: absolute; top: 8px; right: 8px;
+      border: 0; background: #eef1f6; border-radius: 8px;
+      width: 28px; height: 28px; cursor: pointer; line-height: 1;
+    }
+
+    .chat-log{ overflow:auto; padding:8px; border-radius:12px; background:#f6f7fb; border:1px solid rgba(0,0,0,.06); }
+    .message{ padding:10px 12px; border-radius:12px; margin:8px 0; max-width:85%; font-size:14px; line-height:1.5; word-wrap: break-word; }
+    .user-message{ margin-left:auto; background:#0f4d8f; color:#fff; }
+    .bot-message{ margin-right:auto; background:#ffffff; border:1px solid rgba(0,0,0,.08); }
+
+    .chat-suggestions{ display:flex; flex-wrap:wrap; gap:8px; overflow-x:auto; }
+    .suggestion-btn{ border:1px solid rgba(0,0,0,.12); background:#fff; border-radius:999px; padding:6px 10px; font-size:12px; cursor:pointer; }
+    .suggestion-btn:hover{ background:#f2f4f8; }
+
+    .chat-form{ display:grid; grid-template-columns: 1fr auto auto; gap:10px; align-items:center; }
+    #chat-input{ padding:12px 14px; border:1px solid rgba(0,0,0,.12); border-radius:12px; font:inherit; min-width:0; font-size:12px; }
+    #chat-input::placeholder{ font-size:12px; }
+    .send-btn, .reset-btn{ border:0; border-radius:12px; padding:12px 14px; font-weight:600; white-space:nowrap; cursor:pointer; }
+    .send-btn{ background:#ffd166; color:#1a1a1a; }
+    .reset-btn{ background:#eef1f6; color:#0b1b2b; }
+
+  /* Contact actions */
+.contact-actions{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 360px));
+  grid-template-areas:
+    "email   linkedin"
+    "scholar github";
+  justify-content: center;           /* center the whole grid */
+  gap: 16px 18px;
+  margin: 14px auto 22px;            /* keeps it centered */
+}
+/* Map each button to a grid area */
+.action-email   { grid-area: email; }
+.action-linkedin{ grid-area: linkedin; }
+.action-github  { grid-area: github; }
+.action-scholar { grid-area: scholar; }
+
+/* Stack on small screens */
+@media (max-width: 640px){
+  .contact-actions{
+    grid-template-columns: minmax(240px, 1fr);
+    grid-template-areas:
+      "email"
+      "linkedin"
+      "github"
+      "scholar";
+  }
+}
+.action-btn{
+  display:flex; align-items:center; gap:12px;
+  padding: 12px 14px;
+  border: 1px solid rgba(0,0,0,.10);
+  background: #ffffff;
+  border-radius: 14px;
+  text-decoration: none;
+  color: var(--text);
+  box-shadow: 0 4px 14px rgba(0,0,0,.06);
+  transition: transform .1s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
+}
+.action-btn:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0,0,0,.10);
+  border-color: rgba(0,0,0,.18);
+  background: #fcfdff;
+}
+.action-btn .ico{
+  width:38px; height:38px; border-radius: 999px;
+  display:grid; place-items:center;
+  background: #ecf2ff; /* soft blue pill */
+}
+.action-btn .ico i{ font-size: 22px; color:#0f4d8f; }
+.action-btn .label{
+  display:flex; flex-direction:column; line-height:1.2;
+}
+.action-btn .label .title{ font-weight: 700; }
+.action-btn .label .sub{ font-size: 12px; color: var(--muted); }
+
+/* Tiny copy pill */
+.copy-pill{
+  margin-top: 12px;
+  display:inline-flex; align-items:center; gap:6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,.10);
+  background:#f6f7fb; color: var(--text);
+  font-size:12px; cursor:pointer;
+}
+.copy-pill:hover{ background:#eef1f6; }
+.copy-pill i{ font-size:16px; color:#0f4d8f; }
+
+    .logo-pill{
+      display:inline-grid; place-items:center;
+      width:28px; height:28px; border-radius:999px;
+      border:2px solid #fff; color:#fff;    /* default on hero (white) */
+      font-size:18px; line-height:1;
+    }
+    header.site-header.scrolled .logo-pill{
+      border-color: var(--text); color: var(--text);  /* dark after scroll */
+    }
+.bot-message p { margin: 8px 0; }
+.bot-message ul, .bot-message ol { margin: 8px 0 8px 18px; padding: 0; }
+.bot-message a { color:#0f4d8f; text-decoration: underline; font-weight:600; }
+
+    /* === Justify text in Project cards === */
+    #projects .item p,
+    #projects .item .muted{
+      text-align: justify;
+      text-justify: inter-word;   /* nicer spacing */
+      hyphens: auto;              /* better breaks */
+      -webkit-hyphens: auto;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Nyan cat sprite (follows cursor). Will remain behind content. -->
+  <div class="nyan" aria-hidden="true"></div>
+
+  <!-- Header / Nav -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+        <div class="brand">
+          <!-- was: the circle-check SVG -->
+          <span class="logo-pill" aria-hidden="true"><i class="bx bxs-cat"></i></span>
+          <h1>Kiana Hooshanfar</h1>
+        </div>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#publications">Publications</a>
+        <a href="#projects">Projects</a>
+        <a href="#news">News</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Full-screen landing hero -->
+  <section class="landing" id="home">
+    <div class="landing-inner container">
+      <h2>Hi, I’m <strong>Kiana</strong>.</h2>
+      <p class="tagline">Welcome to my portfolio!</p>
+      <div class="social" aria-label="Social links">
+        <a href="mailto:k.hooshanfar02@gmail.com" title="Email" aria-label="Email">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5v2Z"/></svg>
+        </a>
+        <a href="https://github.com/K-Hooshanfar" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5A12 12 0 0 0 0 12.6c0 5.3 3.4 9.8 8 11.3.6.1.8-.2.8-.5v-2c-3.2.7-3.8-1.5-3.8-1.5-.6-1.5-1.5-1.9-1.5-1.9-1.2-.8.1-.8.1-.8 1.3.1 2 .9 2 .9 1.2 2 3 1.4 3.7 1.1.1-.9.5-1.4.9-1.8-2.6-.3-5.3-1.4-5.3-6.1 0-1.3.4-2.3 1.1-3.1-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.2 1.2a10.9 10.9 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.7.2 3 .1 3.3.7.8 1.1 1.8 1.1 3.1 0 4.8-2.7 5.8-5.3 6.1.5.4 1 .1 1.7 1.3v2c0 .3.2.6.8.5 4.6-1.5 8-6 8-11.3A12 12 0 0 0 12 .5Z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/kiana-hooshanfar/" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.9 3.9 6 2.5 6S0 4.9 0 3.5 1.1 1 2.5 1s2.48 1.1 2.48 2.5zM.5 8.5h4V24h-4V8.5zm7.5 0h3.8v2.1h.1c.5-1 1.8-2.1 3.8-2.1 4.1 0 4.9 2.7 4.9 6.2V24h-4v-6.8c0-1.6 0-3.7-2.3-3.7-2.3 0-2.7 1.7-2.7 3.6V24h-4V8.5z"/></svg>
+        </a>
+      <a href="https://scholar.google.com/citations?user=-qqc3AUAAAAJ&hl=en"
+        class="google scholar"
+        target="_blank" rel="noopener"
+        title="Google Scholar" aria-label="Google Scholar">
+        <i class="bx bxs-graduation"></i>
+      </a>
+      </div>
+    </div>
+
+    <div class="scroll-cue">
+      <a href="#about" aria-label="Scroll to About">
+        <div class="mouse"><div class="wheel"></div></div>
+        <span>Scroll</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <main class="container">
+    <div class="sections">
+      <section id="about" class="section-card">
+        <h3>About</h3>
+<!--        <p class="muted">A few sentences about who you are and what you do.</p>-->
+        <p> Hi! I’m Kiana - an AI researcher and developer working on computer vision, saliency, and generative models. I hold a B.Sc.
+          from <strong>IUST</strong> and recently defended my M.Sc. at the <strong>University of Tehran</strong>. I collaborate with the <strong>Machine
+          Learning & Computational Modeling Lab</strong> and build real-world AI systems at <strong>AVIR AI</strong>. I’m always happy to discuss research
+          ideas and collaborations - feel free to reach out.</p>
+      </section>
+
+      <!-- Publications -->
+      <section id="publications" class="section-card">
+        <h3>Publications</h3>
+        <div class="grid">
+          <article class="item">
+            <h4>DTFSal: Audio-Visual Dynamic Token Fusion for Video Saliency Prediction (BMVC, 2025)</h4>
+            <div class="meta">
+              <strong>Kiana Hooshanfar</strong>, Alireza Hosseini, Ahmad Kalhor, Babak Nadjar Araabi ·
+              <a href="https://arxiv.org/abs/2504.10070" target="_blank" rel="noopener">Paper</a> ·
+              <a href="https://k-hooshanfar.github.io/dtfsal/" target="_blank" rel="noopener">Project Page</a>
+            </div>
+          </article>
+
+          <article class="item">
+            <h4>Brand visibility in packaging: a deep learning approach for logo detection, saliency-map prediction, and logo placement analysis (Discover Applied Sciences, 2025)</h4>
+            <div class="meta">
+              Alireza Hosseini, <strong>Kiana Hooshanfar</strong>, Pouria Omrani, Reza Toosi, Ramin Toosi, Zahra Ebrahimian, Mohammad Ali Akhaee
+              <a href="https://link.springer.com/article/10.1007/s42452-025-07043-9" target="_blank" rel="noopener">Paper</a> ·
+              <a href="https://github.com/Arhosseini77/Brand_Attention" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </article>
+
+          <article class="item">
+            <h4>Hybrid Retrieval-Augmented Generation Approach for LLMs Query Response Enhancement (ICWR 2024)</h4>
+            <div class="meta">
+              Pouria Omrani, Alireza Hosseini, <strong>Kiana Hooshanfar</strong>, Zahra Ebrahimian, Ramin Toosi, Mohammad Ali Akhaee
+              <a href="https://ieeexplore.ieee.org/abstract/document/10533345" target="_blank" rel="noopener">Paper</a>
+            </div>
+          </article>
+
+          <article class="item">
+            <h4>Eye-Tracking Based Control of a Robotic Arm and Wheelchair for People with Severe Speech and Motor Impairment (SSMI) (ICRoM 2023)</h4>
+            <div class="meta">
+              Maryam Asad Samani, <strong>Kiana Hooshanfar</strong>, Helia Shams Jey, Seyed Majid Esmailzadeh
+              <a href="https://ieeexplore.ieee.org/abstract/document/10412408/" target="_blank" rel="noopener">Paper</a> ·
+              <a href="https://github.com/K-Hooshanfar/EyeTrackRobot" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+
+      <section id="projects" class="section-card">
+        <h3>Projects</h3>
+        <div class="grid cols-2">
+
+        <article class="item">
+          <h4>OCR (English) - Prompt-Engineering, Labeling & Extraction</h4>
+          <p class="muted">
+            Built a fast labeling workflow for English documents—<strong>handwritten and typed</strong>—using prompt engineering to cut annotation time and improve accuracy.
+            Includes template-aware prompts for forms, smart span suggestions. Exports clean JSON for downstream tasks. <a href="#">Report</a>
+          </p>
+        </article>
+
+        <article class="item">
+          <h4>OCR (Farsi) - Data Collection, Annotation & Model Fine-Tuning</h4>
+          <p class="muted">
+            Curated a diverse Persian (Farsi) dataset covering <strong>handwritten and typed</strong> pages (receipts, forms, notes), defined labeling guidelines, and
+            fine-tuned OCR models for real-world fonts, cursive handwriting, and noisy scans. The pipeline spans dataset prep, annotation, normalization, and evaluation.
+            <a href="#">Demo</a>
+          </p>
+        </article>
+
+        <article class="item">
+          <h4>SmartEYE Ads - Predicting Brand Attention with Eye-Tracking</h4>
+          <p class="muted">  Built AI pipelines for gaze estimation, saliency prediction, and brand-attention scoring on video ads, enabling frame-level insights,
+            A/B tests, and faster creative iteration.<a href="#">Demo</a></p>
+        </article>
+
+        <article class="item">
+          <h4>GazeLab - In-the-Wild Eye-Tracking Data Collection</h4>
+          <p class="muted">Designed and executed billboard & video-ad eye-tracking studies with high-precision trackers; standardized calibration, unified task scripts,
+            and ready-to-use dataset exports (gaze points, fixations, AOIs, heatmaps) for large-scale analysis.  <a href="#">Docs</a></p>
+        </article>
+
+        <article class="item">
+          <h4>AutoCreator - AI-Powered YouTube Content Generator</h4>
+          <p class="muted">  Automatically transforms PDF slides into narrated videos: extracts slide text, generates natural TTS in multiple languages/voices,
+            and syncs narration to slide order and timing.
+            Supports adding an intro clip after slide 1 and compositing a talking avatar with chroma-key (green-screen)
+            removal for presenter overlays.<a href="#">GitHub</a></p>
+        </article>
+
+        <article class="item">
+          <h4>Custom-Tuned VLMs & LLMs</h4>
+          <p class="muted">LoRA/PEFT fine-tuning with retrieval for domain QA and visual question answering over images & documents. <a href="#">Notes</a></p>
+        </article>
+
+        <article class="item">
+          <h4>Generative Ad Creative Studio</h4>
+          <p class="muted">Text-to-ad images and variants with brand colors/logos, safety filters, and quick comparison grids. <a href="#">Preview</a></p>
+        </article>
+
+        <article class="item">
+          <h4>Multimodal Shopping Assistant</h4>
+          <p class="muted">  Multilingual shopping assistant (FastAPI): understands Persian/English queries, supports chat + visual search,
+            reads labels/receipts, extracts & normalizes product entities, classifies images, compares prices, and recommends budget-aware alternatives.
+        <a href="#">Demo</a></p>
+        </article>
+
+        <article class="item">
+          <h4>Logo & Logotype Generation</h4>
+          <p class="muted">Diffusion-based logo/wordmark creation with style prompts, negative prompts, and vector export. <a href="#">Gallery</a></p>
+        </article>
+
+        </div>
+      </section>
+
+      <section id="news" class="section-card">
+        <h3>News</h3>
+        <ul>
+          <li><strong>Jul 2025</strong> — <strong>DTFSal</strong> accepted to <strong>BMVC 2025</strong>.</li>
+          <li><strong>May 2025</strong> — <strong>Eye-Tracking Brand Visibility in Packaging</strong> accepted to <strong>Discover Applied Sciences</strong>.</li>
+          <li><strong>Feb 2025</strong> — Defended Master’s thesis at the University of Tehran.</li>
+          <li><strong>May 2024</strong> — <strong>Hybrid RAG Approach for LLMs</strong> accepted to <strong>ICWR 2024</strong>.</li>
+          <li><strong>Dec 2023</strong> — <strong>Eye-Tracking Based Control of a Robotic Arm and Wheelchair</strong> accepted to <strong>ICRoM 2023</strong>.</li>
+
+        </ul>
+      </section>
+
+        <section id="contact" class="section-card">
+          <h3>Contact</h3>
+
+        <div class="contact-actions">
+          <a class="action-btn action-email" href="mailto:k.hooshanfar02@gmail.com" aria-label="Send me an email">
+            <span class="ico"><i class="bx bx-envelope"></i></span>
+            <span class="label">
+              <span class="title">Email</span>
+              <span class="sub">k.hooshanfar02@gmail.com</span>
+            </span>
+          </a>
+
+          <a class="action-btn action-linkedin" href="https://www.linkedin.com/in/kiana-hooshanfar/" target="_blank" rel="noopener"
+             aria-label="Open LinkedIn profile">
+            <span class="ico"><i class="bx bxl-linkedin"></i></span>
+            <span class="label">
+              <span class="title">LinkedIn</span>
+              <span class="sub">kiana-hooshanfar</span>
+            </span>
+          </a>
+
+          <a class="action-btn action-scholar" href="https://scholar.google.com/citations?user=-qqc3AUAAAAJ&hl=en"
+             target="_blank" rel="noopener" aria-label="Open Google Scholar profile">
+            <span class="ico"><i class="bx bxs-graduation"></i></span>
+            <span class="label">
+              <span class="title">Google Scholar</span>
+              <span class="sub">Profile</span>
+            </span>
+          </a>
+
+          <a class="action-btn action-github" href="https://github.com/K-Hooshanfar" target="_blank" rel="noopener"
+             aria-label="Open GitHub profile">
+            <span class="ico"><i class="bx bxl-github"></i></span>
+            <span class="label">
+              <span class="title">GitHub</span>
+              <span class="sub">K-Hooshanfar</span>
+            </span>
+          </a>
+        </div>
+
+          <!-- Keep your form if you like -->
+          <form class="contact" onsubmit="event.preventDefault(); alert('This is a static site — connect a form service to make this work.');">
+            <div class="field"><label for="name">Name</label><input id="name" name="name" placeholder="Jane Doe" /></div>
+            <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="jane@example.com" /></div>
+            <div class="field"><label for="message">Message</label><textarea id="message" name="message" placeholder="Hello!"></textarea></div>
+            <button class="btn" type="submit">Send</button>
+          </form>
+        </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Kiana Hooshanfar</div>
+  </footer>
+
+  <!-- Version Toggle Button -->
+  <a href="academic_portfolio.html" class="version-toggle">
+    <i class='bx bx-file-blank'></i>
+    <span>Academic Version</span>
+  </a>
+
+  <!-- jQuery (for landing animation script) -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <script>
+  /* ===== Nyan + stars animation (behind content) ===== */
+  var posX = 100, posY = 100, px = 0, py = 0, an = false;
+  var nyan = $('.nyan');
+  var rainbow = null;
+  var altura = $(document).height();
+  var largura = parseInt($('body').width());
+  var tamanhoTela = parseInt(largura/9);
+  var pilha = [];
+
+  function getRandomInt(min, max){ return Math.floor(Math.random() * (max - min + 1)) + min; }
+
+  $(document).on('mousemove', function(event) { posX = event.pageX; posY = event.pageY; });
+
+  for(var i = 0; i < tamanhoTela; i++){
+    var rain = $('<div class="rainbow"/>').css('left', i*9+'px');
+    $('body').append(rain);
+  }
+  rainbow = $('.rainbow');
+
+  function criarEstrela(){
+      var rand = getRandomInt(3, 14);
+      var tempoDeVida = getRandomInt(5,10);
+      var star = $('<div class="star"/>').css({
+          width:rand+'px', height:rand+'px', left: largura-10+'px', top: Math.floor((Math.random()*altura)+1),
+          '-webkit-transition': 'all '+tempoDeVida+'s linear', 'transition': 'all '+tempoDeVida+'s linear',
+          '-webkit-transform': 'translate(0px, 0px)','transform': 'translate(0px, 0px)'
+      });
+      $('body').append(star);
+      window.setTimeout(function(){ star.css({'-webkit-transform': 'translate(-'+largura+'px, 0px)','transform': 'translate(-'+largura+'px, 0px)'}); }, getRandomInt(5,10)*10);
+      window.setTimeout(function(){star.remove();}, tempoDeVida*1000);
+  }
+
+  function moveNyan(){
+      var tamX = nyan.width()/2, tamY = nyan.height()/2;
+      px += (posX - px - tamX) / 50; py += (posY - py - tamY) / 50;
+      nyan.css({ left: px + 'px', top: py + 'px' });
+  }
+  function peidaArcoIris(){
+      var qnt = Math.floor(nyan.position().left/9)+2;
+      if(pilha.length >= qnt) pilha.pop();
+      pilha.unshift(py);
+      rainbow.hide();
+      for(var i = 0; i < qnt; i++){
+          var am = (i%2); if(an) am = (i%2) ? 0 : 1 ;
+          rainbow.eq(qnt-i).css({top: pilha[i]+am}).show();
+      }
+  }
+
+  window.setInterval(function(){ moveNyan(); peidaArcoIris(); }, 10);
+  window.setInterval(function(){ criarEstrela(); }, 300);
+  window.setInterval(function(){ an = !an; }, 500);
+  var frame = 0; window.setInterval(function(){ nyan.css({'background-position': 34*frame+'px'}); frame++; }, 100);
+
+  // Smooth scroll to section on link click
+  $('a[href^="#"]').on('click', function(event) {
+      event.preventDefault();
+      var target = this.hash; var $target = $(target);
+      $('html, body').animate({ scrollTop: $target.offset().top - 70 }, 600, 'swing');
+  });
+
+  // Header background toggles after first scroll
+  const header = document.getElementById('site-header');
+  const onScroll = () => { if (window.scrollY > 12) header.classList.add('scrolled'); else header.classList.remove('scrolled'); };
+  document.addEventListener('scroll', onScroll); onScroll();
+
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <!-- ===== Chat widget (bottom-right) ===== -->
+  <button id="chat-toggle" class="chat-fab" aria-label="Chat with me">💬</button>
+
+  <div id="chat-widget" class="chat-widget" aria-live="polite" aria-expanded="false">
+    <div class="chat-header">
+      <div class="chat-title">
+        <strong>Chat with me</strong>
+        <span class="chat-sub">Ask about my résumé</span>
+      </div>
+      <button id="chat-close" class="chat-close" aria-label="Close">✕</button>
+    </div>
+
+    <div id="chat-log" class="chat-log"></div>
+
+    <div class="chat-suggestions">
+      <button class="suggestion-btn" data-question="Give a brief overview of your education.">Education</button>
+      <button class="suggestion-btn" data-question="List your publications.">Publications</button>
+      <button class="suggestion-btn" data-question="List your projects with one-line summaries.">Projects</button>
+      <button class="suggestion-btn" data-question="What are your technical skills?">Skills</button>
+      <button class="suggestion-btn" data-question="Summarize your experience (roles, labs, internships).">Experience</button>
+      <button class="suggestion-btn" data-question="What are your research interests?">Research interests</button>
+      <button class="suggestion-btn" data-question="How can I contact you? Share email and profiles.">Contact</button>
+    </div>
+
+    <form id="chat-form" class="chat-form">
+      <input id="chat-input" type="text" placeholder="Type a question…" autocomplete="off" />
+      <button type="submit" class="send-btn">Send</button>
+      <button type="button" id="reset-chat" class="reset-btn" title="Clear chat">Reset</button>
+    </form>
+  </div>
+  <!-- ===== /Chat widget ===== -->
+
+  <script>
+  // ===== Config =====
+  const KEY = "AIzaSyD9YBqWkFJ-IFB_";
+  const KEY1 = "goTWZhVcF4FE7Vt1v1A";
+  const GEMINI_API_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + KEY + KEY1;
+
+  // ===== Resume data (Markdown) =====
+  const resumeMarkdown = `
+**Resume of Kiana Hooshanfar**
+
+---
+
+## 📚 **Education**
+
+- **Master of Science in Electrical Engineering (Control Engineering)**  
+  _University of Tehran, Tehran, Iran (September 2022 - Feburary 2025)
+  **GPA:** 4/4
+  **Thesis:** *"Design and Enhancement of Video Saliency Prediction Networks"*
+
+- **Bachelor’s Degree in Electrical Engineering (Control Engineering)**  
+  _Iran University of Science and Technology (IUST), Tehran, Iran (September 2018 – September 2022)  
+  **GPA:** 3.83/4 (18.34/20)  
+  **Thesis:** *"Intelligent Control of a Robot Arm by Eye Tracking for severe speech and motor impairment (SSMI)"*  
+  **Grade:** 20/20
+
+- **High School Diploma in Mathematics and Physics**  
+  _Aboureihan High School, Tehran, Iran (2014 – 2018) 
+  **GPA:** 4/4
+
+---
+
+## 🔬 **Research Interests**
+
+- Computer vision
+- Generative Models
+- Medical Images
+- Implicit Neural Representation
+- Vision Science
+- Saliency Prediction
+- Human-computer interaction
+
+---
+## 🏅 **Honors & Awards**
+
+- Received direct master's admission from three distinguished universities: University of Tehran, Amirkabir University of Technology, and IUST
+- **1st Rank** among 33 Control Engineering students at IUST
+- **3rd Rank** among 118 Electrical Engineering students at IUST
+- **2nd Place** in National Rahneshan Competition – Autonomous Solar Panel Cleaning Robots, INEF, Feb 2022
+- **1st Top Student** of the Year (2020 & 2021)
+
+---
+
+## 📄 **Publications**
+
+- **[DTFSal: Audio-Visual Dynamic Token Fusion for Video Saliency Prediction (Arxiv 2025)](https://arxiv.org/abs/2504.10070)**  
+  _Authors:_ **Kiana Hooshanfar**, Alireza Hosseini, Ahmad Kalhor, Babak N. Araabi  
+  [Project Page](https://k-hooshanfar.github.io/dtfsal/)
+
+- **[Eye-Tracking Brand Visibility in Packaging (Arxiv 2024)](https://arxiv.org/abs/2403.02336)**  
+  _Accepted to Discover Applied Sciences
+  _Authors:_ Alireza Hosseini, **Kiana Hooshanfar**, et al.  
+  [GitHub](https://github.com/Arhosseini77/Brand_Attention)
+
+- **[Hybrid Retrieval-Augmented Generation for LLMs Query Enhancement (ICWR 2024)](https://ieeexplore.ieee.org/abstract/document/10533345)**  
+  _Authors:_ Pouria Omrani, Alireza Hosseini, **Kiana Hooshanfar**, et al.
+
+- **[Eye-Tracking Based Control of a Robotic Arm and Wheelchair (ICROM 2023)](https://ieeexplore.ieee.org/abstract/document/10412408/)**  
+  _Authors:_ Maryam Asad Samani, **Kiana Hooshanfar**, et al.  
+  [GitHub](https://github.com/K-Hooshanfar/EyeTrackRobot)
+
+---
+
+## 🧪 **Research Experiences**
+
+- **Artificial Intelligence Developer**  
+  _AVIR AI Company_ (Dec 2023 – Present)  
+  - Expertise in AI/ML: LLMs, Vision-language models (LVMs), Saliency prediction, OCR, TTS, ASR, RAG, Style transfer, Data analysis, etc.
+
+- **Research Assistant**  
+  _Machine Learning & Computational Modeling Lab, Univ. of Tehran_ (Feb 2023 – Present)  
+  - Designing and improving saliency prediction networks  
+  - Exploring Implicit Neural Representations
+
+- **AI Developer**  
+  _Tehran Heart Center Hospital_ (Aug 2023 – Dec 2023)  
+  - Chest-Xray multi-label classification  
+  - Deep learning-based blood pressure prediction from ECG  
+  - Paper submitted: *Predicting reoperation due to bleeding risk after coronary artery bypass* (Scientific Reports)
+
+- **Research Assistant**  
+  _Convergent Technologies Research Center, University of Tehran_ (Jan 2023 – Dec 2023)  
+  - Eye-tracking in neuromarketing  
+  - Developed neural networks to forecast human visual attention  
+  [Project Site](http://avir.smok.ir/)
+
+- **Research Assistant**  
+  _Control Laboratory, IUST_ (Sep 2021 – Sep 2022)  
+  - Eye-tracking-based intelligent control for SSMI  
+  - [GitHub](https://github.com/K-Hooshanfar/EyeTrackRobot)
+
+- **Research Intern**  
+  _Robotics Research Laboratory, IUST_ (Jun 2021 – Sep 2021)  
+  - Object detection and tracking with YOLOv5  
+  - [GitHub](https://github.com/K-Hooshanfar/Iranian-Football-Detection)
+
+---
+
+## 🛠 **Skills**
+
+- **Programming Languages:** Python, MATLAB, HTML, C/C++
+- **Libraries/Tools:** PyTorch, TensorFlow, OpenCV, NumPy, Pandas, Matplotlib
+- **Other Tools:** Git, Linux, LaTeX, Arduino, Altium Designer, Docker
+- **Soft Skills:** Teamwork, Leadership, Documentation Writing
+
+---
+
+## 🧑‍🏫 **Teaching Experiences**
+
+- **Analysis and Design of Deep Neural Networks** — Fall 2024 (Dr. Ahmad Kalhor)  
+- **Neural Networks and Deep Learning** — Spring & Fall 2024 (Dr. Ahmad Kalhor)  
+- **Machine Learning** — Spring & Fall 2024, Fall 2023 (Dr. Araabi, Dr. Tavassolipour)  
+- **System Identification** — Spring 2024 (Dr. Araabi)  
+- **Linear Control Systems** — Fall 2023 (Dr. Fariba Bahrami)  
+- **Control Labs** — Spring 2023 (Dr. Adhami, Dr. Hosseinzadeh)  
+- **Mechatronics, Signals and Systems, Circuits 2, Technical Language** — Spring 2022  
+- **Python, Linear Algebra** — Fall 2021 (Dr. Ebadollahi)
+
+---
+
+## 🌍 **Languages**
+
+- **English:** Professional working proficiency  
+- **German:** Limited working proficiency (A2)  
+- **Persian:** Native speaker
+
+##  **Contact**
+- Email: k.hooshanfar02@gmail.com
+- Linkedin: www.linkedin.com/in/kiana-hooshanfar/
+- Github: https://github.com/K-Hooshanfar
+- Scholar: https://scholar.google.com/citations?view_op=list_works&hl=en&user=-qqc3AUAAAAJ
+
+    `;
+
+  // ===== Chat widget behavior (open-only FAB, ✕/Esc close) =====
+  (function(){
+      const chat    = document.getElementById('chat-widget');
+      const fab     = document.getElementById('chat-toggle');
+      const close   = document.getElementById('chat-close');
+      const log     = document.getElementById('chat-log');
+      const form    = document.getElementById('chat-form');
+      const input   = document.getElementById('chat-input');
+      const reset   = document.getElementById('reset-chat');
+
+      if (!chat || !fab || !close) return;
+
+      function setOpen(isOpen) {
+        chat.classList.toggle('open', isOpen);
+        chat.setAttribute('aria-expanded', String(isOpen));
+        fab.setAttribute('aria-pressed', String(isOpen));
+        if (isOpen) setTimeout(() => input?.focus(), 0);
+      }
+      function toggle() { setOpen(!chat.classList.contains('open')); }
+
+      // Bubble: toggle open/close (never disappears)
+      fab.addEventListener('click', (e) => { e.preventDefault(); toggle(); });
+
+      // Close controls
+      close.addEventListener('click', (e) => { e.preventDefault(); setOpen(false); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+
+      // Convert markdown -> sanitized HTML
+      function renderMarkdown(md){
+        try {
+          const html = marked.parse(md, { breaks: true });
+          return DOMPurify.sanitize(html, { ADD_ATTR: ['target','rel'] });
+        } catch (e) {
+          // Fallback: very small markdown support if CDNs fail
+          let h = (md || '')
+            .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+            .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')          // **bold**
+            .replace(/\*(.+?)\*/g, '<em>$1</em>')                      // *italic*
+            .replace(/\[(.+?)\]\((https?:\/\/[^\s)]+)\)/g,
+                     '<a href="$2" target="_blank" rel="noopener">$1</a>');
+          // bullets: lines starting with "- "
+          h = h.replace(/(^|\n)-\s+(.+)(?=\n|$)/g, '$1<li>$2</li>');
+          if (/<li>/.test(h)) h = h.replace(/(<li>[\s\S]*<\/li>)/g, '<ul>$1</ul>');
+          return h.replace(/\n/g,'<br>');
+        }
+      }
+
+      // Add a message; set as markdown if needed
+      function appendMessage(text, who, asMarkdown = false){
+        const d = document.createElement('div');
+        d.className = 'message ' + (who === 'user' ? 'user-message' : 'bot-message');
+        if (asMarkdown) d.innerHTML = renderMarkdown(text);
+        else d.textContent = text;
+        document.getElementById('chat-log').appendChild(d);
+        document.getElementById('chat-log').scrollTop = document.getElementById('chat-log').scrollHeight;
+      }
+      appendMessage('Hi! Ask me anything about my résumé.', 'bot');
+
+      document.querySelectorAll('.suggestion-btn').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          input.value = btn.dataset.question || '';
+          form.dispatchEvent(new Event('submit'));
+        });
+      });
+
+    // Reset
+    reset.addEventListener('click', ()=>{
+      log.innerHTML = '';
+      input.value = '';
+      appendMessage('Hi! Ask me anything about my résumé.', 'bot');
+    });
+
+    // Submit handler / API call
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const userText = (input.value || '').trim();
+      if(!userText) return;
+      appendMessage(userText, 'user');
+      input.value = '';
+      appendMessage('…', 'bot'); // temp
+
+      const prompt = `
+You are an AI assistant. Your knowledge is limited to the following résumé information:
+
+${resumeMarkdown}
+
+If a question is asked that is not answered in the résumé, reply with:
+"I'm sorry, I can only answer questions about my resume."
+
+User: ${userText}
+Assistant:
+      `;
+
+      try {
+        const response = await fetch(GEMINI_API_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+        });
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error("API Error:", response.status, errorText);
+          // Replace the last bot message with the error
+          const chatLogEl = document.getElementById("chat-log");
+          chatLogEl.lastChild.textContent = "Bot: API error " + response.status;
+          return;
+        }
+        const data = await response.json();
+        let reply = "No reply received.";
+        if (data && data.candidates && data.candidates.length > 0 &&
+            data.candidates[0].content && data.candidates[0].content.parts &&
+            data.candidates[0].content.parts.length > 0) {
+          reply = data.candidates[0].content.parts[0].text;
+        }
+        // Replace the last bot message (the temporary one) with the actual reply
+        const chatLogEl = document.getElementById("chat-log");
+        chatLogEl.lastChild.innerHTML = renderMarkdown(reply);
+      } catch (err) {
+        console.error("Fetch error:", err);
+        const chatLogEl = document.getElementById("chat-log");
+        chatLogEl.lastChild.textContent = "Bot: Error occurred: " + err.message;
+      }
+    });
+  })();
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
+</body>
+</html>
