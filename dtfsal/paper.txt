@@ -790,9 +790,11 @@ A key limitation of our work is the lack of large-scale audio-visual datasets, w
 
 \section{BibTeX}
 
-@article{hooshanfar2025dtfsal,
-  title={DTFSal: Audio-Visual Dynamic Token Fusion for Video Saliency Prediction},
-  author={Hooshanfar, Kiana and Hosseini, Alireza and Kalhor, Ahmad and Araabi, Babak Nadjar},
-  journal={arXiv preprint arXiv:2504.10070},
-  year={2025}
+@inproceedings{Hooshanfar_2025_BMVC,
+author    = {Kiana Hooshanfar and Alireza Hosseini and Mona Ahmadian and Ahmad Kalhor and Babak N Araabi},
+title     = {DTFSal: Audio-Visual Dynamic Token Fusion for Video Saliency Prediction},
+booktitle = {36th British Machine Vision Conference 2025, {BMVC} 2025, Sheffield, UK, November 24-27, 2025},
+publisher = {BMVA},
+year      = {2025},
+url       = {https://bmva-archive.org.uk/bmvc/2025/assets/papers/Paper_770/paper.pdf}
 }
