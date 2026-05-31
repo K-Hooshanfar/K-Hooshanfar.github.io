@@ -4,833 +4,1204 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Kiana Hooshanfar</title>
-  <meta name="description" content="Academic portfolio of Kiana Hooshanfar - AI Researcher" />
-  
+  <meta name="description" content="Academic portfolio of Kiana Hooshanfar — AI Researcher" />
+
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg-card: #fff;
-      --border-lt: #e8edf3;
-      --primary: #1e40af;
-      --accent: #2563eb;
-      --r-sm: 8px;
-      --sh-sm: 0 2px 8px rgba(26, 47, 90, 0.06);
-      --sh-md: 0 6px 18px rgba(26, 47, 90, 0.12);
-    }
-    
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      line-height: 1.6;
-      color: #333;
-      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-      min-height: 100vh;
-      font-size: 15px;
-    }
-    
-    .container {
-      max-width: 920px;
-      margin: 0 auto;
-      padding: 40px 24px 80px;
-      background: white;
-      box-shadow: 0 0 40px rgba(0,0,0,0.08);
-      border-radius: 12px;
-      margin-top: 20px;
-      margin-bottom: 20px;
-    }
-    
-    /* Header */
-    header {
-      text-align: center;
-      padding: 60px 0 40px;
-      border-bottom: 2px solid #e5e5e5;
-      margin-bottom: 40px;
-      background: linear-gradient(135deg, #1e40af 0%, #0c4a6e 100%);
-      margin: -40px -24px 40px -24px;
-      padding: 60px 24px 40px 24px;
-      border-radius: 12px 12px 0 0;
-    }
-    
-    h1 {
-      font-size: 32px;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: white;
-    }
-    
-    .subtitle {
-      font-size: 16px;
-      color: rgba(255,255,255,0.95);
-      margin-bottom: 20px;
-    }
-    
-    .social-links {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    
-    .social-links a {
-      color: white;
-      text-decoration: none;
-      font-size: 14px;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 6px 12px;
-      border-radius: 6px;
-      transition: all 0.2s;
-      background: rgba(255,255,255,0.1);
-    }
-    
-    .social-links a:hover {
-      background: rgba(255,255,255,0.2);
-      color: white;
-      transform: translateY(-2px);
-    }
-    
-    .social-links i {
-      font-size: 18px;
-    }
-    
-    /* Sections */
-    section {
-      margin-bottom: 50px;
-    }
-    
-    h2 {
-      font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 20px;
-      color: #111;
-      padding-bottom: 8px;
-      border-bottom: 3px solid transparent;
-      background: linear-gradient(90deg, #1e40af 0%, #0c4a6e 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      position: relative;
-    }
-    
-    h2::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 60px;
-      height: 3px;
-      background: linear-gradient(90deg, #1e40af 0%, #0c4a6e 100%);
-    }
-    
-    h3 {
-      font-size: 18px;
-      font-weight: 600;
-      color: #111;
-      margin-bottom: 4px;
-    }
-    
-    /* About */
-    .about-content {
-      line-height: 1.7;
-      color: #444;
+      --navy:       #080f22;
+      --navy-mid:   #0f1f48;
+      --blue-deep:  #1e3a8a;
+      --blue:       #1e40af;
+      --blue-mid:   #2563eb;
+      --blue-light: #3b82f6;
+      --sky-50:     #eff6ff;
+      --sky-100:    #dbeafe;
+      --sky-200:    #bfdbfe;
+      --white:      #ffffff;
+      --gray-50:    #f8fafc;
+      --gray-100:   #f1f5f9;
+      --gray-200:   #e2e8f0;
+      --gray-300:   #cbd5e1;
+      --gray-400:   #94a3b8;
+      --gray-500:   #64748b;
+      --gray-600:   #475569;
+      --gray-700:   #334155;
+      --gray-800:   #1e293b;
+      --gray-900:   #0f172a;
+
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body:    'DM Sans', -apple-system, sans-serif;
+
+      --r-sm:  8px;
+      --r:     12px;
+      --r-lg:  20px;
+
+      --sh-sm: 0 1px 3px rgba(8,15,34,.07), 0 1px 2px rgba(8,15,34,.04);
+      --sh-md: 0 4px 14px rgba(8,15,34,.09), 0 2px 6px rgba(8,15,34,.05);
+      --sh-lg: 0 12px 32px rgba(8,15,34,.12), 0 4px 10px rgba(8,15,34,.07);
+
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --t: 0.25s;
     }
 
-    /* Research Interests */
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 76px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--gray-50);
+      color: var(--gray-800);
+      line-height: 1.7;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ── NAV ─────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      background: rgba(255,255,255,.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid transparent;
+      transition: border-color var(--t) var(--ease), box-shadow var(--t) var(--ease);
+    }
+
+    nav.scrolled {
+      border-bottom-color: var(--gray-200);
+      box-shadow: var(--sh-sm);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+    }
+
+    .nav-brand:hover .nav-name { color: var(--blue); }
+
+    .nav-name {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 19px;
+      color: var(--gray-900);
+      letter-spacing: -.02em;
+      transition: color var(--t) var(--ease);
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 6px 13px;
+      color: var(--gray-500);
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 500;
+      border-radius: 8px;
+      transition: color var(--t) var(--ease), background var(--t) var(--ease);
+    }
+
+    .nav-links a:hover { color: var(--blue); background: var(--sky-50); }
+    .nav-links a.active { color: var(--blue); background: var(--sky-100); }
+
+    /* ── HERO ────────────────────────────────── */
+    .hero {
+      background: linear-gradient(158deg, var(--navy) 0%, var(--navy-mid) 45%, #1a3272 100%);
+      padding: 96px 40px 80px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px);
+      background-size: 56px 56px;
+      pointer-events: none;
+    }
+
+    .hero-glow {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 18% 78%, rgba(59,130,246,.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 82% 18%, rgba(96,165,250,.12) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      max-width: min(960px, 100%);
+    }
+
+    .hero-body {
+      flex: 0 1 auto;
+      min-width: 0;
+    }
+
+    .hero-photo {
+      flex-shrink: 0;
+    }
+
+    .hero-photo img {
+      display: block;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 20%;
+      border: 5px solid rgba(255,255,255,.9);
+      box-shadow:
+        0 16px 48px rgba(0,0,0,.35),
+        0 0 0 1px rgba(255,255,255,.14);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.16);
+      color: rgba(255,255,255,.82);
+      font-size: 11.5px;
+      font-weight: 500;
+      padding: 5px 13px;
+      border-radius: 100px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #60a5fa;
+      animation: pulse-dot 2.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: .5; transform: scale(.75); }
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(44px, 7.5vw, 74px);
+      font-weight: 700;
+      color: white;
+      line-height: 1.04;
+      letter-spacing: -.025em;
+      margin-bottom: 14px;
+    }
+
+    .hero-tagline {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-size: 17px;
+      color: rgba(255,255,255,.68);
+      font-weight: 300;
+      letter-spacing: .01em;
+      margin-bottom: 38px;
+    }
+
+    .tag-sep { color: rgba(255,255,255,.25); }
+
+    .hero-links {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+    }
+
+    .hero-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 18px;
+      background: rgba(255,255,255,.09);
+      border: 1px solid rgba(255,255,255,.18);
+      color: rgba(255,255,255,.92);
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 500;
+      border-radius: 10px;
+      transition: background var(--t) var(--ease), border-color var(--t) var(--ease),
+                  transform var(--t) var(--ease), box-shadow var(--t) var(--ease);
+    }
+
+    .hero-links a:hover {
+      background: rgba(255,255,255,.17);
+      border-color: rgba(255,255,255,.32);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,.25);
+    }
+
+    .hero-links i { font-size: 16px; }
+
+    /* ── MAIN ────────────────────────────────── */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 68px 40px 100px;
+    }
+
+    /* ── SECTION BASE ────────────────────────── */
+    section {
+      margin-bottom: 68px;
+      scroll-margin-top: 76px;
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .55s var(--ease), transform .55s var(--ease);
+    }
+
+    section.visible { opacity: 1; transform: translateY(0); }
+
+    .sec-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--gray-900);
+      letter-spacing: -.02em;
+      line-height: 1.2;
+      flex-shrink: 0;
+    }
+
+    .sec-rule {
+      flex: 1;
+      height: 1px;
+      background: var(--gray-200);
+    }
+
+    /* ── ABOUT ───────────────────────────────── */
+    .about-text {
+      font-size: 15.5px;
+      line-height: 1.82;
+      color: var(--gray-700);
+      max-width: 700px;
+    }
+
+    .about-text p + p { margin-top: 14px; }
+
+    .about-text strong {
+      color: var(--gray-900);
+      font-weight: 600;
+    }
+
+    /* ── INTERESTS ───────────────────────────── */
     .interests-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+      gap: 9px;
     }
 
-    .interest-chip {
+    .chip {
+      padding: 13px 15px;
+      background: white;
+      border: 1.5px solid var(--gray-200);
+      border-radius: var(--r-sm);
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--blue-deep);
+      text-align: center;
+      cursor: default;
+      transition: border-color var(--t) var(--ease), background var(--t) var(--ease),
+                  transform var(--t) var(--ease), box-shadow var(--t) var(--ease);
+      box-shadow: var(--sh-sm);
+      line-height: 1.4;
+      min-height: 52px;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 56px;
-      height: 100%;
-      padding: 12px 14px;
-      background: var(--bg-card);
-      border: 1.5px solid var(--border-lt);
-      border-radius: var(--r-sm);
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--primary);
-      text-align: center;
-      cursor: default;
-      transition: all .2s ease;
-      box-shadow: var(--sh-sm);
-      line-height: 1.35;
     }
 
-    .interest-chip:hover {
-      border-color: var(--accent);
-      background: rgba(30, 64, 175, 0.04);
+    .chip:hover {
+      border-color: var(--blue-light);
+      background: var(--sky-50);
       transform: translateY(-2px);
       box-shadow: var(--sh-md);
+      color: var(--blue);
     }
 
-    /* Education */
-    .education-item {
-      margin-bottom: 28px;
-      padding-bottom: 28px;
-      border-bottom: 1px solid #e8edf3;
+    /* ── EDUCATION ───────────────────────────── */
+    .timeline {
+      position: relative;
+      padding-left: 34px;
     }
 
-    .education-item:last-child {
-      margin-bottom: 0;
-      padding-bottom: 0;
-      border-bottom: none;
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 14px;
+      bottom: 14px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--blue), rgba(30,64,175,.1));
+      border-radius: 2px;
     }
 
-    .edu-degree {
-      font-size: 16px;
+    .tl-item {
+      position: relative;
+      padding-bottom: 38px;
+    }
+
+    .tl-item:last-child { padding-bottom: 0; }
+
+    .tl-dot {
+      position: absolute;
+      left: -30px;
+      top: 8px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: white;
+      border: 2.5px solid var(--blue);
+      box-shadow: 0 0 0 3px var(--sky-100);
+    }
+
+    .edu-deg {
       font-weight: 600;
-      color: #111;
-      margin-bottom: 6px;
+      font-size: 15.5px;
+      color: var(--gray-900);
+      margin-bottom: 5px;
+      line-height: 1.4;
     }
 
     .edu-meta {
-      color: #1e40af;
-      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--blue);
       font-weight: 500;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
-    .edu-details {
+    .edu-meta i { font-size: 14px; }
+
+    .edu-list {
       list-style: none;
-      margin: 0;
-      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
 
-    .edu-details li {
+    .edu-list li {
       position: relative;
       padding-left: 16px;
-      margin-bottom: 6px;
-      color: #444;
-      font-size: 14px;
-      line-height: 1.55;
+      color: var(--gray-600);
+      font-size: 13.5px;
+      line-height: 1.6;
     }
 
-    .edu-details li::before {
-      content: "•";
+    .edu-list li::before {
+      content: '';
       position: absolute;
       left: 0;
-      color: #1e40af;
-      font-weight: 700;
+      top: 9px;
+      width: 7px;
+      height: 1.5px;
+      background: var(--blue-light);
+      border-radius: 2px;
     }
-    
-    /* Publications */
-    .publication {
+
+    /* ── NEWS ────────────────────────────────── */
+    .news-stack {
       display: flex;
-      gap: 24px;
-      align-items: flex-start;
-      margin-bottom: 32px;
-      padding-bottom: 32px;
-      border-bottom: 1px solid #e8edf3;
+      flex-direction: column;
+      gap: 10px;
     }
 
-    .publication:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-      margin-bottom: 0;
+    .news-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 18px;
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--r-sm);
+      box-shadow: var(--sh-sm);
+      transition: border-color var(--t) var(--ease), box-shadow var(--t) var(--ease),
+                  transform var(--t) var(--ease);
+      font-size: 14px;
+      color: var(--gray-700);
+      line-height: 1.5;
     }
 
-    .pub-thumb {
-      position: relative;
-      flex: 0 0 200px;
-      width: 200px;
-      height: 130px;
-      display: block;
-      border-radius: 4px;
+    .news-card:hover {
+      border-color: var(--sky-200);
+      box-shadow: var(--sh-md);
+      transform: translateX(4px);
+    }
+
+    .news-card a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .news-card a:hover { color: var(--blue-mid); }
+
+    .news-card a {
+      color: inherit;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .news-card a:hover {
+      color: var(--blue-mid);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .news-badge {
+      flex-shrink: 0;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: white;
+      background: var(--blue);
+      padding: 3px 9px;
+      border-radius: 5px;
+      letter-spacing: .025em;
+      white-space: nowrap;
+    }
+
+    /* ── PUBLICATIONS ────────────────────────── */
+    .pub-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .pub-card {
+      display: flex;
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--r);
+      box-shadow: var(--sh-sm);
       overflow: hidden;
-      box-shadow: 0 2px 10px rgba(26, 47, 90, 0.12);
-      transition: transform 0.2s, box-shadow 0.2s;
-      background: #fff;
+      transition: border-color var(--t) var(--ease), box-shadow var(--t) var(--ease),
+                  transform var(--t) var(--ease);
     }
 
-    .pub-thumb:hover {
+    .pub-card:hover {
+      border-color: var(--sky-200);
+      box-shadow: var(--sh-md);
       transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(26, 47, 90, 0.16);
     }
 
-    .pub-thumb img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      border: none;
-      object-fit: cover;
-      object-position: center;
-      background: #fff;
+    .pub-bar {
+      width: 4px;
+      flex-shrink: 0;
+      background: linear-gradient(to bottom, var(--blue), var(--blue-light));
     }
 
-    .pub-badge {
-      position: absolute;
-      top: 8px;
-      left: 8px;
-      background: #1a2f5a;
-      color: #fff;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      padding: 4px 8px;
-      border-radius: 3px;
-      line-height: 1;
-    }
-
-    .pub-content {
+    .pub-inner {
+      display: flex;
+      gap: 20px;
+      padding: 20px 20px 20px 18px;
+      align-items: flex-start;
       flex: 1;
       min-width: 0;
     }
 
-    .pub-title {
-      display: inline-block;
-      font-family: 'Source Serif 4', Georgia, serif;
-      font-size: 17px;
-      font-weight: 600;
-      line-height: 1.35;
-      color: #2b7a9e;
-      text-decoration: none;
-      margin-bottom: 8px;
+    .pub-thumb {
+      flex: 0 0 158px;
+      width: 158px;
+      height: 108px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: var(--sh-sm);
+      position: relative;
+      background: var(--gray-100);
+      display: block;
+      transition: box-shadow var(--t) var(--ease);
     }
 
-    .pub-title:hover {
-      color: #1e40af;
-      text-decoration: underline;
+    .pub-thumb:hover { box-shadow: var(--sh-md); }
+
+    .pub-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
+
+    .pub-venue-badge {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      background: var(--navy);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 7px;
+      border-radius: 4px;
+      letter-spacing: .04em;
+      line-height: 1.4;
+    }
+
+    .pub-body { flex: 1; min-width: 0; }
+
+    .pub-title {
+      font-family: var(--font-display);
+      font-size: 15.5px;
+      font-weight: 600;
+      color: var(--blue-deep);
+      text-decoration: none;
+      line-height: 1.4;
+      display: block;
+      margin-bottom: 8px;
+      transition: color var(--t) var(--ease);
+    }
+
+    .pub-title:hover { color: var(--blue-mid); }
 
     .pub-authors {
-      color: #444;
-      font-size: 14px;
-      line-height: 1.5;
-      margin-bottom: 6px;
+      font-size: 13px;
+      color: var(--gray-600);
+      margin-bottom: 4px;
+      line-height: 1.55;
     }
 
-    .pub-authors strong {
-      color: #111;
-      font-weight: 600;
-    }
+    .pub-authors strong { color: var(--gray-900); font-weight: 600; }
 
-    .pub-venue {
-      color: #555;
-      font-size: 14px;
+    .pub-venue-text {
+      font-size: 12.5px;
+      color: var(--gray-400);
       font-style: italic;
-      line-height: 1.5;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     .pub-links {
       display: flex;
-      gap: 8px;
+      gap: 7px;
       flex-wrap: wrap;
     }
 
     .pub-links a {
-      color: #111;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
       padding: 4px 12px;
-      border: 1.5px solid #222;
-      border-radius: 3px;
-      transition: all 0.15s;
-      background: #fff;
+      border: 1.5px solid var(--gray-300);
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray-700);
+      text-decoration: none;
+      transition: background var(--t) var(--ease), border-color var(--t) var(--ease),
+                  color var(--t) var(--ease), transform var(--t) var(--ease),
+                  box-shadow var(--t) var(--ease);
+      background: white;
     }
 
     .pub-links a:hover {
-      background: #1a2f5a;
-      border-color: #1a2f5a;
-      color: #fff;
-    }
-    
-    /* Projects */
-    .project {
-      margin-bottom: 20px;
-    }
-    
-    .project h3 {
-      font-size: 16px;
-      margin-bottom: 6px;
-    }
-    
-    .project p {
-      color: #555;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-    
-    /* News */
-    .news-list {
-      list-style: none;
-    }
-    
-    .news-list li {
-      margin-bottom: 12px;
-      padding-left: 20px;
-      position: relative;
-      color: #444;
-      font-size: 14px;
-    }
-    
-    .news-list li:before {
-      content: "▸";
-      position: absolute;
-      left: 0;
-      color: #1e40af;
-    }
-    
-    .news-date {
-      font-weight: 600;
-      color: #111;
-    }
-    
-    /* Version Toggle Button */
-    .version-toggle {
-      position: fixed;
-      bottom: 24px;
-      left: 24px;
-      z-index: 1000;
-      background: linear-gradient(135deg, #1e40af 0%, #0c4a6e 100%);
+      background: var(--navy);
+      border-color: var(--navy);
       color: white;
-      border: none;
-      width: 48px;
-      height: 48px;
-      padding: 0;
-      border-radius: 50%;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(30,64,175,0.3);
-      transition: all 0.2s;
+      transform: translateY(-1px);
+      box-shadow: 0 3px 10px rgba(8,15,34,.22);
+    }
+
+    .pub-links i { font-size: 13px; }
+
+    /* ── HONORS ──────────────────────────────── */
+    .honors-list {
+      list-style: none;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-direction: column;
+      gap: 9px;
     }
-    
-    .version-toggle:hover {
-      background: linear-gradient(135deg, #0c4a6e 0%, #1e40af 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(30,64,175,0.4);
+
+    .honors-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding: 12px 18px;
+      background: white;
+      border-radius: var(--r-sm);
+      border: 1px solid var(--gray-200);
+      font-size: 13.5px;
+      color: var(--gray-700);
+      line-height: 1.55;
+      box-shadow: var(--sh-sm);
+      transition: border-color var(--t) var(--ease), box-shadow var(--t) var(--ease);
     }
-    
-    .version-toggle i {
-      font-size: 22px;
+
+    .honors-list li:hover {
+      border-color: var(--sky-200);
+      box-shadow: var(--sh-md);
     }
-    
-    /* Chat Widget Styles */
+
+    .honors-list li::before {
+      content: '◆';
+      color: var(--blue-light);
+      font-size: 8px;
+      flex-shrink: 0;
+      position: relative;
+      top: -1px;
+    }
+
+    .honors-list strong { color: var(--blue); font-weight: 700; }
+
+    /* ── CHAT FAB ────────────────────────────── */
     .chat-fab {
       position: fixed;
       right: 24px;
       bottom: 24px;
       z-index: 2000;
-      width: 56px;
-      height: 56px;
+      width: 54px;
+      height: 54px;
       border-radius: 50%;
       border: none;
       cursor: pointer;
-      font-size: 24px;
-      background: linear-gradient(135deg, #1e40af 0%, #0c4a6e 100%);
+      background: linear-gradient(135deg, var(--blue-mid), var(--blue-deep));
       color: white;
-      box-shadow: 0 4px 12px rgba(30,64,175,0.3);
-      transition: all 0.2s;
+      box-shadow: 0 4px 20px rgba(30,64,175,.38);
+      transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 21px;
     }
-    
+
     .chat-fab:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(30,64,175,0.4);
+      transform: translateY(-3px) scale(1.06);
+      box-shadow: 0 8px 28px rgba(30,64,175,.48);
     }
-    
+
+    /* ── CHAT WIDGET ─────────────────────────── */
     .chat-widget {
       position: fixed;
       right: 24px;
-      bottom: 92px;
+      bottom: 90px;
       z-index: 2000;
       width: min(400px, calc(100vw - 48px));
-      max-height: min(70vh, 600px);
+      max-height: min(70vh, 590px);
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      padding: 20px;
       border-radius: 20px;
       background: white;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-      border: 1px solid #e5e5e5;
-      transform: translateY(8px);
+      box-shadow: 0 8px 40px rgba(8,15,34,.16);
+      border: 1px solid var(--gray-200);
+      transform: translateY(12px) scale(.97);
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.2s, transform 0.2s;
+      transition: opacity .22s var(--ease), transform .22s var(--ease);
+      overflow: hidden;
     }
-    
+
     .chat-widget.open {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
       pointer-events: auto;
     }
-    
-    .chat-header {
+
+    .chat-head {
+      background: linear-gradient(135deg, var(--navy), var(--blue-deep));
+      padding: 15px 18px;
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      padding-bottom: 12px;
-      border-bottom: 1px solid #e5e5e5;
-      flex-shrink: 0;
-    }
-    
-    .chat-title {
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .chat-title strong {
-      font-size: 16px;
-      color: #111;
-    }
-    
-    .chat-title .chat-sub {
-      font-size: 12px;
-      color: #666;
-      display: block;
-      margin-top: 2px;
-    }
-    
-    .chat-close {
-      border: none;
-      background: #f5f5f5;
-      border-radius: 6px;
-      width: 28px;
-      height: 28px;
-      cursor: pointer;
-      font-size: 16px;
-      color: #666;
-    }
-    
-    .chat-close:hover {
-      background: #e5e5e5;
-    }
-    
-    .chat-log {
-      overflow-y: auto;
-      padding: 12px;
-      background: #f9f9f9;
-      border-radius: 10px;
-      flex: 1;
-      min-height: 200px;
-    }
-    
-    .message {
-      padding: 10px 14px;
-      border-radius: 10px;
-      margin: 8px 0;
-      max-width: 85%;
-      font-size: 14px;
-      line-height: 1.5;
-      word-wrap: break-word;
-    }
-    
-    .user-message {
-      margin-left: auto;
-      background: linear-gradient(135deg, #1e40af 0%, #0c4a6e 100%);
-      color: white;
-    }
-    
-    .bot-message {
-      margin-right: auto;
-      background: white;
-      border: 1px solid #e5e5e5;
-      color: #333;
-    }
-    
-    .bot-message p {
-      margin: 8px 0;
-    }
-    
-    .bot-message ul, .bot-message ol {
-      margin: 8px 0 8px 18px;
-    }
-    
-    .bot-message a {
-      color: #1e40af;
-      text-decoration: underline;
-      font-weight: 500;
-    }
-    
-    .chat-suggestions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      overflow-x: auto;
-      padding: 4px 0;
-      flex-shrink: 0;
-    }
-    
-    .suggestion-btn {
-      border: 1px solid #ddd;
-      background: white;
-      border-radius: 20px;
-      padding: 6px 12px;
-      font-size: 12px;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.2s;
-    }
-    
-    .suggestion-btn:hover {
-      background: #f5f5f5;
-      border-color: #1e40af;
-      color: #1e40af;
-    }
-    
-    .chat-form {
-      display: flex;
-      gap: 8px;
       align-items: center;
       flex-shrink: 0;
     }
-    
-    #chat-input {
-      padding: 10px 14px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font-family: inherit;
-      font-size: 14px;
-      flex: 1;
-      min-width: 0;
+
+    .chat-head-info strong {
+      display: block;
+      color: white;
+      font-size: 14.5px;
+      font-weight: 600;
     }
-    
-    #chat-input:focus {
-      outline: none;
-      border-color: #1e40af;
-      box-shadow: 0 0 0 3px rgba(30,64,175,0.1);
+
+    .chat-head-info span {
+      font-size: 11.5px;
+      color: rgba(255,255,255,.58);
+      display: block;
+      margin-top: 2px;
     }
-    
-    .send-btn, .reset-btn {
+
+    .chat-x {
       border: none;
+      background: rgba(255,255,255,.12);
       border-radius: 8px;
-      padding: 10px 16px;
-      font-weight: 500;
+      width: 29px;
+      height: 29px;
       cursor: pointer;
       font-size: 14px;
-      transition: all 0.2s;
+      color: rgba(255,255,255,.75);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--t) var(--ease);
     }
-    
-    .send-btn {
-      background: linear-gradient(135deg, #1e40af 0%, #0c4a6e 100%);
+
+    .chat-x:hover { background: rgba(255,255,255,.22); color: white; }
+
+    .chat-log {
+      overflow-y: auto;
+      padding: 14px;
+      background: var(--gray-50);
+      flex: 1;
+      min-height: 180px;
+    }
+
+    .msg {
+      padding: 9px 13px;
+      border-radius: 12px;
+      margin: 8px 0;
+      max-width: 86%;
+      font-size: 13.5px;
+      line-height: 1.55;
+      word-wrap: break-word;
+    }
+
+    .msg-user {
+      margin-left: auto;
+      background: linear-gradient(135deg, var(--blue-mid), var(--blue-deep));
       color: white;
+      border-radius: 12px 12px 3px 12px;
     }
-    
-    .send-btn:hover {
-      background: linear-gradient(135deg, #0c4a6e 0%, #1e40af 100%);
+
+    .msg-bot {
+      margin-right: auto;
+      background: white;
+      border: 1px solid var(--gray-200);
+      color: var(--gray-800);
+      border-radius: 12px 12px 12px 3px;
+    }
+
+    .msg-bot p { margin: 5px 0; }
+    .msg-bot ul, .msg-bot ol { margin: 5px 0 5px 18px; }
+    .msg-bot a { color: var(--blue); text-decoration: underline; }
+
+    .chat-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 9px 14px;
+      border-top: 1px solid var(--gray-100);
+      background: white;
+      flex-shrink: 0;
+    }
+
+    .chat-chip-btn {
+      border: 1.5px solid var(--gray-200);
+      background: white;
+      border-radius: 100px;
+      padding: 4px 12px;
+      font-size: 11.5px;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all var(--t) var(--ease);
+      color: var(--gray-700);
+      font-family: var(--font-body);
+    }
+
+    .chat-chip-btn:hover {
+      background: var(--sky-50);
+      border-color: var(--blue-light);
+      color: var(--blue);
+    }
+
+    .chat-form {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+      padding: 13px 14px;
+      border-top: 1px solid var(--gray-200);
+      background: white;
+      flex-shrink: 0;
+    }
+
+    #chat-input {
+      flex: 1;
+      padding: 9px 13px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 10px;
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      background: var(--gray-50);
+      color: var(--gray-800);
+      min-width: 0;
+      transition: border-color var(--t) var(--ease), box-shadow var(--t) var(--ease);
+    }
+
+    #chat-input:focus {
+      outline: none;
+      border-color: var(--blue-light);
+      background: white;
+      box-shadow: 0 0 0 3px rgba(59,130,246,.12);
+    }
+
+    .chat-send {
+      padding: 9px 15px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--blue-mid), var(--blue-deep));
+      color: white;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease);
+      white-space: nowrap;
+    }
+
+    .chat-send:hover {
       transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(30,64,175,.32);
     }
-    
-    .reset-btn {
-      background: #f5f5f5;
-      color: #333;
+
+    .chat-reset {
+      padding: 9px 11px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 10px;
+      background: white;
+      color: var(--gray-500);
+      font-size: 12.5px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: all var(--t) var(--ease);
     }
-    
-    .reset-btn:hover {
-      background: #e5e5e5;
+
+    .chat-reset:hover { background: var(--gray-100); color: var(--gray-700); }
+
+    /* ── VERSION TOGGLE ──────────────────────── */
+    .ver-btn {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      z-index: 1000;
+      background: white;
+      color: var(--blue);
+      border: 1.5px solid var(--gray-200);
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: var(--sh-md);
+      transition: all var(--t) var(--ease);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    
+
+    .ver-btn:hover {
+      background: var(--sky-50);
+      border-color: var(--blue-light);
+      transform: translateY(-2px);
+      box-shadow: var(--sh-lg);
+    }
+
+    .ver-btn i { font-size: 20px; }
+
+    /* ── RESPONSIVE ──────────────────────────── */
     @media (max-width: 768px) {
-      .container {
-        padding: 24px 16px 60px;
-      }
-      
-      header {
-        padding: 40px 0 30px;
-      }
-      
-      h1 {
-        font-size: 28px;
-      }
-
-      .publication {
-        flex-direction: column;
-        gap: 14px;
-      }
-
-      .pub-thumb {
-        flex: none;
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 68px 24px 58px; }
+      .hero-inner {
         width: 100%;
-        max-width: 280px;
-        height: 170px;
+        max-width: 100%;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 32px;
       }
+      .hero-tagline { justify-content: center; }
+      .hero-links { justify-content: center; }
+      .hero-photo img { width: 180px; height: 180px; }
+      main { padding: 48px 20px 80px; }
+      .interests-grid { grid-template-columns: repeat(2, 1fr); }
+      .pub-inner { flex-direction: column; gap: 14px; }
+      .pub-thumb { width: 100%; max-width: 260px; height: 160px; flex: none; }
+      .chat-fab, .chat-x { right: 16px; bottom: 16px; }
+      .chat-widget { right: 16px; bottom: 82px; }
+      .ver-btn { left: 16px; bottom: 16px; }
+    }
 
-      .interests-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
-      .version-toggle {
-        left: 16px;
-        bottom: 16px;
-        width: 44px;
-        height: 44px;
-      }
-      
-      .chat-fab {
-        right: 16px;
-        bottom: 16px;
-      }
-      
-      .chat-widget {
-        right: 16px;
-        bottom: 84px;
-      }
+    @media (max-width: 480px) {
+      .interests-grid { grid-template-columns: 1fr 1fr; }
+      .hero h1 { font-size: 38px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Kiana Hooshanfar</h1>
-      <p class="subtitle">AI Researcher | Computer Vision | Saliency Prediction</p>
-      <div class="social-links">
-        <a href="mailto:k.hooshanfar02@gmail.com" title="Email">
-          <i class='bx bx-envelope'></i> Email
-        </a>
-        <a href="https://scholar.google.com/citations?user=-qqc3AUAAAAJ&hl=en" target="_blank" rel="noopener">
-          <i class='bx bxs-graduation'></i> Scholar
-        </a>
-        <a href="https://github.com/K-Hooshanfar" target="_blank" rel="noopener">
-          <i class='bx bxl-github'></i> GitHub
-        </a>
-        <a href="https://www.linkedin.com/in/kiana-hooshanfar/" target="_blank" rel="noopener">
-          <i class='bx bxl-linkedin'></i> LinkedIn
-        </a>
+
+  <!-- ── NAV ──────────────────────────── -->
+  <nav id="main-nav">
+    <a href="#" class="nav-brand">
+      <span class="nav-name">Kiana Hooshanfar</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#research-interests">Research</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#honors">Honors</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── HERO ─────────────────────────── -->
+  <div class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <div class="hero-body">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          AI Researcher
+        </div>
+        <h1>Kiana Hooshanfar</h1>
+        <div class="hero-tagline">
+          <span>Computer Vision</span>
+          <span class="tag-sep">·</span>
+          <span>Saliency Prediction</span>
+          <span class="tag-sep">·</span>
+          <span>Large Language Models</span>
+        </div>
+        <div class="hero-links">
+          <a href="mailto:k.hooshanfar02@gmail.com">
+            <i class='bx bx-envelope'></i> Email
+          </a>
+          <a href="https://scholar.google.com/citations?user=-qqc3AUAAAAJ&hl=en" target="_blank" rel="noopener">
+            <i class='bx bxs-graduation'></i> Scholar
+          </a>
+          <a href="https://github.com/K-Hooshanfar" target="_blank" rel="noopener">
+            <i class='bx bxl-github'></i> GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/kiana-hooshanfar/" target="_blank" rel="noopener">
+            <i class='bx bxl-linkedin'></i> LinkedIn
+          </a>
+        </div>
       </div>
-    </header>
-    
+      <div class="hero-photo">
+        <img src="team-2.jpg" alt="Kiana Hooshanfar">
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MAIN ─────────────────────────── -->
+  <main>
+
+    <!-- About -->
     <section id="about">
-      <h2>About</h2>
-      <div class="about-content">
+      <div class="sec-head">
+        <h2>About</h2>
+        <div class="sec-rule"></div>
+      </div>
+      <div class="about-text">
         <p>Hi! I'm Kiana - an AI researcher and developer working on computer vision, saliency, and generative models. I hold a B.Sc. from <strong>IUST</strong> and recently defended my M.Sc. at the <strong>University of Tehran</strong>. I collaborate with the <strong>Machine Learning & Computational Modeling Lab</strong> and build real-world AI systems at <strong>AVIR AI</strong>.</p>
         <p>My research focuses on visual attention modeling, multimodal learning, and human-computer interaction. I'm always happy to discuss research ideas and collaborations.</p>
       </div>
     </section>
 
+    <!-- Research Interests -->
     <section id="research-interests">
-      <h2>Research Interests</h2>
+      <div class="sec-head">
+        <h2>Research Interests</h2>
+        <div class="sec-rule"></div>
+      </div>
       <div class="interests-grid">
-        <div class="interest-chip">Computer Vision</div>
-        <div class="interest-chip">Multimodal Learning</div>
-        <div class="interest-chip">Saliency Prediction</div>
-        <div class="interest-chip">Generative Models</div>
-        <div class="interest-chip">Vision-Language Models</div>
-        <div class="interest-chip">Human-Computer Interaction</div>
-        <div class="interest-chip">Large Language Models</div>
-        <div class="interest-chip">AI Agents</div>
-        <div class="interest-chip">Deep Learning</div>
+        <div class="chip">Computer Vision</div>
+        <div class="chip">Multimodal Learning</div>
+        <div class="chip">Saliency Prediction</div>
+        <div class="chip">Generative Models</div>
+        <div class="chip">Vision-Language Models</div>
+        <div class="chip">Human-Computer Interaction</div>
+        <div class="chip">Large Language Models</div>
+        <div class="chip">AI Agents</div>
+        <div class="chip">Deep Learning</div>
       </div>
     </section>
 
+    <!-- Education -->
     <section id="education">
-      <h2>Education</h2>
-
-      <div class="education-item">
-        <div class="edu-degree">M.Sc. in Electrical Engineering (Control Engineering)</div>
-        <div class="edu-meta">University of Tehran · Tehran, Iran · Sep 2022 – Feb 2025 </div>
-        <ul class="edu-details">
-          <li><strong>Thesis:</strong> <em>Design and Enhancement of Video Saliency Prediction Networks</em></li>
-          <li><strong>Advisors:</strong> Dr. Babak Nadjar Araabi, Dr. Ahmad Kalhor</li>
-          <li><strong>Core courses:</strong> Machine Learning, Deep Learning, Deep Generative Models, Game Theory</li>
-        </ul>
+      <div class="sec-head">
+        <h2>Education</h2>
+        <div class="sec-rule"></div>
       </div>
+      <div class="timeline">
 
-      <div class="education-item">
-        <div class="edu-degree">B.Sc. in Electrical Engineering (Control Engineering)</div>
-        <div class="edu-meta">Iran University of Science and Technology (IUST) · Tehran, Iran · Sep 2018 – Sep 2022 </div>
-        <ul class="edu-details">
-          <li><strong>Thesis:</strong> <em>Intelligent Control of a Robot Arm by Eye Tracking for People with Severe Speech and Motor Impairment (SSMI)</em></li>
-        </ul>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="edu-deg">M.Sc. in Electrical Engineering (Control Engineering)</div>
+          <div class="edu-meta">
+            <i class='bx bx-buildings'></i>
+            University of Tehran · Tehran, Iran · 2022 – 2025
+          </div>
+          <ul class="edu-list">
+            <li><strong>Thesis:</strong> <em>Design and Enhancement of Video Saliency Prediction Networks</em></li>
+            <li><strong>Advisors:</strong> Dr. Babak Nadjar Araabi, Dr. Ahmad Kalhor</li>
+            <li><strong>Core courses:</strong> Machine Learning, Deep Learning, Deep Generative Models, Game Theory</li>
+          </ul>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="edu-deg">B.Sc. in Electrical Engineering (Control Engineering)</div>
+          <div class="edu-meta">
+            <i class='bx bx-buildings'></i>
+            Iran University of Science &amp; Technology (IUST) · Tehran, Iran · 2018 – 2022
+          </div>
+          <ul class="edu-list">
+            <li><strong>Thesis:</strong> <em>Intelligent Control of a Robot Arm by Eye Tracking for People with Severe Speech and Motor Impairment (SSMI)</em></li>
+          </ul>
+        </div>
+
       </div>
     </section>
-    
+
+    <!-- News -->
     <section id="news">
-      <h2>News</h2>
-      <ul class="news-list">
-        <li><span class="news-date">[Jul 2025]</span> DTFSal accepted to BMVC 2025</li>
-        <li><span class="news-date">[May 2025]</span> Paper on brand visibility accepted to Discover Applied Sciences</li>
-        <li><span class="news-date">[Feb 2025]</span> Successfully defended Master's thesis at University of Tehran</li>
-        <li><span class="news-date">[May 2024]</span> Hybrid RAG paper accepted to ICWR 2024</li>
-        <li><span class="news-date">[Dec 2023]</span> Eye-tracking robotics paper accepted to ICRoM 2023</li>
-      </ul>
+      <div class="sec-head">
+        <h2>News</h2>
+        <div class="sec-rule"></div>
+      </div>
+      <div class="news-stack">
+        <div class="news-card"><span class="news-badge">Jul 2025</span> <a href="https://bmvc2025.bmva.org/proceedings/770/" target="_blank" rel="noopener">DTFSal accepted to BMVC 2025</a></div>
+        <div class="news-card"><span class="news-badge">May 2025</span> <a href="https://link.springer.com/article/10.1007/s42452-025-07043-9" target="_blank" rel="noopener">Paper on brand visibility accepted to Discover Applied Sciences</a></div>
+        <div class="news-card"><span class="news-badge">Feb 2025</span> Successfully defended Master's thesis at University of Tehran</div>
+        <div class="news-card"><span class="news-badge">May 2024</span> <a href="https://ieeexplore.ieee.org/abstract/document/10533345" target="_blank" rel="noopener">Hybrid RAG paper accepted to ICWR 2024</a></div>
+        <div class="news-card"><span class="news-badge">Dec 2023</span> <a href="https://ieeexplore.ieee.org/abstract/document/10412408/" target="_blank" rel="noopener">Eye-tracking robotics paper accepted to ICRoM 2023</a></div>
+      </div>
     </section>
-    
+
+    <!-- Publications -->
     <section id="publications">
-      <h2>Publications</h2>
+      <div class="sec-head">
+        <h2>Publications</h2>
+        <div class="sec-rule"></div>
+      </div>
+      <div class="pub-stack">
 
-      <article class="publication">
-        <a class="pub-thumb" href="https://bmvc2025.bmva.org/proceedings/770/" target="_blank" rel="noopener">
-          <img src="assets/publications/dtfsal.png" alt="DTFSal architecture overview">
-          <span class="pub-badge">BMVC'25</span>
-        </a>
-        <div class="pub-content">
-          <a class="pub-title" href="https://bmvc2025.bmva.org/proceedings/770/" target="_blank" rel="noopener">DTFSal: Audio-Visual Dynamic Token Fusion for Video Saliency Prediction</a>
-          <div class="pub-authors"><strong>Kiana Hooshanfar</strong>, Alireza Hosseini, Mona Ahmadian, Ahmad Kalhor, Babak N. Araabi</div>
-          <div class="pub-venue">36th British Machine Vision Conference (BMVC), 2025.</div>
-          <div class="pub-links">
-            <a href="https://bmvc2025.bmva.org/proceedings/770/" target="_blank" rel="noopener">PDF</a>
-            <a href="https://k-hooshanfar.github.io/dtfsal/" target="_blank" rel="noopener">Project</a>
+        <article class="pub-card">
+          <div class="pub-bar"></div>
+          <div class="pub-inner">
+            <a class="pub-thumb" href="https://bmvc2025.bmva.org/proceedings/770/" target="_blank" rel="noopener">
+              <img src="assets/publications/dtfsal.png" alt="DTFSal architecture">
+              <span class="pub-venue-badge">BMVC'25</span>
+            </a>
+            <div class="pub-body">
+              <a class="pub-title" href="https://bmvc2025.bmva.org/proceedings/770/" target="_blank" rel="noopener">DTFSal: Audio-Visual Dynamic Token Fusion for Video Saliency Prediction</a>
+              <div class="pub-authors"><strong>Kiana Hooshanfar</strong>, Alireza Hosseini, Mona Ahmadian, Ahmad Kalhor, Babak N. Araabi</div>
+              <div class="pub-venue-text">36th British Machine Vision Conference (BMVC), 2025.</div>
+              <div class="pub-links">
+                <a href="https://bmvc2025.bmva.org/proceedings/770/" target="_blank" rel="noopener"><i class='bx bx-file-blank'></i>PDF</a>
+                <a href="https://k-hooshanfar.github.io/dtfsal/" target="_blank" rel="noopener"><i class='bx bx-globe'></i>Project</a>
+              </div>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <article class="publication">
-        <a class="pub-thumb" href="https://link.springer.com/article/10.1007/s42452-025-07043-9" target="_blank" rel="noopener">
-          <img src="assets/publications/Saliency_Model_Schematic_green.png" alt="Brand visibility model schematic">
-          <span class="pub-badge">Discover'25</span>
-        </a>
-        <div class="pub-content">
-          <a class="pub-title" href="https://link.springer.com/article/10.1007/s42452-025-07043-9" target="_blank" rel="noopener">Brand Visibility in Packaging: A Deep Learning Approach for Logo Detection, Saliency-Map Prediction, and Logo Placement Analysis</a>
-          <div class="pub-authors">Alireza Hosseini, <strong>Kiana Hooshanfar</strong>, Pouria Omrani, Reza Toosi, Ramin Toosi, Zahra Ebrahimian, Mohammad Ali Akhaee</div>
-          <div class="pub-venue">Discover Applied Sciences, 2025.</div>
-          <div class="pub-links">
-            <a href="https://link.springer.com/article/10.1007/s42452-025-07043-9" target="_blank" rel="noopener">PDF</a>
-            <a href="https://github.com/Arhosseini77/Brand_Attention" target="_blank" rel="noopener">Code</a>
+        <article class="pub-card">
+          <div class="pub-bar"></div>
+          <div class="pub-inner">
+            <a class="pub-thumb" href="https://link.springer.com/article/10.1007/s42452-025-07043-9" target="_blank" rel="noopener">
+              <img src="assets/publications/Saliency_Model_Schematic_green.png" alt="Brand visibility schematic">
+              <span class="pub-venue-badge">Discover'25</span>
+            </a>
+            <div class="pub-body">
+              <a class="pub-title" href="https://link.springer.com/article/10.1007/s42452-025-07043-9" target="_blank" rel="noopener">Brand Visibility in Packaging: A Deep Learning Approach for Logo Detection, Saliency-Map Prediction, and Logo Placement Analysis</a>
+              <div class="pub-authors">Alireza Hosseini, <strong>Kiana Hooshanfar</strong>, Pouria Omrani, Reza Toosi, Ramin Toosi, Zahra Ebrahimian, Mohammad Ali Akhaee</div>
+              <div class="pub-venue-text">Discover Applied Sciences, 2025.</div>
+              <div class="pub-links">
+                <a href="https://link.springer.com/article/10.1007/s42452-025-07043-9" target="_blank" rel="noopener"><i class='bx bx-file-blank'></i>PDF</a>
+                <a href="https://github.com/Arhosseini77/Brand_Attention" target="_blank" rel="noopener"><i class='bx bxl-github'></i>Code</a>
+              </div>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <article class="publication">
-        <a class="pub-thumb" href="https://ieeexplore.ieee.org/abstract/document/10533345" target="_blank" rel="noopener">
-          <img src="assets/publications/hybrid.drawio.png" alt="Hybrid RAG architecture">
-          <span class="pub-badge">ICWR'24</span>
-        </a>
-        <div class="pub-content">
-          <a class="pub-title" href="https://ieeexplore.ieee.org/abstract/document/10533345" target="_blank" rel="noopener">Hybrid Retrieval-Augmented Generation Approach for LLMs Query Response Enhancement</a>
-          <div class="pub-authors">Pouria Omrani, Alireza Hosseini, <strong>Kiana Hooshanfar</strong>, Zahra Ebrahimian, Ramin Toosi, Mohammad Ali Akhaee</div>
-          <div class="pub-venue">International Conference on Web Research (ICWR), 2024.</div>
-          <div class="pub-links">
-            <a href="https://ieeexplore.ieee.org/abstract/document/10533345" target="_blank" rel="noopener">PDF</a>
+        <article class="pub-card">
+          <div class="pub-bar"></div>
+          <div class="pub-inner">
+            <a class="pub-thumb" href="https://ieeexplore.ieee.org/abstract/document/10533345" target="_blank" rel="noopener">
+              <img src="assets/publications/hybrid.drawio.png" alt="Hybrid RAG architecture">
+              <span class="pub-venue-badge">ICWR'24</span>
+            </a>
+            <div class="pub-body">
+              <a class="pub-title" href="https://ieeexplore.ieee.org/abstract/document/10533345" target="_blank" rel="noopener">Hybrid Retrieval-Augmented Generation Approach for LLMs Query Response Enhancement</a>
+              <div class="pub-authors">Pouria Omrani, Alireza Hosseini, <strong>Kiana Hooshanfar</strong>, Zahra Ebrahimian, Ramin Toosi, Mohammad Ali Akhaee</div>
+              <div class="pub-venue-text">International Conference on Web Research (ICWR), 2024.</div>
+              <div class="pub-links">
+                <a href="https://ieeexplore.ieee.org/abstract/document/10533345" target="_blank" rel="noopener"><i class='bx bx-file-blank'></i>PDF</a>
+              </div>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <article class="publication">
-        <a class="pub-thumb" href="https://ieeexplore.ieee.org/abstract/document/10412408/" target="_blank" rel="noopener">
-          <img src="assets/publications/robot.png" alt="Eye-tracking robotics preview">
-          <span class="pub-badge">ICRoM'23</span>
-        </a>
-        <div class="pub-content">
-          <a class="pub-title" href="https://ieeexplore.ieee.org/abstract/document/10412408/" target="_blank" rel="noopener">Eye-Tracking Based Control of a Robotic Arm and Wheelchair for People with Severe Speech and Motor Impairment</a>
-          <div class="pub-authors">Maryam Asad Samani, <strong>Kiana Hooshanfar</strong>, Helia Shams Jey, Seyed Majid Esmailzadeh</div>
-          <div class="pub-venue">International Conference on Robotics and Mechatronics (ICRoM), 2023.</div>
-          <div class="pub-links">
-            <a href="https://ieeexplore.ieee.org/abstract/document/10412408/" target="_blank" rel="noopener">PDF</a>
-            <a href="https://github.com/K-Hooshanfar/EyeTrackRobot" target="_blank" rel="noopener">Code</a>
+        <article class="pub-card">
+          <div class="pub-bar"></div>
+          <div class="pub-inner">
+            <a class="pub-thumb" href="https://ieeexplore.ieee.org/abstract/document/10412408/" target="_blank" rel="noopener">
+              <img src="assets/publications/robot.png" alt="Eye-tracking robotics">
+              <span class="pub-venue-badge">ICRoM'23</span>
+            </a>
+            <div class="pub-body">
+              <a class="pub-title" href="https://ieeexplore.ieee.org/abstract/document/10412408/" target="_blank" rel="noopener">Eye-Tracking Based Control of a Robotic Arm and Wheelchair for People with Severe Speech and Motor Impairment</a>
+              <div class="pub-authors">Maryam Asad Samani, <strong>Kiana Hooshanfar</strong>, Helia Shams Jey, Seyed Majid Esmailzadeh</div>
+              <div class="pub-venue-text">International Conference on Robotics and Mechatronics (ICRoM), 2023.</div>
+              <div class="pub-links">
+                <a href="https://ieeexplore.ieee.org/abstract/document/10412408/" target="_blank" rel="noopener"><i class='bx bx-file-blank'></i>PDF</a>
+                <a href="https://github.com/K-Hooshanfar/EyeTrackRobot" target="_blank" rel="noopener"><i class='bx bxl-github'></i>Code</a>
+              </div>
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
+
+      </div>
     </section>
 
+    <!-- Honors -->
     <section id="honors">
-      <h2>Honors & Awards</h2>
-      <ul class="news-list">
+      <div class="sec-head">
+        <h2>Honors &amp; Awards</h2>
+        <div class="sec-rule"></div>
+      </div>
+      <ul class="honors-list">
         <li>Received direct M.Sc. admission offers from University of Tehran, Amirkabir University of Technology, and IUST</li>
         <li>Ranked <strong>2nd</strong> among 27 Control Engineering master's students, University of Tehran</li>
         <li>Ranked <strong>1st</strong> among 33 students in the Control specialization, IUST</li>
@@ -839,154 +1210,190 @@
         <li>Selected as Top Student of the Year, IUST (2020 and 2021)</li>
       </ul>
     </section>
-  </div>
-  
-  <!-- Version Toggle Button -->
-  <button class="version-toggle" onclick="window.location.href='creative_portfolio.html'" aria-label="Creative version">
+
+  </main>
+
+  <!-- ── VERSION TOGGLE ────────────────── -->
+  <button class="ver-btn" onclick="window.location.href='creative_portfolio.html'" aria-label="Creative version">
     <i class='bx bx-palette'></i>
   </button>
-  
-  <!-- Chat Widget -->
-  <button id="chat-toggle" class="chat-fab" aria-label="Chat">💬</button>
-  
+
+  <!-- ── CHAT ──────────────────────────── -->
+  <button id="chat-toggle" class="chat-fab" aria-label="Chat with me">
+    <i class='bx bx-chat'></i>
+  </button>
+
   <div id="chat-widget" class="chat-widget">
-    <div class="chat-header">
-      <div class="chat-title">
-        <strong>Chat with me</strong>
-        <span class="chat-sub">Ask about my résumé</span>
+    <div class="chat-head">
+      <div class="chat-head-info">
+        <strong>Ask about my résumé</strong>
+        <span>AI-powered assistant</span>
       </div>
-      <button id="chat-close" class="chat-close">✕</button>
+      <button id="chat-close" class="chat-x">✕</button>
     </div>
-    
+
     <div id="chat-log" class="chat-log"></div>
-    
-    <div class="chat-suggestions">
-      <button class="suggestion-btn" data-question="Give a brief overview of your education.">Education</button>
-      <button class="suggestion-btn" data-question="List your publications.">Publications</button>
-      <button class="suggestion-btn" data-question="What are your research interests?">Research</button>
-      <button class="suggestion-btn" data-question="What are your technical skills?">Skills</button>
+
+    <div class="chat-chips">
+      <button class="chat-chip-btn" data-q="Give a brief overview of your education.">Education</button>
+      <button class="chat-chip-btn" data-q="List your publications.">Publications</button>
+      <button class="chat-chip-btn" data-q="What are your research interests?">Research</button>
+      <button class="chat-chip-btn" data-q="What are your technical skills?">Skills</button>
     </div>
-    
+
     <form id="chat-form" class="chat-form">
-      <input id="chat-input" type="text" placeholder="Type a question…" autocomplete="off" />
-      <button type="submit" class="send-btn">Send</button>
-      <button type="button" id="reset-chat" class="reset-btn">Reset</button>
+      <input id="chat-input" type="text" placeholder="Ask me anything…" autocomplete="off" />
+      <button type="submit" class="chat-send">Send</button>
+      <button type="button" id="reset-chat" class="chat-reset">Reset</button>
     </form>
   </div>
-  
+
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
-  
+
   <script>
-    // Chat widget
-    const KEY = "AIzaSyD9YBqWkFJ-IFB_";
-    const KEY1 = "goTWZhVcF4FE7Vt1v1A";
-    const GEMINI_API_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + KEY + KEY1;
-    
-    let resumeMarkdown = '';
+    /* ── NAV SCROLL ── */
+    const nav = document.getElementById('main-nav');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const sections = document.querySelectorAll('main section[id]');
+    const NAV_OFFSET = 76;
+
+    function sectionTop(section) {
+      return section.getBoundingClientRect().top + window.scrollY;
+    }
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const id = link.getAttribute('href').slice(1);
+        const target = document.getElementById(id);
+        if (!target) return;
+
+        e.preventDefault();
+        window.scrollTo({
+          top: sectionTop(target) - NAV_OFFSET,
+          behavior: 'smooth'
+        });
+        history.replaceState(null, '', '#' + id);
+      });
+    });
+
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 8);
+
+      let current = '';
+      sections.forEach(section => {
+        if (window.scrollY >= sectionTop(section) - NAV_OFFSET - 8) {
+          current = section.id;
+        }
+      });
+
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      });
+    }, { passive: true });
+
+    /* ── SCROLL ANIMATIONS ── */
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.07, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('section').forEach(s => io.observe(s));
+
+    /* ── CHAT ── */
+    const K  = 'AIzaSyD9YBqWkFJ-IFB_';
+    const K2 = 'goTWZhVcF4FE7Vt1v1A';
+    const API = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${K}${K2}`;
+
+    let resume = '';
     fetch('./resume.md')
-      .then(r => {
-        if (!r.ok) throw new Error(r.status);
-        return r.text();
-      })
-      .then(text => { resumeMarkdown = text; })
-      .catch(err => console.error('Could not load resume.md:', err));
-    
-    const chat = document.getElementById('chat-widget');
-    const fab = document.getElementById('chat-toggle');
-    const close = document.getElementById('chat-close');
-    const log = document.getElementById('chat-log');
-    const form = document.getElementById('chat-form');
-    const input = document.getElementById('chat-input');
-    const reset = document.getElementById('reset-chat');
-    
-    function setOpen(isOpen) {
-      chat.classList.toggle('open', isOpen);
-      if (isOpen) setTimeout(() => input?.focus(), 0);
-    }
-    
-    fab.addEventListener('click', () => setOpen(!chat.classList.contains('open')));
-    close.addEventListener('click', () => setOpen(false));
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
-    
-    function renderMarkdown(md) {
-      try {
-        const html = marked.parse(md, { breaks: true });
-        return DOMPurify.sanitize(html, { ADD_ATTR: ['target','rel'] });
-      } catch (e) {
-        return md.replace(/\n/g, '<br>');
-      }
-    }
-    
-    function appendMessage(text, who, asMarkdown = false) {
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+      .then(t => { resume = t; })
+      .catch(e => console.warn('resume.md not loaded:', e));
+
+    const chatEl = document.getElementById('chat-widget');
+    const fab    = document.getElementById('chat-toggle');
+    const closeB = document.getElementById('chat-close');
+    const log    = document.getElementById('chat-log');
+    const form   = document.getElementById('chat-form');
+    const inp    = document.getElementById('chat-input');
+    const resetB = document.getElementById('reset-chat');
+
+    const setOpen = v => {
+      chatEl.classList.toggle('open', v);
+      if (v) setTimeout(() => inp.focus(), 50);
+    };
+
+    fab.addEventListener('click',  () => setOpen(!chatEl.classList.contains('open')));
+    closeB.addEventListener('click', () => setOpen(false));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+
+    const md2html = txt => {
+      try { return DOMPurify.sanitize(marked.parse(txt, { breaks: true }), { ADD_ATTR: ['target','rel'] }); }
+      catch { return txt.replace(/\n/g,'<br>'); }
+    };
+
+    const addMsg = (text, who, isMarkdown = false) => {
       const d = document.createElement('div');
-      d.className = 'message ' + (who === 'user' ? 'user-message' : 'bot-message');
-      if (asMarkdown) d.innerHTML = renderMarkdown(text);
-      else d.textContent = text;
+      d.className = `msg ${who === 'user' ? 'msg-user' : 'msg-bot'}`;
+      isMarkdown ? (d.innerHTML = md2html(text)) : (d.textContent = text);
       log.appendChild(d);
       log.scrollTop = log.scrollHeight;
-    }
-    
-    appendMessage('Hi! Ask me anything about my résumé.', 'bot');
-    
-    document.querySelectorAll('.suggestion-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        input.value = btn.dataset.question || '';
+      return d;
+    };
+
+    addMsg('Hi! Ask me anything about my résumé.', 'bot');
+
+    document.querySelectorAll('.chat-chip-btn').forEach(b => {
+      b.addEventListener('click', () => {
+        inp.value = b.dataset.q || '';
         form.dispatchEvent(new Event('submit'));
       });
     });
-    
-    reset.addEventListener('click', () => {
-      log.innerHTML = '';
-      input.value = '';
-      appendMessage('Hi! Ask me anything about my résumé.', 'bot');
-    });
-    
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const userText = (input.value || '').trim();
-      if (!userText) return;
-      
-      appendMessage(userText, 'user');
-      input.value = '';
-      appendMessage('…', 'bot');
 
-      if (!resumeMarkdown) {
-        log.lastChild.textContent = 'Resume is still loading. Please try again in a moment.';
+    resetB.addEventListener('click', () => {
+      log.innerHTML = '';
+      inp.value = '';
+      addMsg('Hi! Ask me anything about my résumé.', 'bot');
+    });
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const text = inp.value.trim();
+      if (!text) return;
+      addMsg(text, 'user');
+      inp.value = '';
+      const waiting = addMsg('…', 'bot');
+
+      if (!resume) {
+        waiting.textContent = 'Resume is still loading - please try again in a moment.';
         return;
       }
-      
-      const prompt = `You are an AI assistant. Your knowledge is limited to the following résumé information:
 
-${resumeMarkdown}
+      const prompt = `You are an AI assistant. Your knowledge is strictly limited to the résumé below.
+If a question cannot be answered from this résumé, reply: "I'm sorry, I can only answer questions about my resume."
 
-If a question is asked that is not answered in the résumé, reply with:
-"I'm sorry, I can only answer questions about my resume."
+${resume}
 
-User: ${userText}
+User: ${text}
 Assistant:`;
-      
+
       try {
-        const response = await fetch(GEMINI_API_ENDPOINT, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
+        const res  = await fetch(API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
         });
-        
-        if (!response.ok) {
-          log.lastChild.textContent = "API error " + response.status;
-          return;
-        }
-        
-        const data = await response.json();
-        let reply = "No reply received.";
-        if (data?.candidates?.[0]?.content?.parts?.[0]?.text) {
-          reply = data.candidates[0].content.parts[0].text;
-        }
-        
-        log.lastChild.innerHTML = renderMarkdown(reply);
+        if (!res.ok) { waiting.textContent = `API error ${res.status}`; return; }
+        const data = await res.json();
+        const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text ?? 'No reply received.';
+        waiting.innerHTML = md2html(reply);
       } catch (err) {
-        log.lastChild.textContent = "Error: " + err.message;
+        waiting.textContent = `Error: ${err.message}`;
       }
     });
   </script>
