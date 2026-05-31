@@ -635,31 +635,14 @@
     const KEY1 = "goTWZhVcF4FE7Vt1v1A";
     const GEMINI_API_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + KEY + KEY1;
     
-    const resumeMarkdown = `
-**Resume of Kiana Hooshanfar**
-
-## 📚 Education
-- **M.Sc. in Electrical Engineering (Control)** - University of Tehran (2022-2025), GPA: 4/4
-- **B.Sc. in Electrical Engineering (Control)** - IUST (2018-2022), GPA: 3.83/4
-
-## 🔬 Research Interests
-Computer vision, Generative Models, Saliency Prediction, Vision Science, Human-computer interaction
-
-## 📄 Publications
-- **DTFSal** (BMVC 2025) - Audio-Visual Dynamic Token Fusion for Video Saliency
-- **Brand Visibility** (Discover Applied Sciences 2025) - Logo detection and saliency analysis
-- **Hybrid RAG** (ICWR 2024) - LLM Query Enhancement
-- **Eye-Tracking Robotics** (ICRoM 2023) - Assistive technology for SSMI
-
-## 🛠 Skills
-Python, PyTorch, TensorFlow, OpenCV, Computer Vision, Deep Learning, LLMs, OCR, TTS, ASR
-
-## 🌐 Contact
-- Email: k.hooshanfar02@gmail.com
-- LinkedIn: linkedin.com/in/kiana-hooshanfar
-- GitHub: github.com/K-Hooshanfar
-- Scholar: scholar.google.com/citations?user=-qqc3AUAAAAJ
-    `;
+    let resumeMarkdown = '';
+    fetch('./resume.md')
+      .then(r => {
+        if (!r.ok) throw new Error(r.status);
+        return r.text();
+      })
+      .then(text => { resumeMarkdown = text; })
+      .catch(err => console.error('Could not load resume.md:', err));
     
     const chat = document.getElementById('chat-widget');
     const fab = document.getElementById('chat-toggle');
@@ -719,6 +702,11 @@ Python, PyTorch, TensorFlow, OpenCV, Computer Vision, Deep Learning, LLMs, OCR, 
       appendMessage(userText, 'user');
       input.value = '';
       appendMessage('…', 'bot');
+
+      if (!resumeMarkdown) {
+        log.lastChild.textContent = 'Resume is still loading. Please try again in a moment.';
+        return;
+      }
       
       const prompt = `You are an AI assistant. Your knowledge is limited to the following résumé information:
 
