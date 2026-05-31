@@ -108,6 +108,142 @@
     .item h4 { margin: 0 0 6px; font-size: 18px; }
     .item .meta { font-size: 13px; color: var(--muted); }
 
+    /* Publications */
+    .pub-stack { display: flex; flex-direction: column; gap: 18px; }
+
+    .pub-card {
+      display: flex;
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 18px rgba(0,0,0,.06);
+      transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+    }
+
+    .pub-card:hover {
+      border-color: rgba(21,79,134,.22);
+      box-shadow: 0 10px 28px rgba(0,0,0,.1);
+      transform: translateY(-2px);
+    }
+
+    .pub-bar {
+      width: 4px;
+      flex-shrink: 0;
+      background: linear-gradient(to bottom, var(--blue-deeper), var(--blue));
+    }
+
+    .pub-inner {
+      display: flex;
+      gap: 18px;
+      padding: 18px;
+      align-items: flex-start;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .pub-thumb {
+      flex: 0 0 148px;
+      width: 148px;
+      height: 102px;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      background: #f3f6fa;
+      display: block;
+      box-shadow: 0 2px 10px rgba(0,0,0,.08);
+      transition: box-shadow .2s ease;
+    }
+
+    .pub-thumb:hover { box-shadow: 0 4px 16px rgba(0,0,0,.14); }
+
+    .pub-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .pub-venue-badge {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      background: var(--blue-deeper);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 7px;
+      border-radius: 4px;
+      letter-spacing: .04em;
+      line-height: 1.4;
+    }
+
+    .pub-body { flex: 1; min-width: 0; }
+
+    .pub-title {
+      display: block;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--blue-deeper);
+      text-decoration: none;
+      line-height: 1.4;
+      margin-bottom: 7px;
+      transition: color .2s ease;
+    }
+
+    .pub-title:hover { color: var(--blue); }
+
+    .pub-authors {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 4px;
+      line-height: 1.55;
+    }
+
+    .pub-authors strong { color: var(--text); font-weight: 600; }
+
+    .pub-venue-text {
+      font-size: 12.5px;
+      color: rgba(11,27,43,.55);
+      font-style: italic;
+      margin-bottom: 12px;
+    }
+
+    .pub-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pub-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 12px;
+      border: 1.5px solid rgba(0,0,0,.12);
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      background: #fff;
+      transition: background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
+    }
+
+    .pub-links a:hover {
+      background: var(--blue-deeper);
+      border-color: var(--blue-deeper);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .pub-links i { font-size: 13px; }
+
+    @media (max-width: 640px) {
+      .pub-inner { flex-direction: column; gap: 14px; }
+      .pub-thumb { width: 100%; max-width: 260px; height: 150px; flex: none; }
+    }
+
     form.contact { display: grid; gap: 12px; }
     .field { display: grid; gap: 6px; }
     .field input, .field textarea { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(0,0,0,.12); font: inherit; }
@@ -385,41 +521,83 @@
       <!-- Publications -->
       <section id="publications" class="section-card">
         <h3>Publications</h3>
-        <div class="grid">
-          <article class="item">
-            <h4>DTFSal: Audio-Visual Dynamic Token Fusion for Video Saliency Prediction (BMVC, 2025)</h4>
-            <div class="meta">
-              <strong>Kiana Hooshanfar</strong>, Alireza Hosseini, Ahmad Kalhor, Babak Nadjar Araabi ·
-              <a href="https://bmvc2025.bmva.org/proceedings/770/" target="_blank" rel="noopener">Paper</a> ·
-              <a href="https://k-hooshanfar.github.io/dtfsal/" target="_blank" rel="noopener">Project Page</a>
+        <div class="pub-stack">
+
+          <article class="pub-card">
+            <div class="pub-bar"></div>
+            <div class="pub-inner">
+              <a class="pub-thumb" href="https://bmvc2025.bmva.org/proceedings/770/" target="_blank" rel="noopener">
+                <img src="assets/publications/dtfsal.png" alt="DTFSal architecture">
+                <span class="pub-venue-badge">BMVC'25</span>
+              </a>
+              <div class="pub-body">
+                <a class="pub-title" href="https://bmvc2025.bmva.org/proceedings/770/" target="_blank" rel="noopener">DTFSal: Audio-Visual Dynamic Token Fusion for Video Saliency Prediction</a>
+                <div class="pub-authors"><strong>Kiana Hooshanfar</strong>, Alireza Hosseini, Mona Ahmadian, Ahmad Kalhor, Babak N. Araabi</div>
+                <div class="pub-venue-text">36th British Machine Vision Conference (BMVC), 2025.</div>
+                <div class="pub-links">
+                  <a href="https://bmvc2025.bmva.org/proceedings/770/" target="_blank" rel="noopener"><i class='bx bx-file-blank'></i> Paper</a>
+                  <a href="https://k-hooshanfar.github.io/dtfsal/" target="_blank" rel="noopener"><i class='bx bx-globe'></i> Project</a>
+                </div>
+              </div>
             </div>
           </article>
 
-          <article class="item">
-            <h4>Brand visibility in packaging: a deep learning approach for logo detection, saliency-map prediction, and logo placement analysis (Discover Applied Sciences, 2025)</h4>
-            <div class="meta">
-              Alireza Hosseini, <strong>Kiana Hooshanfar</strong>, Pouria Omrani, Reza Toosi, Ramin Toosi, Zahra Ebrahimian, Mohammad Ali Akhaee
-              <a href="https://link.springer.com/article/10.1007/s42452-025-07043-9" target="_blank" rel="noopener">Paper</a> ·
-              <a href="https://github.com/Arhosseini77/Brand_Attention" target="_blank" rel="noopener">GitHub</a>
+          <article class="pub-card">
+            <div class="pub-bar"></div>
+            <div class="pub-inner">
+              <a class="pub-thumb" href="https://link.springer.com/article/10.1007/s42452-025-07043-9" target="_blank" rel="noopener">
+                <img src="assets/publications/Saliency_Model_Schematic_green.png" alt="Brand visibility schematic">
+                <span class="pub-venue-badge">Discover'25</span>
+              </a>
+              <div class="pub-body">
+                <a class="pub-title" href="https://link.springer.com/article/10.1007/s42452-025-07043-9" target="_blank" rel="noopener">Brand Visibility in Packaging: A Deep Learning Approach for Logo Detection, Saliency-Map Prediction, and Logo Placement Analysis</a>
+                <div class="pub-authors">Alireza Hosseini, <strong>Kiana Hooshanfar</strong>, Pouria Omrani, Reza Toosi, Ramin Toosi, Zahra Ebrahimian, Mohammad Ali Akhaee</div>
+                <div class="pub-venue-text">Discover Applied Sciences, 2025.</div>
+                <div class="pub-links">
+                  <a href="https://link.springer.com/article/10.1007/s42452-025-07043-9" target="_blank" rel="noopener"><i class='bx bx-file-blank'></i> Paper</a>
+                  <a href="https://github.com/Arhosseini77/Brand_Attention" target="_blank" rel="noopener"><i class='bx bxl-github'></i> Code</a>
+                </div>
+              </div>
             </div>
           </article>
 
-          <article class="item">
-            <h4>Hybrid Retrieval-Augmented Generation Approach for LLMs Query Response Enhancement (ICWR 2024)</h4>
-            <div class="meta">
-              Pouria Omrani, Alireza Hosseini, <strong>Kiana Hooshanfar</strong>, Zahra Ebrahimian, Ramin Toosi, Mohammad Ali Akhaee
-              <a href="https://ieeexplore.ieee.org/abstract/document/10533345" target="_blank" rel="noopener">Paper</a>
+          <article class="pub-card">
+            <div class="pub-bar"></div>
+            <div class="pub-inner">
+              <a class="pub-thumb" href="https://ieeexplore.ieee.org/abstract/document/10533345" target="_blank" rel="noopener">
+                <img src="assets/publications/hybrid.drawio.png" alt="Hybrid RAG architecture">
+                <span class="pub-venue-badge">ICWR'24</span>
+              </a>
+              <div class="pub-body">
+                <a class="pub-title" href="https://ieeexplore.ieee.org/abstract/document/10533345" target="_blank" rel="noopener">Hybrid Retrieval-Augmented Generation Approach for LLMs Query Response Enhancement</a>
+                <div class="pub-authors">Pouria Omrani, Alireza Hosseini, <strong>Kiana Hooshanfar</strong>, Zahra Ebrahimian, Ramin Toosi, Mohammad Ali Akhaee</div>
+                <div class="pub-venue-text">International Conference on Web Research (ICWR), 2024.</div>
+                <div class="pub-links">
+                  <a href="https://ieeexplore.ieee.org/abstract/document/10533345" target="_blank" rel="noopener"><i class='bx bx-file-blank'></i> Paper</a>
+                </div>
+              </div>
             </div>
           </article>
 
-          <article class="item">
-            <h4>Eye-Tracking Based Control of a Robotic Arm and Wheelchair for People with Severe Speech and Motor Impairment (SSMI) (ICRoM 2023)</h4>
-            <div class="meta">
-              Maryam Asad Samani, <strong>Kiana Hooshanfar</strong>, Helia Shams Jey, Seyed Majid Esmailzadeh
-              <a href="https://ieeexplore.ieee.org/abstract/document/10412408/" target="_blank" rel="noopener">Paper</a> ·
-              <a href="https://github.com/K-Hooshanfar/EyeTrackRobot" target="_blank" rel="noopener">GitHub</a>
+          <article class="pub-card">
+            <div class="pub-bar"></div>
+            <div class="pub-inner">
+              <a class="pub-thumb" href="https://ieeexplore.ieee.org/abstract/document/10412408/" target="_blank" rel="noopener">
+                <img src="assets/publications/robot.png" alt="Eye-tracking robotics">
+                <span class="pub-venue-badge">ICRoM'23</span>
+              </a>
+              <div class="pub-body">
+                <a class="pub-title" href="https://ieeexplore.ieee.org/abstract/document/10412408/" target="_blank" rel="noopener">Eye-Tracking Based Control of a Robotic Arm and Wheelchair for People with Severe Speech and Motor Impairment</a>
+                <div class="pub-authors">Maryam Asad Samani, <strong>Kiana Hooshanfar</strong>, Helia Shams Jey, Seyed Majid Esmailzadeh</div>
+                <div class="pub-venue-text">International Conference on Robotics and Mechatronics (ICRoM), 2023.</div>
+                <div class="pub-links">
+                  <a href="https://ieeexplore.ieee.org/abstract/document/10412408/" target="_blank" rel="noopener"><i class='bx bx-file-blank'></i> Paper</a>
+                  <a href="https://github.com/K-Hooshanfar/EyeTrackRobot" target="_blank" rel="noopener"><i class='bx bxl-github'></i> Code</a>
+                </div>
+              </div>
             </div>
           </article>
+
         </div>
       </section>
 
@@ -498,7 +676,6 @@
           <li><strong>Feb 2025</strong> — Defended Master’s thesis at the University of Tehran.</li>
           <li><strong>May 2024</strong> — <strong>Hybrid RAG Approach for LLMs</strong> accepted to <strong>ICWR 2024</strong>.</li>
           <li><strong>Dec 2023</strong> — <strong>Eye-Tracking Based Control of a Robotic Arm and Wheelchair</strong> accepted to <strong>ICRoM 2023</strong>.</li>
-
         </ul>
       </section>
 
