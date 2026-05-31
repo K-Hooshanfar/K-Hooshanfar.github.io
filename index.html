@@ -9,10 +9,20 @@
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
   
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-card: #fff;
+      --border-lt: #e8edf3;
+      --primary: #1e40af;
+      --accent: #2563eb;
+      --r-sm: 8px;
+      --sh-sm: 0 2px 8px rgba(26, 47, 90, 0.06);
+      --sh-md: 0 6px 18px rgba(26, 47, 90, 0.12);
+    }
     
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -131,62 +141,212 @@
       line-height: 1.7;
       color: #444;
     }
-    
-    /* Publications */
-    .publication {
-      margin-bottom: 24px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid #eee;
+
+    /* Research Interests */
+    .interests-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
     }
-    
-    .publication:last-child {
+
+    .interest-chip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 56px;
+      height: 100%;
+      padding: 12px 14px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-lt);
+      border-radius: var(--r-sm);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--primary);
+      text-align: center;
+      cursor: default;
+      transition: all .2s ease;
+      box-shadow: var(--sh-sm);
+      line-height: 1.35;
+    }
+
+    .interest-chip:hover {
+      border-color: var(--accent);
+      background: rgba(30, 64, 175, 0.04);
+      transform: translateY(-2px);
+      box-shadow: var(--sh-md);
+    }
+
+    /* Education */
+    .education-item {
+      margin-bottom: 28px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid #e8edf3;
+    }
+
+    .education-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
       border-bottom: none;
     }
-    
-    .pub-title {
+
+    .edu-degree {
+      font-size: 16px;
       font-weight: 600;
       color: #111;
       margin-bottom: 6px;
     }
-    
-    .pub-authors {
-      color: #666;
-      font-size: 14px;
-      margin-bottom: 6px;
-    }
-    
-    .pub-authors strong {
-      color: #111;
-    }
-    
-    .pub-venue {
+
+    .edu-meta {
       color: #1e40af;
       font-size: 14px;
       font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .edu-details {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .edu-details li {
+      position: relative;
+      padding-left: 16px;
+      margin-bottom: 6px;
+      color: #444;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .edu-details li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #1e40af;
+      font-weight: 700;
+    }
+    
+    /* Publications */
+    .publication {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      margin-bottom: 32px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid #e8edf3;
+    }
+
+    .publication:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .pub-thumb {
+      position: relative;
+      flex: 0 0 200px;
+      width: 200px;
+      height: 130px;
+      display: block;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(26, 47, 90, 0.12);
+      transition: transform 0.2s, box-shadow 0.2s;
+      background: #fff;
+    }
+
+    .pub-thumb:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(26, 47, 90, 0.16);
+    }
+
+    .pub-thumb img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: none;
+      object-fit: cover;
+      object-position: center;
+      background: #fff;
+    }
+
+    .pub-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: #1a2f5a;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 4px 8px;
+      border-radius: 3px;
+      line-height: 1;
+    }
+
+    .pub-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .pub-title {
+      display: inline-block;
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 1.35;
+      color: #2b7a9e;
+      text-decoration: none;
+      margin-bottom: 8px;
+    }
+
+    .pub-title:hover {
+      color: #1e40af;
+      text-decoration: underline;
+    }
+
+    .pub-authors {
+      color: #444;
+      font-size: 14px;
+      line-height: 1.5;
       margin-bottom: 6px;
     }
-    
+
+    .pub-authors strong {
+      color: #111;
+      font-weight: 600;
+    }
+
+    .pub-venue {
+      color: #555;
+      font-size: 14px;
+      font-style: italic;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
     .pub-links {
       display: flex;
-      gap: 12px;
+      gap: 8px;
       flex-wrap: wrap;
-      margin-top: 8px;
     }
-    
+
     .pub-links a {
-      color: #1e40af;
+      color: #111;
       text-decoration: none;
-      font-size: 14px;
-      padding: 4px 10px;
-      border: 1px solid #1e40af;
-      border-radius: 4px;
-      transition: all 0.2s;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 4px 12px;
+      border: 1.5px solid #222;
+      border-radius: 3px;
+      transition: all 0.15s;
+      background: #fff;
     }
-    
+
     .pub-links a:hover {
-      background: #1e40af;
-      color: white;
-      transform: translateY(-1px);
+      background: #1a2f5a;
+      border-color: #1a2f5a;
+      color: #fff;
     }
     
     /* Projects */
@@ -239,16 +399,16 @@
       background: linear-gradient(135deg, #1e40af 0%, #0c4a6e 100%);
       color: white;
       border: none;
-      padding: 12px 20px;
-      border-radius: 8px;
+      width: 48px;
+      height: 48px;
+      padding: 0;
+      border-radius: 50%;
       cursor: pointer;
-      font-size: 14px;
-      font-weight: 500;
       box-shadow: 0 4px 12px rgba(30,64,175,0.3);
       transition: all 0.2s;
       display: flex;
       align-items: center;
-      gap: 8px;
+      justify-content: center;
     }
     
     .version-toggle:hover {
@@ -258,7 +418,7 @@
     }
     
     .version-toggle i {
-      font-size: 16px;
+      font-size: 22px;
     }
     
     /* Chat Widget Styles */
@@ -488,12 +648,28 @@
       h1 {
         font-size: 28px;
       }
+
+      .publication {
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .pub-thumb {
+        flex: none;
+        width: 100%;
+        max-width: 280px;
+        height: 170px;
+      }
+
+      .interests-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
       
       .version-toggle {
         left: 16px;
         bottom: 16px;
-        padding: 10px 16px;
-        font-size: 13px;
+        width: 44px;
+        height: 44px;
       }
       
       .chat-fab {
@@ -536,47 +712,41 @@
         <p>My research focuses on visual attention modeling, multimodal learning, and human-computer interaction. I'm always happy to discuss research ideas and collaborations.</p>
       </div>
     </section>
-    
-    <section id="publications">
-      <h2>Publications</h2>
-      
-      <div class="publication">
-        <div class="pub-title">DTFSal: Audio-Visual Dynamic Token Fusion for Video Saliency Prediction</div>
-        <div class="pub-authors"><strong>Kiana Hooshanfar</strong>, Alireza Hosseini, Ahmad Kalhor, Babak Nadjar Araabi</div>
-        <div class="pub-venue">BMVC 2025</div>
-        <div class="pub-links">
-          <a href="https://bmvc2025.bmva.org/proceedings/770/" target="_blank" rel="noopener">Paper</a>
-          <a href="https://k-hooshanfar.github.io/dtfsal/" target="_blank" rel="noopener">Project</a>
-        </div>
+
+    <section id="research-interests">
+      <h2>Research Interests</h2>
+      <div class="interests-grid">
+        <div class="interest-chip">Computer Vision</div>
+        <div class="interest-chip">Multimodal Learning</div>
+        <div class="interest-chip">Saliency Prediction</div>
+        <div class="interest-chip">Generative Models</div>
+        <div class="interest-chip">Vision-Language Models</div>
+        <div class="interest-chip">Human-Computer Interaction</div>
+        <div class="interest-chip">Large Language Models</div>
+        <div class="interest-chip">AI Agents</div>
+        <div class="interest-chip">Deep Learning</div>
       </div>
-      
-      <div class="publication">
-        <div class="pub-title">Brand visibility in packaging: a deep learning approach for logo detection, saliency-map prediction, and logo placement analysis</div>
-        <div class="pub-authors">Alireza Hosseini, <strong>Kiana Hooshanfar</strong>, Pouria Omrani, Reza Toosi, Ramin Toosi, Zahra Ebrahimian, Mohammad Ali Akhaee</div>
-        <div class="pub-venue">Discover Applied Sciences, 2025</div>
-        <div class="pub-links">
-          <a href="https://link.springer.com/article/10.1007/s42452-025-07043-9" target="_blank" rel="noopener">Paper</a>
-          <a href="https://github.com/Arhosseini77/Brand_Attention" target="_blank" rel="noopener">Code</a>
-        </div>
+    </section>
+
+    <section id="education">
+      <h2>Education</h2>
+
+      <div class="education-item">
+        <div class="edu-degree">M.Sc. in Electrical Engineering (Control Engineering)</div>
+        <div class="edu-meta">University of Tehran · Tehran, Iran · Sep 2022 – Feb 2025 </div>
+        <ul class="edu-details">
+          <li><strong>Thesis:</strong> <em>Design and Enhancement of Video Saliency Prediction Networks</em></li>
+          <li><strong>Advisors:</strong> Dr. Babak Nadjar Araabi, Dr. Ahmad Kalhor</li>
+          <li><strong>Core courses:</strong> Machine Learning, Deep Learning, Deep Generative Models, Game Theory</li>
+        </ul>
       </div>
-      
-      <div class="publication">
-        <div class="pub-title">Hybrid Retrieval-Augmented Generation Approach for LLMs Query Response Enhancement</div>
-        <div class="pub-authors">Pouria Omrani, Alireza Hosseini, <strong>Kiana Hooshanfar</strong>, Zahra Ebrahimian, Ramin Toosi, Mohammad Ali Akhaee</div>
-        <div class="pub-venue">ICWR 2024</div>
-        <div class="pub-links">
-          <a href="https://ieeexplore.ieee.org/abstract/document/10533345" target="_blank" rel="noopener">Paper</a>
-        </div>
-      </div>
-      
-      <div class="publication">
-        <div class="pub-title">Eye-Tracking Based Control of a Robotic Arm and Wheelchair for People with Severe Speech and Motor Impairment</div>
-        <div class="pub-authors">Maryam Asad Samani, <strong>Kiana Hooshanfar</strong>, Helia Shams Jey, Seyed Majid Esmailzadeh</div>
-        <div class="pub-venue">ICRoM 2023</div>
-        <div class="pub-links">
-          <a href="https://ieeexplore.ieee.org/abstract/document/10412408/" target="_blank" rel="noopener">Paper</a>
-          <a href="https://github.com/K-Hooshanfar/EyeTrackRobot" target="_blank" rel="noopener">Code</a>
-        </div>
+
+      <div class="education-item">
+        <div class="edu-degree">B.Sc. in Electrical Engineering (Control Engineering)</div>
+        <div class="edu-meta">Iran University of Science and Technology (IUST) · Tehran, Iran · Sep 2018 – Sep 2022 </div>
+        <ul class="edu-details">
+          <li><strong>Thesis:</strong> <em>Intelligent Control of a Robot Arm by Eye Tracking for People with Severe Speech and Motor Impairment (SSMI)</em></li>
+        </ul>
       </div>
     </section>
     
@@ -590,12 +760,90 @@
         <li><span class="news-date">[Dec 2023]</span> Eye-tracking robotics paper accepted to ICRoM 2023</li>
       </ul>
     </section>
+    
+    <section id="publications">
+      <h2>Publications</h2>
+
+      <article class="publication">
+        <a class="pub-thumb" href="https://bmvc2025.bmva.org/proceedings/770/" target="_blank" rel="noopener">
+          <img src="assets/publications/dtfsal.png" alt="DTFSal architecture overview">
+          <span class="pub-badge">BMVC'25</span>
+        </a>
+        <div class="pub-content">
+          <a class="pub-title" href="https://bmvc2025.bmva.org/proceedings/770/" target="_blank" rel="noopener">DTFSal: Audio-Visual Dynamic Token Fusion for Video Saliency Prediction</a>
+          <div class="pub-authors"><strong>Kiana Hooshanfar</strong>, Alireza Hosseini, Mona Ahmadian, Ahmad Kalhor, Babak N. Araabi</div>
+          <div class="pub-venue">36th British Machine Vision Conference (BMVC), 2025.</div>
+          <div class="pub-links">
+            <a href="https://bmvc2025.bmva.org/proceedings/770/" target="_blank" rel="noopener">PDF</a>
+            <a href="https://k-hooshanfar.github.io/dtfsal/" target="_blank" rel="noopener">Project</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="publication">
+        <a class="pub-thumb" href="https://link.springer.com/article/10.1007/s42452-025-07043-9" target="_blank" rel="noopener">
+          <img src="assets/publications/Saliency_Model_Schematic_green.png" alt="Brand visibility model schematic">
+          <span class="pub-badge">Discover'25</span>
+        </a>
+        <div class="pub-content">
+          <a class="pub-title" href="https://link.springer.com/article/10.1007/s42452-025-07043-9" target="_blank" rel="noopener">Brand Visibility in Packaging: A Deep Learning Approach for Logo Detection, Saliency-Map Prediction, and Logo Placement Analysis</a>
+          <div class="pub-authors">Alireza Hosseini, <strong>Kiana Hooshanfar</strong>, Pouria Omrani, Reza Toosi, Ramin Toosi, Zahra Ebrahimian, Mohammad Ali Akhaee</div>
+          <div class="pub-venue">Discover Applied Sciences, 2025.</div>
+          <div class="pub-links">
+            <a href="https://link.springer.com/article/10.1007/s42452-025-07043-9" target="_blank" rel="noopener">PDF</a>
+            <a href="https://github.com/Arhosseini77/Brand_Attention" target="_blank" rel="noopener">Code</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="publication">
+        <a class="pub-thumb" href="https://ieeexplore.ieee.org/abstract/document/10533345" target="_blank" rel="noopener">
+          <img src="assets/publications/hybrid.drawio.png" alt="Hybrid RAG architecture">
+          <span class="pub-badge">ICWR'24</span>
+        </a>
+        <div class="pub-content">
+          <a class="pub-title" href="https://ieeexplore.ieee.org/abstract/document/10533345" target="_blank" rel="noopener">Hybrid Retrieval-Augmented Generation Approach for LLMs Query Response Enhancement</a>
+          <div class="pub-authors">Pouria Omrani, Alireza Hosseini, <strong>Kiana Hooshanfar</strong>, Zahra Ebrahimian, Ramin Toosi, Mohammad Ali Akhaee</div>
+          <div class="pub-venue">International Conference on Web Research (ICWR), 2024.</div>
+          <div class="pub-links">
+            <a href="https://ieeexplore.ieee.org/abstract/document/10533345" target="_blank" rel="noopener">PDF</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="publication">
+        <a class="pub-thumb" href="https://ieeexplore.ieee.org/abstract/document/10412408/" target="_blank" rel="noopener">
+          <img src="assets/publications/robot.png" alt="Eye-tracking robotics preview">
+          <span class="pub-badge">ICRoM'23</span>
+        </a>
+        <div class="pub-content">
+          <a class="pub-title" href="https://ieeexplore.ieee.org/abstract/document/10412408/" target="_blank" rel="noopener">Eye-Tracking Based Control of a Robotic Arm and Wheelchair for People with Severe Speech and Motor Impairment</a>
+          <div class="pub-authors">Maryam Asad Samani, <strong>Kiana Hooshanfar</strong>, Helia Shams Jey, Seyed Majid Esmailzadeh</div>
+          <div class="pub-venue">International Conference on Robotics and Mechatronics (ICRoM), 2023.</div>
+          <div class="pub-links">
+            <a href="https://ieeexplore.ieee.org/abstract/document/10412408/" target="_blank" rel="noopener">PDF</a>
+            <a href="https://github.com/K-Hooshanfar/EyeTrackRobot" target="_blank" rel="noopener">Code</a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section id="honors">
+      <h2>Honors & Awards</h2>
+      <ul class="news-list">
+        <li>Received direct M.Sc. admission offers from University of Tehran, Amirkabir University of Technology, and IUST</li>
+        <li>Ranked <strong>2nd</strong> among 27 Control Engineering master's students, University of Tehran</li>
+        <li>Ranked <strong>1st</strong> among 33 students in the Control specialization, IUST</li>
+        <li>Ranked <strong>3rd</strong> among 118 Electrical Engineering students, IUST</li>
+        <li>Ranked <strong>2nd</strong> nationally in the Rahneshan Autonomous Solar Panel Cleaning Robot Competition, INEF (Feb 2022)</li>
+        <li>Selected as Top Student of the Year, IUST (2020 and 2021)</li>
+      </ul>
+    </section>
   </div>
   
   <!-- Version Toggle Button -->
-  <button class="version-toggle" onclick="window.location.href='creative_portfolio.html'">
+  <button class="version-toggle" onclick="window.location.href='creative_portfolio.html'" aria-label="Creative version">
     <i class='bx bx-palette'></i>
-    <span>Creative Version</span>
   </button>
   
   <!-- Chat Widget -->
