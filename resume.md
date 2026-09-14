@@ -44,22 +44,27 @@ AI researcher and engineer specializing in computer vision, visual attention mod
 
 ## Publications
 
-1. **DTFSal: Audio-Visual Dynamic Token Fusion for Video Saliency Prediction**  
-   **Kiana Hooshanfar**, Alireza Hosseini, Mona Ahmadian, Ahmad Kalhor, Babak N. Araabi  
-   *BMVC 2025*  
+1. **OpenVAM: Open-World Visual Attention Modeling with VLMs**
+   **Kiana Hooshanfar**, Amirhossein Kazerouni, Alireza Hosseini, Michael Brudno, Babak Taati
+   *Preprint 2026*
+   Project: https://k-hooshanfar.github.io/openvam/ · Code: https://github.com/K-Hooshanfar/OpenVAM
+
+2. **DTFSal: Audio-Visual Dynamic Token Fusion for Video Saliency Prediction**
+   **Kiana Hooshanfar**, Alireza Hosseini, Mona Ahmadian, Ahmad Kalhor, Babak N. Araabi
+   *BMVC 2025*
    Paper: https://bmvc2025.bmva.org/proceedings/770/ · Project: https://k-hooshanfar.github.io/dtfsal/
 
-2. **Brand Visibility in Packaging: A Deep Learning Approach for Logo Detection, Saliency-Map Prediction, and Logo Placement Analysis**  
+3. **Brand Visibility in Packaging: A Deep Learning Approach for Logo Detection, Saliency-Map Prediction, and Logo Placement Analysis**  
    Alireza Hosseini, **Kiana Hooshanfar**, Pouria Omrani, Reza Toosi, Ramin Toosi, Zahra Ebrahimian, Mohammad Ali Akhaee  
    *Discover Applied Sciences, 2025*  
    Paper: https://link.springer.com/article/10.1007/s42452-025-07043-9 · Code: https://github.com/Arhosseini77/Brand_Attention
 
-3. **Hybrid Retrieval-Augmented Generation Approach for LLMs Query Response Enhancement**  
+4. **Hybrid Retrieval-Augmented Generation Approach for LLMs Query Response Enhancement**  
    Pouria Omrani, Alireza Hosseini, **Kiana Hooshanfar**, Zahra Ebrahimian, Ramin Toosi, Mohammad Ali Akhaee  
    *ICWR 2024*  
    Paper: https://ieeexplore.ieee.org/abstract/document/10533345
 
-4. **Eye-Tracking Based Control of a Robotic Arm and Wheelchair for People with Severe Speech and Motor Impairment (SSMI)**  
+5. **Eye-Tracking Based Control of a Robotic Arm and Wheelchair for People with Severe Speech and Motor Impairment (SSMI)**  
    Maryam Asad Samani, **Kiana Hooshanfar**, Helia Shams Jey, Seyed Majid Esmailzadeh  
    *ICRoM 2023*  
    Paper: https://ieeexplore.ieee.org/abstract/document/10412408/ · Code: https://github.com/K-Hooshanfar/EyeTrackRobot

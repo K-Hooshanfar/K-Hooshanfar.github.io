@@ -6,10 +6,20 @@
   <title>Kiana Hooshanfar</title>
   <meta name="description" content="Academic portfolio of Kiana Hooshanfar — AI Researcher" />
 
+  <script>
+    (function() {
+      try {
+        var t = localStorage.getItem('theme');
+        if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+      } catch (e) {}
+    })();
+  </script>
+
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -36,6 +46,8 @@
       --gray-800:   #1e293b;
       --gray-900:   #0f172a;
 
+      --nav-bg: rgba(255,255,255,.88);
+
       --font-display: 'Fraunces', Georgia, serif;
       --font-body:    'DM Sans', -apple-system, sans-serif;
 
@@ -51,6 +63,28 @@
       --t: 0.25s;
     }
 
+    :root[data-theme="dark"] {
+      --blue-deep:  #5b8def;
+      --blue:       #4d8bf5;
+      --blue-mid:   #3b82f6;
+      --blue-light: #60a5fa;
+      --sky-50:     rgba(59,130,246,.10);
+      --sky-100:    rgba(59,130,246,.18);
+      --sky-200:    rgba(59,130,246,.32);
+      --white:      #101b30;
+      --gray-50:    #0b1220;
+      --gray-100:   #121b2e;
+      --gray-200:   #1c2740;
+      --gray-300:   #2d3a56;
+      --gray-400:   #5f6c92;
+      --gray-500:   #8b96b8;
+      --gray-600:   #a9b4d1;
+      --gray-700:   #c3ccdf;
+      --gray-800:   #dbe1ee;
+      --gray-900:   #f3f5fa;
+      --nav-bg: rgba(11,18,32,.85);
+    }
+
     html {
       scroll-behavior: smooth;
       scroll-padding-top: 76px;
@@ -64,6 +98,7 @@
       font-size: 15px;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      transition: background-color var(--t) var(--ease), color var(--t) var(--ease);
     }
 
     /* ── NAV ─────────────────────────────────── */
@@ -76,11 +111,40 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 40px;
-      background: rgba(255,255,255,.88);
+      background: var(--nav-bg);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid transparent;
-      transition: border-color var(--t) var(--ease), box-shadow var(--t) var(--ease);
+      transition: background var(--t) var(--ease), border-color var(--t) var(--ease), box-shadow var(--t) var(--ease);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .theme-toggle-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gray-200);
+      background: var(--white);
+      color: var(--gray-600);
+      cursor: pointer;
+      font-size: 16px;
+      transition: border-color var(--t) var(--ease), background var(--t) var(--ease),
+                  color var(--t) var(--ease), transform var(--t) var(--ease);
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--blue-light);
+      background: var(--sky-50);
+      color: var(--blue);
+      transform: translateY(-1px);
     }
 
     nav.scrolled {
@@ -130,7 +194,7 @@
     /* ── HERO ────────────────────────────────── */
     .hero {
       background: linear-gradient(158deg, var(--navy) 0%, var(--navy-mid) 45%, #1a3272 100%);
-      padding: 96px 40px 80px;
+      padding: 88px 40px 56px;
       position: relative;
       overflow: hidden;
       display: flex;
@@ -177,12 +241,12 @@
 
     .hero-photo img {
       display: block;
-      width: 220px;
-      height: 220px;
+      width: 200px;
+      height: 200px;
       border-radius: 50%;
       object-fit: cover;
       object-position: center 20%;
-      border: 5px solid rgba(255,255,255,.9);
+      border: 3px solid rgba(255,255,255,.85);
       box-shadow:
         0 16px 48px rgba(0,0,0,.35),
         0 0 0 1px rgba(255,255,255,.14);
@@ -219,7 +283,7 @@
 
     .hero h1 {
       font-family: var(--font-display);
-      font-size: clamp(44px, 7.5vw, 74px);
+      font-size: clamp(44px, 7vw, 68px);
       font-weight: 700;
       color: white;
       line-height: 1.04;
@@ -233,19 +297,28 @@
       gap: 10px;
       flex-wrap: wrap;
       font-size: 17px;
-      color: rgba(255,255,255,.68);
-      font-weight: 300;
+      color: rgba(255,255,255,.82);
+      font-weight: 400;
       letter-spacing: .01em;
-      margin-bottom: 38px;
+      margin-bottom: 14px;
     }
 
     .tag-sep { color: rgba(255,255,255,.25); }
+
+    .hero-affil {
+      font-size: 13.5px;
+      font-weight: 400;
+      color: rgba(255,255,255,.6);
+      letter-spacing: .01em;
+      margin-bottom: 32px;
+    }
 
     .hero-links {
       display: flex;
       gap: 9px;
       flex-wrap: wrap;
     }
+
 
     .hero-links a {
       display: inline-flex;
@@ -339,7 +412,7 @@
 
     .chip {
       padding: 13px 15px;
-      background: white;
+      background: var(--white);
       border: 1.5px solid var(--gray-200);
       border-radius: var(--r-sm);
       font-size: 13.5px;
@@ -396,7 +469,7 @@
       width: 14px;
       height: 14px;
       border-radius: 50%;
-      background: white;
+      background: var(--white);
       border: 2.5px solid var(--blue);
       box-shadow: 0 0 0 3px var(--sky-100);
     }
@@ -448,6 +521,40 @@
     }
 
     /* ── NEWS ────────────────────────────────── */
+    .news-card[hidden] { display: none; }
+
+    .news-toggle {
+      align-self: center;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+      padding: 6px 16px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 100px;
+      background: var(--white);
+      color: var(--gray-600);
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color var(--t) var(--ease), background var(--t) var(--ease),
+                  color var(--t) var(--ease);
+    }
+
+    .news-toggle:hover {
+      border-color: var(--blue-light);
+      background: var(--sky-50);
+      color: var(--blue);
+    }
+
+    .news-toggle i {
+      font-size: 15px;
+      transition: transform var(--t) var(--ease);
+    }
+
+    .news-toggle.open i { transform: rotate(180deg); }
+
     .news-stack {
       display: flex;
       flex-direction: column;
@@ -459,7 +566,7 @@
       align-items: center;
       gap: 14px;
       padding: 13px 18px;
-      background: white;
+      background: var(--white);
       border: 1px solid var(--gray-200);
       border-radius: var(--r-sm);
       box-shadow: var(--sh-sm);
@@ -482,10 +589,27 @@
       font-weight: 500;
     }
 
-    .news-card a:hover {
-      color: var(--blue-mid);
+    .news-card a:hover,
+    .news-card a:focus-visible {
+      color: inherit;
       text-decoration: underline;
       text-underline-offset: 3px;
+    }
+
+    .news-arrow {
+      display: inline-block;
+      margin-left: 5px;
+      font-size: 14px;
+      vertical-align: -2px;
+      color: inherit;
+      opacity: .45;
+      transition: opacity var(--t) var(--ease), transform var(--t) var(--ease);
+    }
+
+    .news-card:hover .news-arrow,
+    .news-card a:focus-visible .news-arrow {
+      opacity: 1;
+      transform: translate(2px, -2px);
     }
 
     .news-badge {
@@ -501,15 +625,67 @@
     }
 
     /* ── PUBLICATIONS ────────────────────────── */
+    #publications {
+      border-top: 1px solid var(--gray-200);
+      padding-top: 56px;
+    }
+
+    .pub-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .pub-filter {
+      padding: 6px 14px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 100px;
+      background: var(--white);
+      color: var(--gray-600);
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background var(--t) var(--ease), border-color var(--t) var(--ease),
+                  color var(--t) var(--ease), transform var(--t) var(--ease);
+    }
+
+    .pub-filter:hover {
+      border-color: var(--blue-light);
+      background: var(--sky-50);
+      color: var(--blue);
+    }
+
+    .pub-filter[aria-pressed="true"] {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: white;
+    }
+
+    :root[data-theme="dark"] .pub-filter[aria-pressed="true"] {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: white;
+    }
+
+    .pub-empty {
+      color: var(--gray-400);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 13px;
+    }
+
     .pub-stack {
       display: flex;
       flex-direction: column;
       gap: 20px;
     }
 
+    .pub-card[hidden] { display: none; }
+
     .pub-card {
       display: flex;
-      background: white;
+      background: var(--white);
       border: 1px solid var(--gray-200);
       border-radius: var(--r);
       box-shadow: var(--sh-sm);
@@ -611,7 +787,26 @@
       font-size: 12.5px;
       color: var(--gray-400);
       font-style: italic;
-      margin-bottom: 14px;
+      margin-bottom: 10px;
+    }
+
+    .pub-topics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 12px;
+    }
+
+    .pub-topics span {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: .03em;
+      color: var(--blue-deep);
+      background: var(--sky-50);
+      border: 1px solid var(--sky-100);
+      padding: 2px 8px;
+      border-radius: 100px;
+      line-height: 1.5;
     }
 
     .pub-links {
@@ -634,7 +829,7 @@
       transition: background var(--t) var(--ease), border-color var(--t) var(--ease),
                   color var(--t) var(--ease), transform var(--t) var(--ease),
                   box-shadow var(--t) var(--ease);
-      background: white;
+      background: var(--white);
     }
 
     .pub-links a:hover {
@@ -701,6 +896,69 @@
       text-justify: inter-word;
     }
 
+    .pub-cite { margin-top: 16px; }
+
+    .pub-cite-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .pub-cite-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+    }
+
+    .pub-copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 12px;
+      border: 1.5px solid var(--gray-300);
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray-700);
+      background: var(--white);
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: background var(--t) var(--ease), border-color var(--t) var(--ease),
+                  color var(--t) var(--ease), transform var(--t) var(--ease);
+    }
+
+    .pub-copy-btn:hover {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: white;
+      transform: translateY(-1px);
+    }
+
+    .pub-copy-btn.copied {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: white;
+    }
+
+    .pub-copy-btn i { font-size: 14px; }
+
+    .pub-bibtex {
+      margin: 0;
+      padding: 14px 16px;
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--gray-700);
+      white-space: pre;
+      overflow-x: auto;
+    }
+
     /* ── HONORS ──────────────────────────────── */
     .honors-list {
       list-style: none;
@@ -714,7 +972,7 @@
       align-items: baseline;
       gap: 12px;
       padding: 12px 18px;
-      background: white;
+      background: var(--white);
       border-radius: var(--r-sm);
       border: 1px solid var(--gray-200);
       font-size: 13.5px;
@@ -740,26 +998,73 @@
 
     .honors-list strong { color: var(--blue); font-weight: 700; }
 
+    /* ── FOOTER ──────────────────────────────── */
+    footer {
+      background: linear-gradient(158deg, var(--navy) 0%, var(--navy-mid) 100%);
+      padding: 34px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      color: rgba(255,255,255,.75);
+      font-size: 17px;
+      text-decoration: none;
+      transition: background var(--t) var(--ease), border-color var(--t) var(--ease),
+                  color var(--t) var(--ease), transform var(--t) var(--ease);
+    }
+
+    .footer-links a:hover {
+      background: rgba(255,255,255,.16);
+      border-color: rgba(255,255,255,.3);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .footer-note {
+      font-size: 12.5px;
+      color: rgba(255,255,255,.45);
+      letter-spacing: .02em;
+    }
+
     /* ── CHAT FAB ────────────────────────────── */
     .chat-fab {
       position: fixed;
       right: 24px;
       bottom: 24px;
       z-index: 2000;
-      width: 54px;
+      width: auto;
       height: 54px;
-      border-radius: 50%;
+      padding: 0 15px 0 17px;
+      gap: 9px;
+      border-radius: 100px;
       border: none;
       cursor: pointer;
       background: linear-gradient(135deg, var(--blue-mid), var(--blue-deep));
       color: white;
       box-shadow: 0 4px 20px rgba(30,64,175,.38);
-      transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease);
+      transition: clip-path .35s var(--ease), transform var(--t) var(--ease), box-shadow var(--t) var(--ease);
       display: flex;
+      flex-direction: row-reverse;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       font-size: 21px;
-      overflow: hidden;
+      clip-path: inset(0 0 0 calc(100% - 54px) round 100px);
       animation: ver-glow 2.8s ease-in-out infinite;
     }
 
@@ -781,6 +1086,30 @@
     .chat-fab i {
       position: relative;
       z-index: 1;
+      min-width: 24px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .chat-fab .fab-label {
+      white-space: nowrap;
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      font-weight: 600;
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: opacity .25s var(--ease), transform .35s var(--ease);
+    }
+
+    .chat-fab.expanded,
+    .chat-fab:hover {
+      clip-path: inset(0 0 0 0 round 100px);
+    }
+
+    .chat-fab.expanded .fab-label,
+    .chat-fab:hover .fab-label {
+      opacity: 1;
+      transform: translateX(0);
     }
 
     .chat-fab:hover {
@@ -800,7 +1129,7 @@
       display: flex;
       flex-direction: column;
       border-radius: 20px;
-      background: white;
+      background: var(--white);
       box-shadow: 0 8px 40px rgba(8,15,34,.16);
       border: 1px solid var(--gray-200);
       transform: translateY(12px) scale(.97);
@@ -883,7 +1212,7 @@
 
     .msg-bot {
       margin-right: auto;
-      background: white;
+      background: var(--white);
       border: 1px solid var(--gray-200);
       color: var(--gray-800);
       border-radius: 12px 12px 12px 3px;
@@ -899,13 +1228,13 @@
       gap: 6px;
       padding: 9px 14px;
       border-top: 1px solid var(--gray-100);
-      background: white;
+      background: var(--white);
       flex-shrink: 0;
     }
 
     .chat-chip-btn {
       border: 1.5px solid var(--gray-200);
-      background: white;
+      background: var(--white);
       border-radius: 100px;
       padding: 4px 12px;
       font-size: 11.5px;
@@ -929,7 +1258,7 @@
       align-items: center;
       padding: 13px 14px;
       border-top: 1px solid var(--gray-200);
-      background: white;
+      background: var(--white);
       flex-shrink: 0;
     }
 
@@ -949,7 +1278,7 @@
     #chat-input:focus {
       outline: none;
       border-color: var(--blue-light);
-      background: white;
+      background: var(--white);
       box-shadow: 0 0 0 3px rgba(59,130,246,.12);
     }
 
@@ -976,7 +1305,7 @@
       padding: 9px 11px;
       border: 1.5px solid var(--gray-200);
       border-radius: 10px;
-      background: white;
+      background: var(--white);
       color: var(--gray-500);
       font-size: 12.5px;
       cursor: pointer;
@@ -992,7 +1321,7 @@
       bottom: 24px;
       left: 24px;
       z-index: 1000;
-      background: white;
+      background: var(--white);
       color: var(--blue);
       border: 1.5px solid var(--sky-200);
       width: 46px;
@@ -1059,7 +1388,6 @@
     /* ── RESPONSIVE ──────────────────────────── */
     @media (max-width: 768px) {
       nav { padding: 0 20px; }
-      .nav-links { display: none; }
       .hero { padding: 68px 24px 58px; }
       .hero-inner {
         width: 100%;
@@ -1084,6 +1412,466 @@
     @media (max-width: 480px) {
       .interests-grid { grid-template-columns: 1fr 1fr; }
       .hero h1 { font-size: 38px; }
+      .teach-role { flex-wrap: wrap; }
+      .teach-legend { gap: 6px; }
+      .teach-legend span { font-size: 10.5px; padding: 3px 9px 3px 7px; }
+    }
+
+    /* ── TEACHING: scoped color tokens ───────── */
+    .teach-scope {
+      --ai-bg:      #eef2ff;
+      --ai-bd:      #a5b4fc;
+      --ai-fg:      #3730a3;
+
+      --ctl-bg:     #fff7ed;
+      --ctl-bd:     #fdba74;
+      --ctl-fg:     #9a3412;
+
+      --core-bg:    #ecfdf5;
+      --core-bd:    #6ee7b7;
+      --core-fg:    #065f46;
+
+      --lab-bg:     #faf5ff;
+      --lab-bd:     #c4b5fd;
+      --lab-fg:     #6b21a8;
+    }
+
+    :root[data-theme="dark"] .teach-scope {
+      --ai-bg:      rgba(129,140,248,.13);
+      --ai-bd:      rgba(129,140,248,.42);
+      --ai-fg:      #a5b4fc;
+
+      --ctl-bg:     rgba(251,146,60,.12);
+      --ctl-bd:     rgba(251,146,60,.40);
+      --ctl-fg:     #fdba74;
+
+      --core-bg:    rgba(52,211,153,.12);
+      --core-bd:    rgba(52,211,153,.38);
+      --core-fg:    #6ee7b7;
+
+      --lab-bg:     rgba(196,181,253,.12);
+      --lab-bd:     rgba(196,181,253,.40);
+      --lab-fg:     #c4b5fd;
+    }
+
+    .teach-role {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 600;
+      font-size: 15.5px;
+      color: var(--gray-900);
+      margin-bottom: 5px;
+      line-height: 1.4;
+    }
+
+    .teach-count {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue);
+      background: var(--sky-50);
+      border: 1px solid var(--sky-100);
+      padding: 2px 8px;
+      border-radius: 100px;
+      letter-spacing: .02em;
+      white-space: nowrap;
+    }
+
+    .teach-courses {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 13px;
+    }
+
+    .course {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12.5px;
+      font-weight: 600;
+      line-height: 1.4;
+      padding: 6px 12px;
+      border-radius: 7px;
+      border: 1px solid transparent;
+      cursor: default;
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease),
+                  filter var(--t) var(--ease);
+    }
+
+    .course:hover {
+      transform: translateY(-2px);
+      filter: saturate(1.15);
+    }
+
+    .course.c-ai {
+      background: var(--ai-bg);
+      border-color: var(--ai-bd);
+      color: var(--ai-fg);
+    }
+    .course.c-ai:hover { box-shadow: 0 4px 12px rgba(99,102,241,.28); }
+
+    .course.c-control {
+      background: var(--ctl-bg);
+      border-color: var(--ctl-bd);
+      color: var(--ctl-fg);
+    }
+    .course.c-control:hover { box-shadow: 0 4px 12px rgba(249,115,22,.26); }
+
+    .course.c-core {
+      background: var(--core-bg);
+      border-color: var(--core-bd);
+      color: var(--core-fg);
+    }
+    .course.c-core:hover { box-shadow: 0 4px 12px rgba(16,185,129,.26); }
+
+    .course.c-lab {
+      background: var(--lab-bg);
+      border: 1px dashed var(--lab-bd);
+      color: var(--lab-fg);
+    }
+    .course.c-lab:hover { box-shadow: 0 4px 12px rgba(139,92,246,.26); }
+
+    .course.c-lab i { font-size: 13px; opacity: .85; }
+
+    .teach-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 26px;
+    }
+
+    .teach-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 4px 11px 4px 8px;
+      border-radius: 100px;
+      border: 1px solid transparent;
+    }
+
+    .lg-ai      { background: var(--ai-bg);   border-color: var(--ai-bd);   color: var(--ai-fg); }
+    .lg-control { background: var(--ctl-bg);  border-color: var(--ctl-bd);  color: var(--ctl-fg); }
+    .lg-core    { background: var(--core-bg); border-color: var(--core-bd); color: var(--core-fg); }
+    .lg-lab     { background: var(--lab-bg);  border: 1px dashed var(--lab-bd); color: var(--lab-fg); }
+
+    .lg-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: currentColor;
+    }
+
+    .teach-item {
+      position: relative;
+      padding-left: 2px;
+    }
+
+    /* ── PROJECTS: ARCHIVE STACK ─────────────── */
+    #projects {
+      --mono: 'IBM Plex Mono', ui-monospace, 'Courier New', monospace;
+      --lift: 0 24px 48px -18px rgba(8,15,34,.30);
+      --rest: 0 8px 18px -14px rgba(8,15,34,.18);
+      --deck-ease: cubic-bezier(.2,.8,.2,1);
+      margin-bottom: 32px;
+
+      /* card colour pairs (bg / fg) — mapped to the site's blue-navy-gray scale */
+      --bg-dark:#0f172a;   --fg-dark:#f1f5f9;
+      --bg-1:#eef2f8;      --fg-1:#1e293b;
+      --bg-2:#dde5f1;      --fg-2:#1e293b;
+      --bg-3:#c5d3e8;      --fg-3:#1e293b;
+      --bg-4:#aec2de;      --fg-4:#16233b;
+      --bg-deep:#1e3a8a;   --fg-deep:#ffffff;
+      --bg-accent:#2563eb; --fg-accent:#ffffff;
+      --bg-slate:#334155;  --fg-slate:#f1f5f9;
+    }
+    :root[data-theme="dark"] #projects {
+      --lift: 0 24px 48px -18px rgba(0,0,0,.6);
+      --rest: 0 8px 18px -14px rgba(0,0,0,.5);
+      --bg-dark:#e8edf6;   --fg-dark:#0f1830;
+      --bg-1:#16223a;      --fg-1:#dbe1ee;
+      --bg-2:#1b2942;      --fg-2:#dbe1ee;
+      --bg-3:#223252;      --fg-3:#dbe1ee;
+      --bg-4:#2b3d5f;      --fg-4:#dbe1ee;
+      --bg-deep:#2f4fa0;   --fg-deep:#ffffff;
+      --bg-accent:#2f6bd8; --fg-accent:#ffffff;
+      --bg-slate:#c3ccdf;  --fg-slate:#0f1830;
+    }
+
+    .proj-meta {
+      font-family: var(--mono);
+      font-size: 11px; letter-spacing: .14em; line-height: 2;
+      text-transform: uppercase; color: var(--gray-500);
+      margin-bottom: 40px;
+    }
+    .proj-meta .proj-accent { color: var(--blue-mid); }
+
+    .proj-stage {
+      position: relative;
+      width: min(1080px, 94vw);
+      margin-left: 50%;
+      transform: translateX(-50%);
+      min-height: 680px;
+    }
+
+    .proj-doodle {
+      position: absolute; left: 4%; top: 86%;
+      width: 128px; color: var(--blue-mid);
+      pointer-events: none; z-index: 12; opacity: .85;
+    }
+    #projects.visible .proj-doodle path {
+      stroke-dasharray: 260; stroke-dashoffset: 260;
+      animation: proj-draw 1.1s var(--deck-ease) .5s forwards;
+    }
+    @keyframes proj-draw { to { stroke-dashoffset: 0; } }
+
+    #projects .card {
+      position: absolute;
+      left: var(--x); top: var(--y);
+      z-index: var(--z);
+      width: var(--w);
+      display: flex; flex-direction: column;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--mono);
+      padding: 22px 26px 16px;
+      border: 1px solid color-mix(in srgb, var(--fg) 14%, transparent);
+      text-align: left;
+      box-shadow: var(--rest);
+      transform: translate(-50%,-50%) rotate(var(--r));
+      transition: transform .5s var(--deck-ease), box-shadow .5s var(--deck-ease);
+    }
+    #projects.visible .card {
+      animation: proj-deal .7s var(--deck-ease) backwards;
+      animation-delay: calc(var(--i) * 80ms + .1s);
+    }
+    @keyframes proj-deal {
+      from { opacity: 0; transform: translate(-50%,-40%) rotate(0deg) scale(.96); }
+    }
+    #projects .card:hover,
+    #projects .card:focus-within,
+    #projects .card.is-active {
+      z-index: 80;
+      box-shadow: var(--lift);
+      transform: translate(-50%,-50%) rotate(0deg) scale(1.02);
+    }
+    #projects .card:focus-visible { outline: 2px solid var(--blue-mid); outline-offset: 6px; }
+
+    #projects .card-head {
+      display: flex; justify-content: space-between; align-items: baseline; gap: 18px;
+      font-size: 10.5px; letter-spacing: .13em; text-transform: uppercase;
+      padding-bottom: 10px;
+      border-bottom: 1px solid color-mix(in srgb, currentColor 28%, transparent);
+    }
+    #projects .card-head .ref { opacity: .72; white-space: nowrap; }
+
+    #projects .card-body {
+      font-size: 13.5px; line-height: 1.6; letter-spacing: .005em;
+      padding: 22px 0 26px;
+    }
+    #projects .card-foot {
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      margin-top: auto;
+      font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+    }
+    #projects .stack-list { opacity: .7; }
+
+    #projects .links { display: flex; gap: 15px; }
+    #projects .links a {
+      color: inherit; text-decoration: none;
+      border-bottom: 1px solid color-mix(in srgb, currentColor 45%, transparent);
+      padding-bottom: 2px; transition: opacity .2s var(--ease);
+    }
+    #projects .links a:hover { opacity: .6; }
+    #projects .links a:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+
+    #projects .stamp {
+      position: absolute; right: 22px; bottom: 16px;
+      width: 42px; height: 42px;
+      border: 1px dashed color-mix(in srgb, currentColor 45%, transparent);
+      border-radius: 50%;
+      display: grid; place-items: center;
+      font-size: 7px; letter-spacing: .1em; opacity: .55; pointer-events: none;
+    }
+
+    @media (max-width: 900px) {
+      .proj-doodle { display: none; }
+      .proj-stage { width: 100%; margin-left: 0; transform: none; }
+      .proj-stage { min-height: 0; padding-top: 18px; }
+      #projects .card {
+        position: relative;
+        left: auto; top: auto;
+        width: 100%; max-width: 440px;
+        margin: 0 auto -92px;
+        padding: 18px 20px 14px;
+        transform: none;
+      }
+      #projects .card:last-of-type { margin-bottom: 0; }
+      #projects .card:hover,
+      #projects .card:focus-within,
+      #projects .card.is-active { transform: scale(1); }
+      #projects .card.is-active { margin-bottom: 22px; }
+      #projects .card-body { padding: 18px 0 22px; }
+      #projects .card-foot { flex-direction: column; align-items: flex-start; gap: 9px; }
+      #projects .stamp { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #projects .card,
+      #projects.visible .card { animation: none; }
+      #projects.visible .proj-doodle path { animation: none; stroke-dashoffset: 0; }
+    }
+
+    /* ── NAV: dropdown + mobile (Option B) ───── */
+    .nav-links { align-items: center; }
+
+    .nav-group { position: relative; }
+
+    .nav-group-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 13px;
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--gray-500);
+      background: transparent;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: color var(--t) var(--ease), background var(--t) var(--ease);
+    }
+    .nav-group-btn:hover,
+    .nav-group-btn.trigger-active { color: var(--blue); background: var(--sky-50); }
+    .nav-group-btn.trigger-active { background: var(--sky-100); }
+
+    .nav-group-btn i {
+      font-size: 16px;
+      transition: transform var(--t) var(--ease);
+    }
+    .nav-group.open .nav-group-btn i { transform: rotate(180deg); }
+
+    .nav-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      min-width: 180px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--r);
+      box-shadow: var(--sh-lg);
+      padding: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+      transition: opacity var(--t) var(--ease), transform var(--t) var(--ease);
+      z-index: 120;
+    }
+    .nav-group.open .nav-dropdown {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .nav-dropdown a {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 11px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--gray-600);
+      text-decoration: none;
+      border-radius: 8px;
+      transition: color var(--t) var(--ease), background var(--t) var(--ease);
+    }
+    .nav-dropdown a:hover { color: var(--blue); background: var(--sky-50); }
+    .nav-dropdown a.active { color: var(--blue); background: var(--sky-100); }
+    .nav-dropdown a i { font-size: 16px; opacity: .75; }
+
+    .nav-burger {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      border: 1.5px solid var(--gray-200);
+      background: var(--white);
+      color: var(--gray-600);
+      cursor: pointer;
+      font-size: 20px;
+      transition: border-color var(--t) var(--ease), color var(--t) var(--ease);
+    }
+    .nav-burger:hover { border-color: var(--blue-light); color: var(--blue); }
+
+    @media (max-width: 768px) {
+      .nav-burger { display: flex; }
+
+      .nav-links {
+        display: flex !important;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 2px;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: var(--nav-bg);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--gray-200);
+        box-shadow: var(--sh-md);
+        padding: 10px 16px 16px;
+        max-height: calc(100vh - 60px);
+        overflow-y: auto;
+        transform: translateY(-8px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity var(--t) var(--ease), transform var(--t) var(--ease);
+      }
+      .nav-links.mobile-open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .nav-links > li > a { padding: 11px 12px; font-size: 15px; border-radius: 9px; }
+
+      .nav-group { position: static; }
+      .nav-group-btn {
+        width: 100%;
+        justify-content: space-between;
+        padding: 11px 12px;
+        font-size: 15px;
+      }
+      .nav-dropdown {
+        position: static;
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+        box-shadow: none;
+        border: none;
+        border-left: 2px solid var(--gray-200);
+        border-radius: 0;
+        margin: 2px 0 2px 12px;
+        padding: 2px 0 2px 6px;
+        min-width: 0;
+        display: none;
+      }
+      .nav-group.open .nav-dropdown { display: flex; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .nav-links, .nav-dropdown, .nav-group-btn i { transition: none; }
     }
   </style>
 </head>
@@ -1094,14 +1882,35 @@
     <a href="#" class="nav-brand">
       <span class="nav-name">Kiana Hooshanfar</span>
     </a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#research-interests">Research</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#news">News</a></li>
-      <li><a href="#publications">Publications</a></li>
-      <li><a href="#honors">Honors</a></li>
-    </ul>
+
+    <div class="nav-right">
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#research-interests">Research</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li class="nav-group" id="nav-group">
+          <button type="button" class="nav-group-btn" id="nav-group-btn"
+                  aria-haspopup="true" aria-expanded="false">
+            Background <i class='bx bx-chevron-down'></i>
+          </button>
+          <div class="nav-dropdown" role="menu" aria-label="Background">
+            <a href="#education" role="menuitem"><i class='bx bx-book-open'></i>Education</a>
+            <a href="#news"      role="menuitem"><i class='bx bx-news'></i>News</a>
+            <a href="#honors"    role="menuitem"><i class='bx bx-award'></i>Honors</a>
+            <a href="#teaching"  role="menuitem"><i class='bx bx-chalkboard'></i>Teaching</a>
+          </div>
+        </li>
+      </ul>
+
+      <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <i class='bx bx-moon'></i>
+      </button>
+
+      <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+        <i class='bx bx-menu'></i>
+      </button>
+    </div>
   </nav>
 
   <!-- ── HERO ─────────────────────────── -->
@@ -1122,6 +1931,7 @@
           <span class="tag-sep">·</span>
           <span>Large Language Models</span>
         </div>
+        <div class="hero-affil">M.Sc., University of Tehran <span class="tag-sep">·</span> ML &amp; Computational Modeling Lab <span class="tag-sep">·</span> AVIR AI</div>
         <div class="hero-links">
           <a href="mailto:k.hooshanfar02@gmail.com">
             <i class='bx bx-envelope'></i> Email
@@ -1221,11 +2031,12 @@
         <div class="sec-rule"></div>
       </div>
       <div class="news-stack">
-        <div class="news-card"><span class="news-badge">Jul 2025</span> <a href="https://bmvc2025.bmva.org/proceedings/770/" target="_blank" rel="noopener">DTFSal accepted to BMVC 2025</a></div>
-        <div class="news-card"><span class="news-badge">May 2025</span> <a href="https://link.springer.com/article/10.1007/s42452-025-07043-9" target="_blank" rel="noopener">Paper on brand visibility accepted to Discover Applied Sciences</a></div>
+        <div class="news-card"><span class="news-badge">2026</span> <a href="https://k-hooshanfar.github.io/openvam/" target="_blank" rel="noopener">New preprint: OpenVAM — Open-World Visual Attention Modeling with VLMs<i class="bx bx-link-external news-arrow" aria-hidden="true"></i></a></div>
+        <div class="news-card"><span class="news-badge">Jul 2025</span> <a href="https://bmvc2025.bmva.org/proceedings/770/" target="_blank" rel="noopener">DTFSal accepted to BMVC 2025<i class="bx bx-link-external news-arrow" aria-hidden="true"></i></a></div>
+        <div class="news-card"><span class="news-badge">May 2025</span> <a href="https://link.springer.com/article/10.1007/s42452-025-07043-9" target="_blank" rel="noopener">Paper on brand visibility accepted to Discover Applied Sciences<i class="bx bx-link-external news-arrow" aria-hidden="true"></i></a></div>
         <div class="news-card"><span class="news-badge">Feb 2025</span> Successfully defended Master's thesis at University of Tehran</div>
-        <div class="news-card"><span class="news-badge">May 2024</span> <a href="https://ieeexplore.ieee.org/abstract/document/10533345" target="_blank" rel="noopener">Hybrid RAG paper accepted to ICWR 2024</a></div>
-        <div class="news-card"><span class="news-badge">Dec 2023</span> <a href="https://ieeexplore.ieee.org/abstract/document/10412408/" target="_blank" rel="noopener">Eye-tracking robotics paper accepted to ICRoM 2023</a></div>
+        <div class="news-card"><span class="news-badge">May 2024</span> <a href="https://ieeexplore.ieee.org/abstract/document/10533345" target="_blank" rel="noopener">Hybrid RAG paper accepted to ICWR 2024<i class="bx bx-link-external news-arrow" aria-hidden="true"></i></a></div>
+        <div class="news-card"><span class="news-badge">Dec 2023</span> <a href="https://ieeexplore.ieee.org/abstract/document/10412408/" target="_blank" rel="noopener">Eye-tracking robotics paper accepted to ICRoM 2023<i class="bx bx-link-external news-arrow" aria-hidden="true"></i></a></div>
       </div>
     </section>
 
@@ -1235,22 +2046,75 @@
         <h2>Publications</h2>
         <div class="sec-rule"></div>
       </div>
-      <div class="pub-stack">
 
-        <article class="pub-card">
+      <div class="pub-filters" id="pub-filters" role="group" aria-label="Filter publications by topic">
+        <button type="button" class="pub-filter" data-topic="all" aria-pressed="true">All</button>
+        <button type="button" class="pub-filter" data-topic="Saliency Prediction" aria-pressed="false">Saliency Prediction</button>
+        <button type="button" class="pub-filter" data-topic="Computer Vision" aria-pressed="false">Computer Vision</button>
+        <button type="button" class="pub-filter" data-topic="Multimodal Learning" aria-pressed="false">Multimodal Learning</button>
+        <button type="button" class="pub-filter" data-topic="Large Language Models" aria-pressed="false">Large Language Models</button>
+        <button type="button" class="pub-filter" data-topic="Human-Computer Interaction" aria-pressed="false">Human-Computer Interaction</button>
+      </div>
+
+      <div class="pub-stack" id="pub-stack">
+
+        <article class="pub-card" data-topics="Saliency Prediction,Computer Vision,Multimodal Learning,Large Language Models,Deep Learning">
+          <div class="pub-bar"></div>
+          <div class="pub-main">
+            <div class="pub-inner">
+              <a class="pub-thumb" href="https://k-hooshanfar.github.io/openvam/" target="_blank" rel="noopener">
+                <img src="assets/publications/openvam.png" alt="OpenVAM architecture" loading="lazy" width="1605" height="1057">
+                <span class="pub-venue-badge">2026</span>
+              </a>
+              <div class="pub-body">
+                <a class="pub-title" href="https://k-hooshanfar.github.io/openvam/" target="_blank" rel="noopener">OpenVAM: Open-World Visual Attention Modeling with VLMs</a>
+                <div class="pub-authors"><strong>Kiana Hooshanfar</strong>, Amirhossein Kazerouni, Alireza Hosseini, Michael Brudno, Babak Taati</div>
+                <div class="pub-venue-text">Preprint, 2026.</div>
+                <div class="pub-topics"><span>Saliency Prediction</span><span>Vision-Language Models</span><span>Multimodal Learning</span></div>
+                <div class="pub-links">
+                  <a href="https://github.com/K-Hooshanfar/OpenVAM/blob/main/assets/arch2.pdf" target="_blank" rel="noopener"><i class='bx bx-file-blank'></i>PDF</a>
+                  <a href="https://k-hooshanfar.github.io/openvam/" target="_blank" rel="noopener"><i class='bx bx-globe'></i>Project</a>
+                  <a href="https://github.com/K-Hooshanfar/OpenVAM" target="_blank" rel="noopener"><i class='bx bxl-github'></i>Code</a>
+                </div>
+              </div>
+            </div>
+            <div class="pub-expand-row">
+              <button type="button" class="pub-expand-btn" aria-expanded="false" aria-label="Show abstract"><i class='bx bx-chevron-down'></i></button>
+            </div>
+            <div class="pub-abstract" hidden>
+              <p>Predicting human gaze is a core capability for applications ranging from web/UI design analysis to robotics and human-computer interaction. Yet, most visual attention modeling methods output only a dense saliency map, which is often insufficient for action: practitioners need to connect attention peaks to discrete elements in the scene (<em>what</em>) and understand the drivers of those peaks in context (<em>why</em>), while remaining robust to domain shift across natural images, commercial content, and UI/web layouts. We introduce OpenVAM (Open-world Visual Attention Modeling with VLMs), a unified framework that jointly addresses universality and explainability across heterogeneous domains and supervision modalities. OpenVAM adopts a decoupled-but-aligned design: a dedicated dense visual pathway provides stable, spatially precise localization, while an instruction-following vision–language semantic head generates grounded what/why explanations conditioned on the same image and data-type prompts. A three-stage training strategy preserves strong localization priors while progressively introducing language grounding via parameter-efficient adaptation without perturbing the saliency branch. Experiments across diverse datasets show that OpenVAM improves robustness under domain shift while producing image-grounded explanations that make saliency predictions more interpretable.</p>
+              <div class="pub-cite">
+                <div class="pub-cite-head">
+                  <span class="pub-cite-label">BibTeX</span>
+                  <button type="button" class="pub-copy-btn"><i class='bx bx-copy'></i><span class="copy-label">Copy</span></button>
+                </div>
+                <pre class="pub-bibtex">@article{hooshanfar2026openvam,
+  title   = {OpenVAM: Open-World Visual Attention Modeling with VLMs},
+  author  = {Hooshanfar, Kiana and Kazerouni, Amirhossein and Hosseini, Alireza and Brudno, Michael and Taati, Babak},
+  journal = {arXiv preprint},
+  year    = {2026}
+}</pre>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="pub-card" data-topics="Saliency Prediction,Computer Vision,Multimodal Learning,Deep Learning">
           <div class="pub-bar"></div>
           <div class="pub-main">
             <div class="pub-inner">
               <a class="pub-thumb" href="https://bmvc2025.bmva.org/proceedings/770/" target="_blank" rel="noopener">
-                <img src="assets/publications/dtfsal.png" alt="DTFSal architecture">
+                <img src="assets/publications/dtfsal.png" alt="DTFSal architecture" loading="lazy" width="1852" height="845">
                 <span class="pub-venue-badge">BMVC'25</span>
               </a>
               <div class="pub-body">
                 <a class="pub-title" href="https://bmvc2025.bmva.org/proceedings/770/" target="_blank" rel="noopener">DTFSal: Audio-Visual Dynamic Token Fusion for Video Saliency Prediction</a>
                 <div class="pub-authors"><strong>Kiana Hooshanfar</strong>, Alireza Hosseini, Mona Ahmadian, Ahmad Kalhor, Babak N. Araabi</div>
                 <div class="pub-venue-text">36th British Machine Vision Conference (BMVC), 2025.</div>
+                <div class="pub-topics"><span>Saliency Prediction</span><span>Computer Vision</span><span>Multimodal Learning</span></div>
                 <div class="pub-links">
                   <a href="https://bmvc2025.bmva.org/proceedings/770/" target="_blank" rel="noopener"><i class='bx bx-file-blank'></i>PDF</a>
+                  <a href="https://bmva-archive.org.uk/bmvc/2025/assets/papers/Paper_770/poster.pdf" target="_blank" rel="noopener"><i class='bx bx-image'></i>Poster</a>
                   <a href="https://k-hooshanfar.github.io/dtfsal/" target="_blank" rel="noopener"><i class='bx bx-globe'></i>Project</a>
                 </div>
               </div>
@@ -1260,22 +2124,37 @@
             </div>
             <div class="pub-abstract" hidden>
               <p>Audio-visual saliency prediction aims to mimic human visual attention by identifying salient regions in videos through the integration of both visual and auditory information. Although visual-only approaches have significantly advanced, effectively incorporating auditory cues remains challenging due to complex spatio-temporal interactions and high computational demands. To address these challenges, we propose Dynamic Token Fusion Saliency (DTFSal), a novel audio-visual saliency prediction framework designed to balance accuracy with computational efficiency. Our approach features a multi-scale visual encoder equipped with two novel modules: the Learnable Token Enhancement Block (LTEB), which adaptively weights tokens to emphasize crucial saliency cues, and the Dynamic Learnable Token Fusion Block (DLTFB), which employs a shifting operation to reorganize and merge features. An audio branch processes raw audio signals, and both modalities are integrated using our Adaptive Multimodal Fusion Block (AMFB). Extensive evaluations on six audio-visual benchmarks demonstrate that DTFSal achieves state-of-the-art performance while maintaining computational efficiency.</p>
+              <div class="pub-cite">
+                <div class="pub-cite-head">
+                  <span class="pub-cite-label">BibTeX</span>
+                  <button type="button" class="pub-copy-btn"><i class='bx bx-copy'></i><span class="copy-label">Copy</span></button>
+                </div>
+                <pre class="pub-bibtex">@inproceedings{Hooshanfar_2025_BMVC,
+        author    = {Kiana Hooshanfar and Alireza Hosseini and Mona Ahmadian and Ahmad Kalhor and Babak N Araabi},
+        title     = {DTFSal: Audio-Visual Dynamic Token Fusion for Video Saliency Prediction},
+        booktitle = {36th British Machine Vision Conference 2025, {BMVC} 2025, Sheffield, UK, November 24-27, 2025},
+        publisher = {BMVA},
+        year      = {2025},
+        url       = {https://bmva-archive.org.uk/bmvc/2025/assets/papers/Paper_770/paper.pdf}
+        }</pre>
+              </div>
             </div>
           </div>
         </article>
 
-        <article class="pub-card">
+        <article class="pub-card" data-topics="Saliency Prediction,Computer Vision,Deep Learning">
           <div class="pub-bar"></div>
           <div class="pub-main">
             <div class="pub-inner">
               <a class="pub-thumb" href="https://link.springer.com/article/10.1007/s42452-025-07043-9" target="_blank" rel="noopener">
-                <img src="assets/publications/Saliency_Model_Schematic_green.png" alt="Brand visibility schematic">
+                <img src="assets/publications/Saliency_Model_Schematic_green.png" alt="Brand visibility schematic" loading="lazy" width="2677" height="1153">
                 <span class="pub-venue-badge">Discover'25</span>
               </a>
               <div class="pub-body">
                 <a class="pub-title" href="https://link.springer.com/article/10.1007/s42452-025-07043-9" target="_blank" rel="noopener">Brand Visibility in Packaging: A Deep Learning Approach for Logo Detection, Saliency-Map Prediction, and Logo Placement Analysis</a>
                 <div class="pub-authors">Alireza Hosseini, <strong>Kiana Hooshanfar</strong>, Pouria Omrani, Reza Toosi, Ramin Toosi, Zahra Ebrahimian, Mohammad Ali Akhaee</div>
                 <div class="pub-venue-text">Discover Applied Sciences, 2025.</div>
+                <div class="pub-topics"><span>Saliency Prediction</span><span>Computer Vision</span><span>Deep Learning</span></div>
                 <div class="pub-links">
                   <a href="https://link.springer.com/article/10.1007/s42452-025-07043-9" target="_blank" rel="noopener"><i class='bx bx-file-blank'></i>PDF</a>
                   <a href="https://github.com/Arhosseini77/Brand_Attention" target="_blank" rel="noopener"><i class='bx bxl-github'></i>Code</a>
@@ -1287,22 +2166,39 @@
             </div>
             <div class="pub-abstract" hidden>
               <p>The visibility of brand logos on packaging plays a crucial role in shaping consumer perception, directly influencing the product's success. Analyzing eye-tracking data across large groups of individuals is both costly and time-intensive. Therefore, there is a growing need to develop models that capture human visual attention behavior effectively. This paper introduces a framework that models attention in the human visual system to brand logos on packaging designs, to measure brand logo visibility and its impact on consumer perception. The proposed method consists of three main steps: logo detection with YOLOv8, a novel saliency prediction model tailored for the packaging context, and integration of both to provide a brand attention score. Comparing logo detection and saliency map prediction with state-of-the-art models shows the superiority of the proposed methods, and the brand attention score aligns with previous psychophysical studies on brand visibility.</p>
+              <div class="pub-cite">
+                <div class="pub-cite-head">
+                  <span class="pub-cite-label">BibTeX</span>
+                  <button type="button" class="pub-copy-btn"><i class='bx bx-copy'></i><span class="copy-label">Copy</span></button>
+                </div>
+                <pre class="pub-bibtex">@article{hosseini2025brand,
+  title={Brand visibility in packaging: A deep learning approach for logo detection, saliency-map prediction, and logo placement analysis},
+  author={Hosseini, Alireza and Hooshanfar, Kiana and Omrani, Pouria and Toosi, Reza and Toosi, Ramin and Ebrahimian, Zahra and Akhaee, Mohammad Ali},
+  journal={Discover Applied Sciences},
+  volume={7},
+  number={6},
+  pages={537},
+  year={2025},
+  publisher={Springer}
+}</pre>
+              </div>
             </div>
           </div>
         </article>
 
-        <article class="pub-card">
+        <article class="pub-card" data-topics="Large Language Models,RAG ,Deep Learning">
           <div class="pub-bar"></div>
           <div class="pub-main">
             <div class="pub-inner">
               <a class="pub-thumb" href="https://ieeexplore.ieee.org/abstract/document/10533345" target="_blank" rel="noopener">
-                <img src="assets/publications/hybrid.drawio.png" alt="Hybrid RAG architecture">
+                <img src="assets/publications/hybrid.drawio.png" alt="Hybrid RAG architecture" loading="lazy" width="787" height="1560">
                 <span class="pub-venue-badge">ICWR'24</span>
               </a>
               <div class="pub-body">
                 <a class="pub-title" href="https://ieeexplore.ieee.org/abstract/document/10533345" target="_blank" rel="noopener">Hybrid Retrieval-Augmented Generation Approach for LLMs Query Response Enhancement</a>
                 <div class="pub-authors">Pouria Omrani, Alireza Hosseini, <strong>Kiana Hooshanfar</strong>, Zahra Ebrahimian, Ramin Toosi, Mohammad Ali Akhaee</div>
                 <div class="pub-venue-text">International Conference on Web Research (ICWR), 2024.</div>
+                <div class="pub-topics"><span>Large Language Models</span><span>RAG</span></div>
                 <div class="pub-links">
                   <a href="https://ieeexplore.ieee.org/abstract/document/10533345" target="_blank" rel="noopener"><i class='bx bx-file-blank'></i>PDF</a>
                 </div>
@@ -1313,22 +2209,37 @@
             </div>
             <div class="pub-abstract" hidden>
               <p>In the domain of Natural Language Processing (NLP), the integration of Large Language Models (LLMs) with Retrieval-Augmented Generation (RAG) represents a significant advancement towards enhancing the depth and relevance of model-generated responses. This paper introduces a novel hybrid RAG framework that synergizes the Sentence-Window and Parent-Child methodologies with an innovative re-ranking mechanism, aimed at optimizing the query response capabilities of LLMs. By leveraging external knowledge sources more effectively, the proposed method enriches LLM outputs with greater accuracy, relevance, and information fidelity. Evaluation against benchmark datasets demonstrates superior performance over existing state-of-the-art RAG techniques, with responses that are contextually appropriate and faithful to the source material.</p>
+              <div class="pub-cite">
+                <div class="pub-cite-head">
+                  <span class="pub-cite-label">BibTeX</span>
+                  <button type="button" class="pub-copy-btn"><i class='bx bx-copy'></i><span class="copy-label">Copy</span></button>
+                </div>
+                <pre class="pub-bibtex">@inproceedings{omrani2024hybrid,
+  title={Hybrid retrieval-augmented generation approach for LLMs query response enhancement},
+  author={Omrani, Pouria and Hosseini, Alireza and Hooshanfar, Kiana and Ebrahimian, Zahra and Toosi, Ramin and Akhaee, Mohammad Ali},
+  booktitle={2024 10th International Conference on Web Research (ICWR)},
+  pages={22--26},
+  year={2024},
+  organization={IEEE}
+}</pre>
+              </div>
             </div>
           </div>
         </article>
 
-        <article class="pub-card">
+        <article class="pub-card" data-topics="Human-Computer Interaction,Deep Learning">
           <div class="pub-bar"></div>
           <div class="pub-main">
             <div class="pub-inner">
               <a class="pub-thumb" href="https://ieeexplore.ieee.org/abstract/document/10412408/" target="_blank" rel="noopener">
-                <img src="assets/publications/robot.png" alt="Eye-tracking robotics">
+                <img src="assets/publications/robot.png" alt="Eye-tracking robotics" loading="lazy" width="693" height="541">
                 <span class="pub-venue-badge">ICRoM'23</span>
               </a>
               <div class="pub-body">
                 <a class="pub-title" href="https://ieeexplore.ieee.org/abstract/document/10412408/" target="_blank" rel="noopener">Eye-Tracking Based Control of a Robotic Arm and Wheelchair for People with Severe Speech and Motor Impairment</a>
                 <div class="pub-authors">Maryam Asad Samani, <strong>Kiana Hooshanfar</strong>, Helia Shams Jey, Seyed Majid Esmailzadeh</div>
                 <div class="pub-venue-text">International Conference on Robotics and Mechatronics (ICRoM), 2023.</div>
+                <div class="pub-topics"><span>Human-Computer Interaction</span><span>Deep Learning</span></div>
                 <div class="pub-links">
                   <a href="https://ieeexplore.ieee.org/abstract/document/10412408/" target="_blank" rel="noopener"><i class='bx bx-file-blank'></i>PDF</a>
                   <a href="https://github.com/K-Hooshanfar/EyeTrackRobot" target="_blank" rel="noopener"><i class='bx bxl-github'></i>Code</a>
@@ -1340,7 +2251,152 @@
             </div>
             <div class="pub-abstract" hidden>
               <p>Eye-tracking technology has rapidly gained popularity as a revolutionary solution for individuals with severe physical disabilities, empowering them to engage in their daily activities with newfound independence and efficiency. By utilizing advanced eye-tracking systems, individuals with limited mobility are able to control various devices and interfaces simply by moving their eyes. This paper utilizes deep learning techniques to create a low-cost real-time eye-tracking interface for controlling systems. A smart wheelchair and a robotic arm have been developed to design an eye-tracker, aiming to address the challenges faced by paralyzed people with severe physical limitations. The results demonstrate that eye-tracking is both fast and accurate, making it an effective tool for improving interactions and accessibility for disabled individuals.</p>
+              <div class="pub-cite">
+                <div class="pub-cite-head">
+                  <span class="pub-cite-label">BibTeX</span>
+                  <button type="button" class="pub-copy-btn"><i class='bx bx-copy'></i><span class="copy-label">Copy</span></button>
+                </div>
+                <pre class="pub-bibtex">@inproceedings{samani2023eye,
+  title={Eye-tracking based control of a robotic arm and wheelchair for people with severe speech and motor impairment (ssmi)},
+  author={Samani, Maryam Asad and Hooshanfar, Kiana and Jey, Helia Shams and Esmailzadeh, Seyed Majid},
+  booktitle={2023 11th RSI International Conference on Robotics and Mechatronics (ICRoM)},
+  pages={35--41},
+  year={2023},
+  organization={IEEE}
+}</pre>
+              </div>
             </div>
+          </div>
+        </article>
+
+      </div>
+      <p id="pub-empty" class="pub-empty" hidden>No publications match that topic.</p>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <div class="sec-head">
+        <h2>Projects</h2>
+        <div class="sec-rule"></div>
+      </div>
+
+      <div class="proj-meta" aria-hidden="true">
+        <div>Archive: 2026.V1</div>
+        <div>Status: open to collaboration</div>
+        <div class="proj-accent">Projects &mdash; selected</div>
+      </div>
+
+      <div class="proj-stage">
+        <svg class="proj-doodle" viewBox="0 0 150 70" fill="none" aria-hidden="true">
+          <path d="M4 62C30 60 66 50 92 20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M76 16 96 14 94 34" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+
+        <article class="card" tabindex="0"
+          style="--x:48%;--y:16%;--r:-1.2deg;--z:10;--w:470px;--bg:var(--bg-slate);--fg:var(--fg-slate);--i:0;--r-m:-1deg">
+          <div class="card-head"><span>Project&hellip; Multi-Agent</span><span class="ref">Ref: SYS/01</span></div>
+          <p class="card-body">A multi-agent LLM platform: intent routing, tool calling, and auditable workflows, plus a Weaviate RAG pipeline with hybrid retrieval, BGE-M3, and layered safety guardrails.</p>
+          <div class="card-foot">
+            <span class="stack-list">ADK / Weaviate</span>
+          </div>
+        </article>
+
+        <article class="card" tabindex="0"
+          style="--x:16%;--y:58%;--r:2deg;--z:11;--w:430px;--bg:var(--bg-deep);--fg:var(--fg-deep);--i:1;--r-m:1deg">
+          <div class="card-head"><span>Project&hellip; Yara</span><span class="ref">Ref: DEV/06</span></div>
+          <p class="card-body">A docs support assistant: hybrid RAG for how-to questions, and a multi-step troubleshooting agent when something is broken &mdash; it refuses to guess when evidence is insufficient.</p>
+          <div class="card-foot">
+            <span class="stack-list">ADK / Qdrant</span>
+            <span class="links">
+              <a href="https://github.com/K-Hooshanfar/yara-docs-agent" target="_blank" rel="noopener">Code &#8599;</a>
+            </span>
+          </div>
+        </article>
+
+        <article class="card" tabindex="0"
+          style="--x:32%;--y:23%;--r:-2.5deg;--z:5;--w:440px;--bg:var(--bg-dark);--fg:var(--fg-dark);--i:2;--r-m:-1.5deg">
+          <div class="card-head"><span>Project&hellip; OpenVAM</span><span class="ref">Ref: PRJ/01</span></div>
+          <p class="card-body">Open-world visual attention with VLMs &mdash; predicts <strong>where</strong> people look, plus the <strong>what</strong> and <strong>why</strong> behind it, across natural images, ads, and UIs.</p>
+          <div class="card-foot">
+            <span class="stack-list">Saliency / VLMs</span>
+            <span class="links">
+              <a href="https://k-hooshanfar.github.io/openvam/" target="_blank" rel="noopener">Project &#8599;</a>
+              <a href="https://github.com/K-Hooshanfar/OpenVAM" target="_blank" rel="noopener">Code</a>
+            </span>
+          </div>
+        </article>
+
+        <article class="card" tabindex="0"
+          style="--x:68%;--y:24%;--r:2deg;--z:6;--w:430px;--bg:var(--bg-1);--fg:var(--fg-1);--i:3;--r-m:1deg">
+          <div class="card-head"><span>Project&hellip; DTFSal</span><span class="ref">Ref: PRJ/02</span></div>
+          <p class="card-body">Audio-visual saliency for video: dynamic token fusion predicts where attention lands from what you see <em>and</em> hear &mdash; state of the art on six benchmarks.</p>
+          <div class="card-foot">
+            <span class="stack-list">BMVC 2025</span>
+            <span class="links">
+              <a href="https://k-hooshanfar.github.io/dtfsal/" target="_blank" rel="noopener">Project &#8599;</a>
+              <a href="https://bmvc2025.bmva.org/proceedings/770/" target="_blank" rel="noopener">Paper</a>
+            </span>
+          </div>
+        </article>
+
+        <article class="card" tabindex="0"
+          style="--x:22%;--y:38%;--r:2.5deg;--z:4;--w:410px;--bg:var(--bg-3);--fg:var(--fg-3);--i:4;--r-m:-1deg">
+          <div class="card-head"><span>Project&hellip; Brand Attention</span><span class="ref">Ref: PRJ/03</span></div>
+          <p class="card-body">Where do eyes land on a shelf? Logo detection plus packaging-tuned saliency, distilled into a single brand-visibility score.</p>
+          <div class="card-foot">
+            <span class="stack-list">Discover App. Sci. 2025</span>
+            <span class="links">
+              <a href="https://link.springer.com/article/10.1007/s42452-025-07043-9" target="_blank" rel="noopener">Paper &#8599;</a>
+              <a href="https://github.com/Arhosseini77/Brand_Attention" target="_blank" rel="noopener">Code</a>
+            </span>
+          </div>
+        </article>
+
+        <article class="card" tabindex="0"
+          style="--x:60%;--y:39%;--r:-1.5deg;--z:7;--w:460px;--bg:var(--bg-deep);--fg:var(--fg-deep);--i:5;--r-m:1.5deg">
+          <div class="card-head"><span>Project&hellip; Doc Parser</span><span class="ref">Ref: DEV/01</span></div>
+          <p class="card-body">Engineering drawings, structured. YOLO finds the title block, auto-rotates and crops it, then Qwen2.5-VL reads out fields like scale and drawing number.</p>
+          <div class="card-foot">
+            <span class="stack-list">YOLO / Qwen2.5-VL</span>
+            <span class="links">
+              <a href="https://github.com/K-Hooshanfar/engineering-doc-parser" target="_blank" rel="noopener">Code &#8599;</a>
+            </span>
+          </div>
+        </article>
+
+        <article class="card" tabindex="0"
+          style="--x:81%;--y:60%;--r:3deg;--z:3;--w:400px;--bg:var(--bg-2);--fg:var(--fg-2);--i:6;--r-m:-1deg">
+          <div class="card-head"><span>Project&hellip; Influencer AI</span><span class="ref">Ref: DEV/04</span></div>
+          <p class="card-body">Turn a few parameters into social content &mdash; 15+ formats from hashtags to captions, plus GPT-4o vision for images, in two steps.</p>
+          <div class="card-foot">
+            <span class="stack-list">OpenAI / GPT-4o</span>
+            <span class="links">
+              <a href="https://github.com/K-Hooshanfar/influencer_ai" target="_blank" rel="noopener">Code &#8599;</a>
+            </span>
+          </div>
+        </article>
+
+        <article class="card" tabindex="0"
+          style="--x:34%;--y:62%;--r:-2deg;--z:8;--w:460px;--bg:var(--bg-4);--fg:var(--fg-4);--i:7;--r-m:1.5deg">
+          <div class="card-head"><span>Project&hellip; Doc Intelligence</span><span class="ref">Ref: DEV/03</span></div>
+          <p class="card-body">GPU OCR, table extraction, and document classification from PDFs and images &mdash; Surya OCR plus Qwen, served through a Gradio UI and a REST API.</p>
+          <div class="card-foot">
+            <span class="stack-list">Surya / vLLM</span>
+            <span class="links">
+              <a href="https://github.com/K-Hooshanfar/document-intelligence" target="_blank" rel="noopener">Code &#8599;</a>
+            </span>
+          </div>
+        </article>
+
+        <article class="card" tabindex="0"
+          style="--x:67%;--y:70%;--r:1.5deg;--z:9;--w:440px;--bg:var(--bg-accent);--fg:var(--fg-accent);--i:8;--r-m:-1deg">
+          <div class="card-head"><span>Project&hellip; OCR Bot</span><span class="ref">Ref: DEV/02</span></div>
+          <p class="card-body">Send a document photo to Telegram, get back clean Markdown, LaTeX, or DOCX. Gemini OCR on a FastAPI backend with auth and credits.</p>
+          <div class="card-foot">
+            <span class="stack-list">Gemini / FastAPI</span>
+            <span class="links">
+              <a href="https://github.com/K-Hooshanfar/ocr_telegram_bot" target="_blank" rel="noopener">Code &#8599;</a>
+            </span>
           </div>
         </article>
 
@@ -1363,7 +2419,79 @@
       </ul>
     </section>
 
+    <!-- Teaching -->
+    <section id="teaching" class="teach-scope">
+      <div class="sec-head">
+        <h2>Teaching Experience</h2>
+        <div class="sec-rule"></div>
+      </div>
+
+      <div class="teach-legend">
+        <span class="lg-ai"><i class="lg-dot"></i>Machine Learning &amp; AI</span>
+        <span class="lg-control"><i class="lg-dot"></i>Control Systems</span>
+        <span class="lg-core"><i class="lg-dot"></i>Foundations</span>
+        <span class="lg-lab"><i class="lg-dot"></i>Laboratory</span>
+      </div>
+
+      <div class="timeline">
+
+        <div class="tl-item teach-item">
+          <div class="tl-dot"></div>
+          <div class="teach-role">
+            Teaching Assistant
+            <span class="teach-count">8 courses</span>
+          </div>
+          <div class="edu-meta">
+            <i class='bx bx-buildings'></i>
+            University of Tehran · Tehran, Iran · 2023 – 2025
+          </div>
+          <div class="teach-courses">
+            <span class="course c-ai">Machine Learning</span>
+            <span class="course c-ai">Neural Networks and Deep Learning</span>
+            <span class="course c-ai">Analysis and Design of Deep Neural Networks</span>
+            <span class="course c-core">Linear Algebra</span>
+            <span class="course c-control">System Identification</span>
+            <span class="course c-control">Linear Control Systems</span>
+            <span class="course c-lab"><i class='bx bx-test-tube'></i>Linear Control Systems Laboratory</span>
+            <span class="course c-lab"><i class='bx bx-test-tube'></i>Digital Control Laboratory</span>
+          </div>
+        </div>
+
+        <div class="tl-item teach-item">
+          <div class="tl-dot"></div>
+          <div class="teach-role">
+            Teaching Assistant
+            <span class="teach-count">6 courses</span>
+          </div>
+          <div class="edu-meta">
+            <i class='bx bx-buildings'></i>
+            Iran University of Science &amp; Technology (IUST) · Tehran, Iran · 2021 – 2022
+          </div>
+          <div class="teach-courses">
+            <span class="course c-control">Principles of Mechatronics</span>
+            <span class="course c-control">Signals and Systems</span>
+            <span class="course c-control">Electrical Circuits II</span>
+            <span class="course c-core">Linear Algebra</span>
+            <span class="course c-core">Python</span>
+            <span class="course c-core">Technical Language</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
   </main>
+
+  <!-- ── FOOTER ────────────────────────── -->
+  <footer>
+    <div class="footer-links">
+      <a href="mailto:k.hooshanfar02@gmail.com" aria-label="Email" title="Email"><i class='bx bx-envelope'></i></a>
+      <a href="https://scholar.google.com/citations?user=-qqc3AUAAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Google Scholar" title="Google Scholar"><i class='bx bxs-graduation'></i></a>
+      <a href="https://github.com/K-Hooshanfar" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><i class='bx bxl-github'></i></a>
+      <a href="https://www.linkedin.com/in/kiana-hooshanfar/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><i class='bx bxl-linkedin'></i></a>
+    </div>
+    <div class="footer-note">© 2026 Kiana Hooshanfar</div>
+  </footer>
 
   <!-- ── VERSION TOGGLE ────────────────── -->
   <button class="ver-btn" onclick="window.location.href='creative_portfolio.html'" aria-label="Creative version">
@@ -1371,8 +2499,9 @@
   </button>
 
   <!-- ── CHAT ──────────────────────────── -->
-  <button id="chat-toggle" class="chat-fab" aria-label="Chat with me">
+  <button id="chat-toggle" class="chat-fab" aria-label="Ask about my work">
     <i class='bx bx-chat'></i>
+    <span class="fab-label">Ask about my work</span>
   </button>
 
   <div id="chat-widget" class="chat-widget">
@@ -1458,6 +2587,29 @@
     window.addEventListener('load', updateActiveSection);
     updateActiveSection();
 
+    /* ── DARK MODE ── */
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = themeToggle.querySelector('i');
+
+    function applyThemeIcon() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      themeIcon.className = isDark ? 'bx bx-sun' : 'bx bx-moon';
+      themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+    applyThemeIcon();
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      applyThemeIcon();
+    });
+
     /* ── SCROLL ANIMATIONS ── */
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
@@ -1469,6 +2621,37 @@
     }, { threshold: 0.07, rootMargin: '0px 0px -30px 0px' });
 
     document.querySelectorAll('section').forEach(s => io.observe(s));
+
+    /* ── PROJECTS: TAP TO SURFACE A CARD ── */
+    (function() {
+      const cards = [...document.querySelectorAll('#projects .card')];
+      if (!cards.length) return;
+
+      const surface = (card) => cards.forEach(c => c.classList.toggle('is-active', c === card));
+      const toggle  = (card) => card.classList.contains('is-active')
+        ? card.classList.remove('is-active')
+        : surface(card);
+
+      cards.forEach(card => {
+        card.addEventListener('click', (e) => {
+          if (e.target.closest('a')) return;   // let links work
+          toggle(card);
+        });
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            if (e.target.closest('a')) return;
+            e.preventDefault();
+            toggle(card);
+          }
+        });
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('#projects .card')) {
+          cards.forEach(c => c.classList.remove('is-active'));
+        }
+      });
+    })();
 
     /* ── PUBLICATION ABSTRACTS ── */
     document.querySelectorAll('.pub-expand-btn').forEach(btn => {
@@ -1484,19 +2667,100 @@
       });
     });
 
+    /* ── COPY BIBTEX ── */
+    document.querySelectorAll('.pub-copy-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const pre = btn.closest('.pub-cite').querySelector('.pub-bibtex');
+        const text = pre.textContent;
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch {
+          const range = document.createRange();
+          range.selectNode(pre);
+          const sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+          try { document.execCommand('copy'); } catch {}
+          sel.removeAllRanges();
+        }
+        const label = btn.querySelector('.copy-label');
+        const prev = label.textContent;
+        btn.classList.add('copied');
+        label.textContent = 'Copied!';
+        setTimeout(() => { btn.classList.remove('copied'); label.textContent = prev; }, 1600);
+      });
+    });
+
+    /* ── PUBLICATION FILTERS ── */
+    const pubFilters = document.querySelectorAll('.pub-filter');
+    const pubCards   = document.querySelectorAll('#pub-stack .pub-card');
+    const pubEmpty   = document.getElementById('pub-empty');
+
+    function applyPubFilter(topic) {
+      let visible = 0;
+      pubCards.forEach(card => {
+        const topics = (card.dataset.topics || '').split(',').map(t => t.trim());
+        const show = topic === 'all' || topics.includes(topic);
+        card.hidden = !show;
+        if (show) visible++;
+      });
+      if (pubEmpty) pubEmpty.hidden = visible !== 0;
+    }
+
+    pubFilters.forEach(btn => {
+      btn.addEventListener('click', () => {
+        pubFilters.forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+        applyPubFilter(btn.dataset.topic);
+      });
+    });
+
+    /* ── NEWS: SHOW LATEST 4 ── */
+    (function() {
+      const NEWS_VISIBLE = 4;
+      const stack = document.querySelector('.news-stack');
+      if (!stack) return;
+      const cards = stack.querySelectorAll('.news-card');
+      if (cards.length <= NEWS_VISIBLE) return;
+
+      const older = Array.from(cards).slice(NEWS_VISIBLE);
+      older.forEach(c => c.hidden = true);
+
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'news-toggle';
+      btn.setAttribute('aria-expanded', 'false');
+      btn.innerHTML = `<span>Show older news (${older.length})</span><i class='bx bx-chevron-down'></i>`;
+      stack.appendChild(btn);
+
+      btn.addEventListener('click', () => {
+        const open = btn.classList.toggle('open');
+        older.forEach(c => c.hidden = !open);
+        btn.setAttribute('aria-expanded', String(open));
+        btn.querySelector('span').textContent = open ? 'Show fewer' : `Show older news (${older.length})`;
+      });
+    })();
+
     /* ── CHAT ── */
     const K  = 'AIzaSyD9YBqWkFJ-IFB_';
     const K2 = 'goTWZhVcF4FE7Vt1v1A';
     const API = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${K}${K2}`;
 
     let resume = '';
-    fetch('./resume.md')
-      .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
-      .then(t => { resume = t; })
-      .catch(e => console.warn('resume.md not loaded:', e));
+    let resumePromise = null;
+    const loadResume = () => {
+      if (!resumePromise) {
+        resumePromise = fetch('./resume.md')
+          .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+          .then(t => { resume = t; })
+          .catch(e => { console.warn('resume.md not loaded:', e); resumePromise = null; });
+      }
+      return resumePromise;
+    };
 
     const chatEl = document.getElementById('chat-widget');
     const fab    = document.getElementById('chat-toggle');
+    setTimeout(() => fab.classList.add('expanded'), 1200);
+    setTimeout(() => fab.classList.remove('expanded'), 5200);
     const closeB = document.getElementById('chat-close');
     const log    = document.getElementById('chat-log');
     const form   = document.getElementById('chat-form');
@@ -1505,7 +2769,10 @@
 
     const setOpen = v => {
       chatEl.classList.toggle('open', v);
-      if (v) setTimeout(() => inp.focus(), 50);
+      if (v) {
+        loadResume();
+        setTimeout(() => inp.focus(), 50);
+      }
     };
 
     fab.addEventListener('click',  () => setOpen(!chatEl.classList.contains('open')));
@@ -1549,8 +2816,9 @@
       inp.value = '';
       const waiting = addMsg('…', 'bot');
 
+      if (!resume) await loadResume();
       if (!resume) {
-        waiting.textContent = 'Resume is still loading - please try again in a moment.';
+        waiting.textContent = 'Resume could not be loaded - please try again in a moment.';
         return;
       }
 
@@ -1576,6 +2844,59 @@ Assistant:`;
         waiting.textContent = `Error: ${err.message}`;
       }
     });
+
+    /* ── NAV OPTION B: dropdown + mobile menu ──────────────────────── */
+    (function () {
+      const group    = document.getElementById('nav-group');
+      const groupBtn = document.getElementById('nav-group-btn');
+      const burger   = document.getElementById('nav-burger');
+      const links    = document.getElementById('nav-links');
+      const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
+
+      function setGroup(open) {
+        group.classList.toggle('open', open);
+        groupBtn.setAttribute('aria-expanded', String(open));
+      }
+      groupBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setGroup(!group.classList.contains('open'));
+      });
+      document.addEventListener('click', (e) => {
+        if (!group.contains(e.target)) setGroup(false);
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') { setGroup(false); setMobile(false); }
+      });
+
+      function setMobile(open) {
+        links.classList.toggle('mobile-open', open);
+        burger.setAttribute('aria-expanded', String(open));
+        burger.querySelector('i').className = open ? 'bx bx-x' : 'bx bx-menu';
+      }
+      burger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setMobile(!links.classList.contains('mobile-open'));
+      });
+
+      links.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => { if (isMobile()) setMobile(false); });
+      });
+
+      const groupLinks = [...group.querySelectorAll('.nav-dropdown a')];
+      const syncTrigger = () => {
+        const anyActive = groupLinks.some(a => a.classList.contains('active'));
+        groupBtn.classList.toggle('trigger-active', anyActive);
+      };
+      const mo = new MutationObserver(syncTrigger);
+      groupLinks.forEach(a => mo.observe(a, { attributes: true, attributeFilter: ['class'] }));
+      window.addEventListener('scroll', syncTrigger, { passive: true });
+      syncTrigger();
+
+      window.addEventListener('resize', () => {
+        if (!isMobile()) { setMobile(false); }
+        else { setGroup(false); }
+      });
+    })();
   </script>
 </body>
 </html>
