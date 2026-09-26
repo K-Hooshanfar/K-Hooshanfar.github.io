@@ -1,0 +1,244 @@
+\begin{table*}[t]
+    \centering
+    \vspace{-0.5em}
+    \caption{\textbf{Saliency prediction performance across various datasets.} 
+    Baseline results are taken from their respective papers.}
+    \vspace{-0.4em}
+    \label{tab:saliency}
+    \resizebox{1\textwidth}{!}{
+    \setlength{\tabcolsep}{6pt}
+    \scriptsize
+    \begin{tabular}{c|lcccccccccc}
+    \toprule
+    Dataset & Method 
+    & CC $\uparrow$ & & KLD $\downarrow$ & & AUC $\uparrow$ & & SIM $\uparrow$ & & NSS $\uparrow$ &  \\
+    \midrule
+    
+    % ========================= U-EYE =========================
+    \textit{U-EYE}~\cite{jiang2023ueyes} 
+    & SAM~\cite{cornia2018predicting} & 0.580 && 1.490 && 0.811 && 0.520 && 1.640 & \\
+    (Web page)
+    & UMSI~\cite{fosco2020predicting} & 0.562 && 1.580 && 0.805 && 0.510 && 1.690 & \\
+    & SAM++~\cite{jiang2023ueyes} & 0.580 && 1.190 && 0.800 && 0.530 && 1.660 & \\
+    & Transalnet~\cite{lou2022transalnet} & 0.696 && 0.616 && 0.839 && 0.598 && 1.601 & \\
+    & UMSI++~\cite{jiang2023ueyes} & 0.670 && 0.860 && 0.830 && 0.580 && 1.610 & \\
+    & SUM~\cite{hosseini2025sum} & 0.731 && 0.544 && 0.846 && 0.630 && 1.704 & \\
+    \cmidrule{2-12}
+    & \cellcolor[HTML]{DADCFF}OpenVAM-3B
+    & \cellcolor[HTML]{DADCFF}0.734\scriptsize{(+0.41\%)} && 
+      \cellcolor[HTML]{DADCFF}0.542\scriptsize{(+0.37\%)} && 
+      \cellcolor[HTML]{DADCFF}0.847\scriptsize{(+0.12\%)} && 
+      \cellcolor[HTML]{DADCFF}0.639\scriptsize{(+1.43\%)} && 
+      \cellcolor[HTML]{DADCFF}1.720\scriptsize{(+0.94\%)} & \\
+    & \cellcolor[HTML]{DADCFF}OpenVAM-4B
+    & \cellcolor[HTML]{DADCFF}0.737\scriptsize{(+0.82\%)} && 
+      \cellcolor[HTML]{DADCFF}0.538\scriptsize{(+1.10\%)} && 
+      \cellcolor[HTML]{DADCFF}0.847\scriptsize{(+0.12\%)} && 
+      \cellcolor[HTML]{DADCFF}0.627\scriptsize{(-0.48\%)} && 
+      \cellcolor[HTML]{DADCFF}1.718\scriptsize{(+0.82\%)} & \\
+    & \cellcolor[HTML]{DADCFF}OpenVAM-7B
+    & \cellcolor[HTML]{DADCFF}0.736\scriptsize{(+0.68\%)} && 
+      \cellcolor[HTML]{DADCFF}0.539\scriptsize{(+0.92\%)} && 
+      \cellcolor[HTML]{DADCFF}0.847\scriptsize{(+0.12\%)} && 
+      \cellcolor[HTML]{DADCFF}\textbf{0.642\scriptsize{(+1.90\%)}} && 
+      \cellcolor[HTML]{DADCFF}\textbf{1.732\scriptsize{(+1.64\%)}} & \\ 
+    & \cellcolor[HTML]{DADCFF}OpenVAM-8B
+    & \cellcolor[HTML]{DADCFF}\textbf{0.739\scriptsize{(+1.09\%)}} && 
+      \cellcolor[HTML]{DADCFF}\textbf{0.537\scriptsize{(+1.29\%)}} && 
+      \cellcolor[HTML]{DADCFF}\textbf{0.848\scriptsize{(+0.24\%)}} && 
+      \cellcolor[HTML]{DADCFF}0.630\scriptsize{(+0.00\%)} && 
+      \cellcolor[HTML]{DADCFF}1.727\scriptsize{(+1.35\%)} & \\
+    \midrule
+    
+    % ========================= SalECI =========================
+    \textit{SalECI}~\cite{jiang2022does}
+    & SSM~\cite{cornia2018predicting} & 0.720 && 0.599 && 0.830 && 0.611 && 1.396 & \\
+    (E-Commercial)
+    & DeepGaze IIE~\cite{linardos2021deepgaze} & 0.560 && 0.995 && 0.842 && 0.399 && 1.327 & \\
+    & EML-NET~\cite{jiang2023ueyes} & 0.510 && 1.220 && 0.807 && 0.536 && 1.232 & \\
+    & Transalnet~\cite{jiang2023ueyes} & 0.717 && 0.873 && 0.824 && 0.534 && 1.723 & \\
+    & Temp-Sal~\cite{aydemir2023tempsal} & 0.719 && 0.712 && 0.813 && 0.629 && 1.768 & \\
+    & SSwin Transformer~\cite{jiang2022does} & 0.687 && 0.652 && 0.868 && 0.606 && 1.701 & \\
+    & BrandAttn~\cite{hosseini2024brand} & 0.750 && 0.578 && 0.892 && 0.645 && 1.890 & \\
+    & SUM~\cite{hosseini2025sum} & 0.789 && 0.473 && 0.899 && 0.680 && 2.012 & \\
+    \cmidrule{2-12}
+    & \cellcolor[HTML]{DADCFF}OpenVAM-3B
+    & \cellcolor[HTML]{DADCFF}0.795\scriptsize{(+0.76\%)} && 
+      \cellcolor[HTML]{DADCFF}0.462\scriptsize{(+2.33\%)} && 
+      \cellcolor[HTML]{DADCFF}0.899\scriptsize{(+0.00\%)} && 
+      \cellcolor[HTML]{DADCFF}0.680\scriptsize{(+0.00\%)} && 
+      \cellcolor[HTML]{DADCFF}2.026\scriptsize{(+0.70\%)} & \\
+    & \cellcolor[HTML]{DADCFF}OpenVAM-4B
+    & \cellcolor[HTML]{DADCFF}\textbf{0.797\scriptsize{(+1.01\%)}} && 
+      \cellcolor[HTML]{DADCFF}\textbf{0.450\scriptsize{(+4.86\%)}} && 
+      \cellcolor[HTML]{DADCFF}\textbf{0.901\scriptsize{(+0.22\%)}} && 
+      \cellcolor[HTML]{DADCFF}0.679\scriptsize{(-0.15\%)} && 
+      \cellcolor[HTML]{DADCFF}\textbf{2.033\scriptsize{(+1.04\%)}} & \\
+    & \cellcolor[HTML]{DADCFF}OpenVAM-7B
+    & \cellcolor[HTML]{DADCFF}\textbf{0.797\scriptsize{(+1.01\%)}} && 
+      \cellcolor[HTML]{DADCFF}0.452\scriptsize{(+4.44\%)} && 
+      \cellcolor[HTML]{DADCFF}0.899\scriptsize{(+0.00\%)} && 
+      \cellcolor[HTML]{DADCFF}\textbf{0.692\scriptsize{(+1.76\%)}} && 
+      \cellcolor[HTML]{DADCFF}2.032\scriptsize{(+0.99\%)} & \\
+    & \cellcolor[HTML]{DADCFF}OpenVAM-8B
+    & \cellcolor[HTML]{DADCFF}0.792\scriptsize{(+0.38\%)} && 
+      \cellcolor[HTML]{DADCFF}0.460\scriptsize{(+2.75\%)} && 
+      \cellcolor[HTML]{DADCFF}0.900\scriptsize{(+0.11\%)} && 
+      \cellcolor[HTML]{DADCFF}0.678\scriptsize{(-0.29\%)} && 
+      \cellcolor[HTML]{DADCFF}2.022\scriptsize{(+0.50\%)} & \\
+    \midrule
+    
+    % ========================= OSIE =========================
+    \textit{OSIE}~\cite{xu2014predicting}
+    & UMSI~\cite{fosco2020predicting} & 0.746 && 0.513 && 0.856 && 0.631 && 1.788 & \\
+    (Natural scene)
+    & EML-NET~\cite{jia2020eml} & 0.717 && 0.537 && 0.854 && 0.619 && 1.737 & \\
+    & SAM-ResNet~\cite{cornia2018predicting} & 0.758 && 0.480 && 0.860 && 0.648 && 1.811 & \\
+    & BrandAttn~\cite{chen2023learning} & 0.761 && 0.506 && 0.860 && 0.652 && 1.840 & \\
+    & Transalnet~\cite{jiang2023ueyes} & 0.791 && 0.667 && 0.923 && 0.651 && 2.448 & \\
+    & UniAR~\cite{li2024uniar} & 0.754 && 0.547 && 0.867 && 0.647 && 1.842 & \\
+    & SUM~\cite{hosseini2025sum} & 0.861 && 0.340 && 0.924 && 0.727 && 3.416 & \\
+    \cmidrule{2-12}
+    & \cellcolor[HTML]{DADCFF}OpenVAM-3B
+    & \cellcolor[HTML]{DADCFF}0.928\scriptsize{(+7.78\%)} && 
+      \cellcolor[HTML]{DADCFF}0.214\scriptsize{(+37.06\%)} && 
+      \cellcolor[HTML]{DADCFF}0.935\scriptsize{(+1.19\%)} && 
+      \cellcolor[HTML]{DADCFF}0.793\scriptsize{(+9.08\%)} && 
+      \cellcolor[HTML]{DADCFF}3.841\scriptsize{(+12.44\%)} & \\
+    & \cellcolor[HTML]{DADCFF}OpenVAM-4B
+    & \cellcolor[HTML]{DADCFF}\textbf{0.933\scriptsize{(+8.36\%)}} && 
+      \cellcolor[HTML]{DADCFF}0.211\scriptsize{(+37.94\%)} && 
+      \cellcolor[HTML]{DADCFF}\textbf{0.936\scriptsize{(+1.30\%)}} && 
+      \cellcolor[HTML]{DADCFF}0.786\scriptsize{(+8.12\%)} && 
+      \cellcolor[HTML]{DADCFF}3.713\scriptsize{(+8.69\%)} & \\
+    & \cellcolor[HTML]{DADCFF}OpenVAM-7B
+    & \cellcolor[HTML]{DADCFF}0.931\scriptsize{(+8.13\%)} && 
+      \cellcolor[HTML]{DADCFF}\textbf{0.209\scriptsize{(+38.53\%)}} && 
+      \cellcolor[HTML]{DADCFF}\textbf{0.936\scriptsize{(+1.30\%)}} && 
+      \cellcolor[HTML]{DADCFF}\textbf{0.799\scriptsize{(+9.90\%)}} && 
+      \cellcolor[HTML]{DADCFF}\textbf{3.876\scriptsize{(+13.47\%)}} & \\
+    & \cellcolor[HTML]{DADCFF}OpenVAM-8B
+    & \cellcolor[HTML]{DADCFF}0.926\scriptsize{(+7.55\%)} && 
+      \cellcolor[HTML]{DADCFF}0.226\scriptsize{(+33.53\%)} && 
+      \cellcolor[HTML]{DADCFF}0.934\scriptsize{(+1.08\%)} && 
+      \cellcolor[HTML]{DADCFF}0.787\scriptsize{(+8.25\%)} && 
+      \cellcolor[HTML]{DADCFF}3.715\scriptsize{(+8.75\%)} & \\
+    \midrule
+    
+    % ========================= Salicon =========================
+    \textit{Salicon}~\cite{jiang2015salicon}
+    & UniAR~\cite{li2024uniar} & 0.901 && 0.215 && 0.870 && 0.792 && 1.947 & \\
+    (Natural scene)
+    & SimpleNet~\cite{reddy2020tidying} & 0.907 && 0.193 && 0.871 && 0.797 && 1.926 & \\
+    & MDNSal~\cite{reddy2020tidying} & 0.899 && 0.217 && 0.868 && 0.797 && 1.893 & \\
+    & MSI-Net~\cite{kroner2020contextual} & 0.899 && 0.307 && 0.865 && 0.784 && 1.931 & \\
+    & GazeGAN~\cite{che2019gazegan} & 0.879 && 0.376 && 0.864 && 0.773 && 1.899 & \\
+    & UNISAL~\cite{droste2020unified} & 0.879 && 0.354 && 0.864 && 0.775 && 1.952 & \\
+    & Transalnet~\cite{lou2022transalnet} & 0.890 && 0.220 && 0.867 && 0.783 && 1.924 & \\
+    & DeepGaze IIE~\cite{linardos2021deepgaze} & 0.872 && 0.285 && 0.869 && 0.733 && \textbf{1.996} & \\
+    & Temp-Sal~\cite{aydemir2023tempsal} & 0.911 && 0.195 && 0.869 && 0.800 && 1.967 & \\
+    & SUM~\cite{hosseini2025sum} & 0.909 && 0.192 && \textbf{0.876} && 0.804 && 1.981 & \\
+    \cmidrule{2-12}
+    & \cellcolor[HTML]{DADCFF}OpenVAM-3B
+    & \cellcolor[HTML]{DADCFF}0.911\scriptsize{(+0.00\%)} && 
+      \cellcolor[HTML]{DADCFF}0.184\scriptsize{(+4.17\%)} && 
+      \cellcolor[HTML]{DADCFF}\textbf{0.876\scriptsize{(+0.00\%)}} && 
+      \cellcolor[HTML]{DADCFF}0.805\scriptsize{(+0.12\%)} && 
+      \cellcolor[HTML]{DADCFF}1.989\scriptsize{(-0.35\%)} & \\
+    & \cellcolor[HTML]{DADCFF}OpenVAM-4B
+    & \cellcolor[HTML]{DADCFF}0.913\scriptsize{(+0.22\%)} && 
+      \cellcolor[HTML]{DADCFF}\textbf{0.179\scriptsize{(+6.77\%)}} && 
+      \cellcolor[HTML]{DADCFF}\textbf{0.876\scriptsize{(+0.00\%)}} && 
+      \cellcolor[HTML]{DADCFF}0.805\scriptsize{(+0.12\%)} && 
+      \cellcolor[HTML]{DADCFF}1.970\scriptsize{(-1.30\%)} & \\
+    & \cellcolor[HTML]{DADCFF}OpenVAM-7B
+    & \cellcolor[HTML]{DADCFF}0.912\scriptsize{(+0.11\%)} && 
+      \cellcolor[HTML]{DADCFF}\textbf{0.179\scriptsize{(+6.77\%)}} && 
+      \cellcolor[HTML]{DADCFF}\textbf{0.876\scriptsize{(+0.00\%)}} && 
+      \cellcolor[HTML]{DADCFF}0.806\scriptsize{(+0.25\%)} && 
+      \cellcolor[HTML]{DADCFF}1.993\scriptsize{(-0.15\%)} & \\
+    & \cellcolor[HTML]{DADCFF}OpenVAM-8B
+    & \cellcolor[HTML]{DADCFF}\textbf{0.914\scriptsize{(+0.33\%)}} && 
+      \cellcolor[HTML]{DADCFF}\textbf{0.179\scriptsize{(+6.77\%)}} && 
+      \cellcolor[HTML]{DADCFF}\textbf{0.876\scriptsize{(+0.00\%)}} && 
+      \cellcolor[HTML]{DADCFF}\textbf{0.808\scriptsize{(+0.50\%)}} && 
+      \cellcolor[HTML]{DADCFF}1.972\scriptsize{(-1.20\%)} & \\
+    \midrule
+    
+    % ========================= CAT2000 =========================
+    \textit{CAT2000}~\cite{borji2015cat2000}
+    & FastSal~\cite{hu2021fastsal} & 0.721 && 0.552 && 0.860 && 0.603 && 1.859 & \\
+    (Natural scene)
+    & SAM-Resnet~\cite{cornia2018predicting} & 0.870 && 0.670 && 0.878 && 0.739 && 2.411 & \\
+    & MSI-Net~\cite{kroner2020contextual} & 0.866 && 0.428 && 0.881 && 0.730 && 2.355 & \\
+    & DVA~\cite{wang2017deep} & 0.861 && 0.449 && 0.878 && 0.734 && 2.345 & \\
+    & UNISAL~\cite{droste2020unified} & 0.842 && 0.530 && 0.876 && 0.721 && 2.257 & \\
+    & MDNSal~\cite{reddy2020tidying} & 0.889 && 0.293 && 0.878 && 0.751 && 2.329 & \\
+    & Transalnet~\cite{lou2022transalnet} & 0.877 && 0.287 && 0.882 && 0.744 && 2.373 & \\
+    & SUM~\cite{hosseini2025sum} & 0.882 && 0.270 && 0.888 && 0.754 && 2.424 & \\
+    \cmidrule{2-12}
+    & \cellcolor[HTML]{DADCFF}OpenVAM-3B
+    & \cellcolor[HTML]{DADCFF}0.891\scriptsize{(+0.22\%)} && 
+      \cellcolor[HTML]{DADCFF}0.258\scriptsize{(+4.44\%)} && 
+      \cellcolor[HTML]{DADCFF}0.889\scriptsize{(+0.11\%)} && 
+      \cellcolor[HTML]{DADCFF}0.759\scriptsize{(+0.66\%)} && 
+      \cellcolor[HTML]{DADCFF}2.452\scriptsize{(+1.16\%)} & \\
+    & \cellcolor[HTML]{DADCFF}OpenVAM-4B
+    & \cellcolor[HTML]{DADCFF}0.892\scriptsize{(+0.34\%)} && 
+      \cellcolor[HTML]{DADCFF}0.256\scriptsize{(+5.19\%)} && 
+      \cellcolor[HTML]{DADCFF}0.889\scriptsize{(+0.11\%)} && 
+      \cellcolor[HTML]{DADCFF}0.759\scriptsize{(+0.66\%)} && 
+      \cellcolor[HTML]{DADCFF}2.442\scriptsize{(+0.74\%)} & \\
+    & \cellcolor[HTML]{DADCFF}OpenVAM-7B
+    & \cellcolor[HTML]{DADCFF}\textbf{0.899\scriptsize{(+1.12\%)}} && 
+      \cellcolor[HTML]{DADCFF}\textbf{0.246\scriptsize{(+8.89\%)}} && 
+      \cellcolor[HTML]{DADCFF}\textbf{0.899\scriptsize{(+1.24\%)}} && 
+      \cellcolor[HTML]{DADCFF}\textbf{0.761\scriptsize{(+0.93\%)}} && 
+      \cellcolor[HTML]{DADCFF}\textbf{2.459\scriptsize{(+1.44\%)}} & \\
+    & \cellcolor[HTML]{DADCFF}OpenVAM-8B
+    & \cellcolor[HTML]{DADCFF}0.895\scriptsize{(+0.67\%)} && 
+      \cellcolor[HTML]{DADCFF}0.253\scriptsize{(+6.30\%)} && 
+      \cellcolor[HTML]{DADCFF}0.889\scriptsize{(+0.11\%)} && 
+      \cellcolor[HTML]{DADCFF}\textbf{0.761\scriptsize{(+0.93\%)}} && 
+      \cellcolor[HTML]{DADCFF}2.443\scriptsize{(+0.78\%)} & \\
+    \midrule
+    
+    % ========================= MIT1003 =========================
+    \textit{MIT1003}~\cite{judd2009learning}
+    & FastSal~\cite{hu2021fastsal} & 0.590 && 1.036 && 0.875 && 0.478 && 2.008 & \\
+    (Natural scene)
+    & SAM-Resnet~\cite{cornia2018predicting} & 0.746 && 1.247 && 0.902 && 0.597 && 2.752 & \\
+    & DVA~\cite{wang2017deep} & 0.699 && 0.753 && 0.897 && 0.566 && 2.574 & \\
+    & UNISAL~\cite{droste2020unified} & 0.734 && 1.014 && 0.902 && 0.597 && 2.759 & \\
+    & Transalnet~\cite{lou2022transalnet} & 0.722 && 0.660 && 0.903 && 0.592 && 2.631 & \\
+    & SUM~\cite{hosseini2025sum} & 0.768 && 0.563 && 0.913 && 0.630 && 2.839 & \\
+    \cmidrule{2-12}
+    & \cellcolor[HTML]{DADCFF}OpenVAM-3B
+    & \cellcolor[HTML]{DADCFF}0.829\scriptsize{(+7.94\%)} && 
+      \cellcolor[HTML]{DADCFF}0.463\scriptsize{(+17.76\%)} && 
+      \cellcolor[HTML]{DADCFF}0.923\scriptsize{(+1.10\%)} && 
+      \cellcolor[HTML]{DADCFF}0.671\scriptsize{(+6.51\%)} && 
+      \cellcolor[HTML]{DADCFF}3.081\scriptsize{(+8.52\%)} & \\
+    & \cellcolor[HTML]{DADCFF}OpenVAM-4B
+    & \cellcolor[HTML]{DADCFF}0.829\scriptsize{(+7.94\%)} && 
+      \cellcolor[HTML]{DADCFF}0.473\scriptsize{(+15.99\%)} && 
+      \cellcolor[HTML]{DADCFF}0.923\scriptsize{(+1.10\%)} && 
+      \cellcolor[HTML]{DADCFF}0.655\scriptsize{(+3.97\%)} && 
+      \cellcolor[HTML]{DADCFF}3.044\scriptsize{(+7.22\%)} & \\
+    & \cellcolor[HTML]{DADCFF}OpenVAM-7B
+    & \cellcolor[HTML]{DADCFF}\textbf{0.842\scriptsize{(+9.64\%)}} && 
+      \cellcolor[HTML]{DADCFF}\textbf{0.458\scriptsize{(+18.65\%)}} && 
+      \cellcolor[HTML]{DADCFF}\textbf{0.924\scriptsize{(+1.20\%)}} && 
+      \cellcolor[HTML]{DADCFF}\textbf{0.679\scriptsize{(+7.78\%)}} && 
+      \cellcolor[HTML]{DADCFF}\textbf{3.090\scriptsize{(+8.84\%)}} & \\
+    & \cellcolor[HTML]{DADCFF}OpenVAM-8B
+    & \cellcolor[HTML]{DADCFF}0.825\scriptsize{(+7.42\%)} && 
+      \cellcolor[HTML]{DADCFF}0.474\scriptsize{(+15.81\%)} && 
+      \cellcolor[HTML]{DADCFF}0.922\scriptsize{(+0.99\%)} && 
+      \cellcolor[HTML]{DADCFF}0.663\scriptsize{(+5.24\%)} && 
+      \cellcolor[HTML]{DADCFF}3.021\scriptsize{(+6.41\%)} & \\
+    \bottomrule
+    \end{tabular}
+    }
+    \vspace{-2em}
+\end{table*}
