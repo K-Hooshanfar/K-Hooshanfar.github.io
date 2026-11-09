@@ -46,7 +46,7 @@ AI researcher and engineer specializing in computer vision, visual attention mod
 
 1. **OpenVAM: Open-World Visual Attention Modeling with VLMs**
    **Kiana Hooshanfar**, Amirhossein Kazerouni, Alireza Hosseini, Michael Brudno, Babak Taati
-   *arXiv preprint arXiv:2609.31364, 2026*
+   *IEEE/CVF Winter Conference on Applications of Computer Vision (WACV), 2027*
    Paper: https://arxiv.org/abs/2609.31364 · Project: https://k-hooshanfar.github.io/openvam/ · Code: https://github.com/K-Hooshanfar/OpenVAM · Dataset: https://huggingface.co/datasets/K-Hooshanfar/OpenVAM
 
 2. **DTFSal: Audio-Visual Dynamic Token Fusion for Video Saliency Prediction**
